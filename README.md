@@ -38,7 +38,19 @@ npx http-server -p 8000
 Then open `http://localhost:8000` in your browser.
 
 ### Option 4: GitHub Pages (Production)
-The site is automatically deployed to GitHub Pages when pushed to the main branch. See the repository's Pages settings for the live URL.
+
+The site is automatically deployed to GitHub Pages using GitHub Actions when you push to the `main` branch.
+
+**First-time setup:**
+1. Go to your repository on GitHub
+2. Click **Settings** → **Pages** (in the left sidebar)
+3. Under **Source**, select **GitHub Actions**
+4. Save the settings
+
+**After setup:**
+- The workflow (`.github/workflows/deploy.yml`) will automatically deploy on every push to `main`
+- Your site will be available at: `https://[your-username].github.io/[repository-name]/`
+- You can view deployment status in the **Actions** tab
 
 ---
 
