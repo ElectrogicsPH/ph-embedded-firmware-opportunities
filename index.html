@@ -40,7 +40,7 @@
                 0 0,
                 25px 25px;
             min-height: 100vh;
-            padding: 40px 20px;
+            padding: 20px 10px;
             position: relative;
         }
 
@@ -80,28 +80,32 @@
         header {
             text-align: center;
             color: #4ade80;
-            margin-bottom: 50px;
+            margin-bottom: 30px;
             text-shadow: 0 0 10px rgba(74, 222, 128, 0.5), 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         h1 {
-            font-size: 3em;
+            font-size: 2em;
             margin-bottom: 10px;
             text-shadow: 0 0 15px rgba(74, 222, 128, 0.6), 2px 2px 4px rgba(0, 0, 0, 0.5);
+            line-height: 1.2;
         }
 
         .subtitle {
-            font-size: 1.2em;
+            font-size: 1em;
             opacity: 0.9;
             color: #86efac;
+            line-height: 1.4;
+            padding: 0 10px;
         }
 
         .table-container {
             background: white;
             border-radius: 15px;
-            padding: 30px;
+            padding: 20px 10px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         table {
@@ -144,11 +148,58 @@
             color: #16a34a;
             text-decoration: none;
             transition: color 0.3s ease;
+            word-break: break-all;
+            display: inline-block;
+            min-height: 44px;
+            padding: 4px 0;
         }
 
         .website-link:hover {
             color: #15803d;
             text-decoration: underline;
+        }
+
+        /* Mobile Card Layout */
+        .mobile-card {
+            display: none;
+        }
+
+        .mobile-card-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-card-item .card-label {
+            font-weight: 600;
+            color: #16a34a;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+            margin-top: 15px;
+        }
+
+        .mobile-card-item .card-label:first-child {
+            margin-top: 0;
+        }
+
+        .mobile-card-item .card-value {
+            color: #333;
+            font-size: 1em;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .mobile-card-item .company-name {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #16a34a;
         }
 
         .loading {
@@ -169,13 +220,72 @@
         }
 
         @media (max-width: 768px) {
-            th, td {
-                padding: 10px;
-                font-size: 0.9em;
+            body {
+                padding: 15px 8px;
+            }
+
+            header {
+                margin-bottom: 20px;
             }
 
             h1 {
-                font-size: 2em;
+                font-size: 1.5em;
+                padding: 0 5px;
+            }
+
+            .subtitle {
+                font-size: 0.9em;
+                padding: 0 5px;
+            }
+
+            .table-container {
+                padding: 15px 8px;
+                border-radius: 10px;
+            }
+
+            /* Hide table on mobile, show cards */
+            table {
+                display: none;
+            }
+
+            .mobile-card {
+                display: block;
+            }
+
+            .loading {
+                font-size: 1.2em;
+                padding: 30px 20px;
+            }
+
+            .error {
+                padding: 15px;
+                font-size: 0.9em;
+                margin: 15px 0;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            body {
+                padding: 30px 15px;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .table-container {
+                padding: 25px 15px;
+            }
+
+            th, td {
+                padding: 12px;
+                font-size: 0.95em;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-card {
+                display: none;
             }
         }
     </style>
@@ -202,6 +312,8 @@
                 <tbody id="companies-table-body">
                 </tbody>
             </table>
+            <div id="mobile-card-container" class="mobile-card">
+            </div>
         </div>
     </div>
 
@@ -218,8 +330,10 @@
                 document.getElementById('table-container').style.display = 'block';
 
                 const tbody = document.getElementById('companies-table-body');
+                const mobileContainer = document.getElementById('mobile-card-container');
 
                 companies.forEach(company => {
+                    // Create table row for desktop
                     const row = document.createElement('tr');
 
                     const companyCell = document.createElement('td');
@@ -247,6 +361,53 @@
                     row.appendChild(websiteCell);
 
                     tbody.appendChild(row);
+
+                    // Create mobile card
+                    const card = document.createElement('div');
+                    card.className = 'mobile-card-item';
+
+                    const companyName = document.createElement('div');
+                    companyName.className = 'company-name';
+                    companyName.textContent = company.company;
+                    card.appendChild(companyName);
+
+                    const focusAreaLabel = document.createElement('div');
+                    focusAreaLabel.className = 'card-label';
+                    focusAreaLabel.textContent = 'Focus Area';
+                    card.appendChild(focusAreaLabel);
+
+                    const focusAreaValue = document.createElement('div');
+                    focusAreaValue.className = 'card-value';
+                    focusAreaValue.textContent = company.focus_area;
+                    card.appendChild(focusAreaValue);
+
+                    const rolesLabel = document.createElement('div');
+                    rolesLabel.className = 'card-label';
+                    rolesLabel.textContent = 'Roles / Projects';
+                    card.appendChild(rolesLabel);
+
+                    const rolesValue = document.createElement('div');
+                    rolesValue.className = 'card-value';
+                    rolesValue.textContent = company.roles_or_projects;
+                    card.appendChild(rolesValue);
+
+                    const websiteLabel = document.createElement('div');
+                    websiteLabel.className = 'card-label';
+                    websiteLabel.textContent = 'Website / LinkedIn';
+                    card.appendChild(websiteLabel);
+
+                    const websiteValue = document.createElement('div');
+                    websiteValue.className = 'card-value';
+                    const mobileLink = document.createElement('a');
+                    mobileLink.className = 'website-link';
+                    mobileLink.href = company.website_or_linkedin;
+                    mobileLink.target = '_blank';
+                    mobileLink.rel = 'noopener noreferrer';
+                    mobileLink.textContent = company.website_or_linkedin;
+                    websiteValue.appendChild(mobileLink);
+                    card.appendChild(websiteValue);
+
+                    mobileContainer.appendChild(card);
                 });
             } catch (error) {
                 document.getElementById('loading').style.display = 'none';
