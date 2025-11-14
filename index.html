@@ -288,6 +288,50 @@
                 display: none;
             }
         }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+            color: #86efac;
+            font-size: 0.95em;
+            position: relative;
+            z-index: 1;
+        }
+
+        footer a {
+            color: #4ade80;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+        }
+
+        footer a:hover {
+            color: #86efac;
+            text-shadow: 0 0 15px rgba(74, 222, 128, 0.7);
+            text-decoration: underline;
+        }
+
+        footer .heart {
+            color: #ef4444;
+            display: inline-block;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            footer {
+                padding: 25px 15px;
+                margin-top: 30px;
+                font-size: 0.9em;
+            }
+        }
     </style>
 </head>
 <body>
@@ -316,6 +360,12 @@
             </div>
         </div>
     </div>
+
+    <footer>
+        Made with <span class="heart">❤️</span> by <a href="https://www.facebook.com/groups/embeddsysph/" target="_blank" rel="noopener noreferrer">Embedded Systems PH community</a>
+        <br><br>
+        Want to add your company or contribute? <a href="https://github.com/ElectrogicsPH/ph-embedded-firmware-opportunities/issues/new" target="_blank" rel="noopener noreferrer">Create an issue on GitHub</a>
+    </footer>
 
     <script>
         async function loadCompanies() {
