@@ -3,7 +3,7 @@
     "company": "Accenture",
     "focus_area": "IT Consulting, Software Engineering, Embedded Systems",
     "roles_or_projects": "Software Engineering Manager | Embedded Systems ",
-    "website_or_linkedin": "https://ph.jobstreet.com/job/88137470"
+    "website_or_linkedin": "https://www.accenture.com/ph-en/careers/jobsearch"
   },
   {
     "company": "Analog Devices",
@@ -21,7 +21,7 @@
     "company": "Canonical",
     "focus_area": "IoT, Linux, Embedded Systems",
     "roles_or_projects": "Embedded Linux Senior Software Engineer",
-    "website_or_linkedin": "https://ph.jobstreet.com/job/87996151"
+    "website_or_linkedin": "https://canonical.com/careers"
   },
   {
     "company": "Drake International",
@@ -39,7 +39,7 @@
     "company": "Emerson Electric",
     "focus_area": "Industrial Automation, Process Control, Control Systems",
     "roles_or_projects": "Hardware Design Engineer | Embedded microprocessor & FPGA design & development",
-    "website_or_linkedin": "https://ph.jobstreet.com/job/87839006"
+    "website_or_linkedin": "https://www.emerson.com/en-us/careers"
   },
   {
     "company": "HRTX",
@@ -69,7 +69,7 @@
     "company": "MAKS Enterprises",
     "focus_area": "Automotive, Embedded Systems, ECU, BCM, TIPM",
     "roles_or_projects": "Automotive Embedded Software Engineer (ECU/BCM/TIPM)",
-    "website_or_linkedin": "https://www.linkedin.com/jobs/view/automotive-embedded-software-engineer-ecu-bcm-tipm-at-maks-enterprises-4334751180"
+    "website_or_linkedin": "https://tipmrebuilders.com/careers/"
   },
   {
     "company": "MedSolutions Technology and Innovation Inc",
@@ -100,6 +100,12 @@
     "focus_area": "Semiconductor Manufacturing, Microcontrollers, Microprocessors",
     "roles_or_projects": "Software Engineer & Programmer",
     "website_or_linkedin": "https://www.sercomm.com/careers"
+  },
+  {
+    "company": "Texas Instruments",
+    "focus_area": "Semiconductor Manufacturing, Analog Electronics",
+    "roles_or_projects": "Embedded Software Engineer | Applications Engineer | Systems Engineer",
+    "website_or_linkedin": "https://careers.ti.com/en/sites/CX"
   },
   {
     "company": "Thales",
