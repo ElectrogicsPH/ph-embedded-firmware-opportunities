@@ -52,7 +52,7 @@
             --toggle-hover: rgba(255, 255, 255, 0.06);
             --panel-bg: #161b22;
             --panel-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-            --panel-border: #30363d;
+            --panel-border: #484f58;
             --text: #e6edf3;
             --text-muted: #9da7b3;
             --row-border: #30363d;
@@ -64,10 +64,10 @@
             --link: #4ade80;
             --link-hover: #86efac;
             --card-label: #4ade80;
-            --card-border: #30363d;
+            --card-border: #484f58;
             --tag-bg: #21262d;
             --tag-text: #e6edf3;
-            --tag-border: #30363d;
+            --tag-border: #6e7681;
             --focus-ring: #93c5fd;
             /* for the search/filter UI (PR #3) */
             --chip-bg: #21262d;
@@ -436,13 +436,18 @@
         footer a:focus-visible { outline-color: var(--focus-ring-page); }
         /* SPST theme toggle © 2026 Jeferson De Leon (https://jefersondeleon.dev). MIT License. Keep this notice when reusing. */
         /* SPST theme switch, ported from the portfolio's theme-toggle */
-        .theme-toggle { position: absolute; top: 0; right: 0; display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 4px 6px; border: 0; border-radius: 4px; background: transparent; cursor: pointer; touch-action: manipulation; transition: background-color 0.2s ease; }
-        .theme-toggle:hover { background: var(--toggle-hover); }
+        .theme-toggle { position: absolute; top: 0; right: 0; display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 4px 6px; border: 0; border-radius: 4px; background: transparent; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+        .theme-toggle:hover, .theme-toggle:active, .theme-toggle:focus { background: transparent; }
+        .theme-toggle:focus:not(:focus-visible) { outline: none; }
+        @media (hover: hover) and (pointer: fine) {
+            .theme-toggle:hover .lever { stroke-width: 2.75; }
+            .theme-toggle:hover .wire { stroke: var(--toggle-accent); }
+        }
         .theme-toggle:focus-visible { outline: 2px solid var(--focus-ring-page); outline-offset: 2px; }
         .theme-toggle svg { display: block; height: 32px; width: auto; aspect-ratio: 110 / 32; }
         .theme-toggle .wire { fill: none; stroke: var(--toggle-wire); stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.2s ease, opacity 0.2s ease; }
         .theme-toggle .terminal { fill: var(--page-bg); stroke: var(--toggle-accent); stroke-width: 1.75; }
-        .theme-toggle .lever { fill: none; stroke: var(--toggle-accent); stroke-width: 2.25; stroke-linecap: round; transition: d 0.2s ease; }
+        .theme-toggle .lever { fill: none; stroke: var(--toggle-accent); stroke-width: 2.25; stroke-linecap: round; transition: d 0.2s ease, stroke-width 0.15s ease; }
         .theme-toggle .led { fill: none; }
         .theme-toggle .rays { opacity: 0.4; }
         :root[data-theme="light"] .theme-toggle .led { fill: var(--toggle-accent); stroke: var(--toggle-accent); filter: drop-shadow(0 0 2px rgba(21, 128, 61, 0.45)); }
