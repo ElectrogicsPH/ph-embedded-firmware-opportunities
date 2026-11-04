@@ -516,6 +516,13 @@
         .filters fieldset { border: none; margin-top: 12px; }
         .filters legend { font-weight: 600; margin-bottom: 6px; }
         .chip { font: inherit; font-size: 0.85em; padding: 6px 12px; margin: 0 6px 6px 0; border-radius: 999px; border: 1px solid var(--chip-border, #15803d); background: var(--chip-bg, #ffffff); color: var(--chip-text, #14532d); cursor: pointer; min-height: 32px; transition: background-color 0.2s ease, color 0.2s ease; }
+        .sort-control { margin: 10px 0 4px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+        .sort-label { font-weight: 600; font-size: 0.9em; margin-right: 4px; }
+        .sort-btn { font: inherit; font-size: 0.85em; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--chip-border, #15803d); background: var(--chip-bg, #ffffff); color: var(--chip-text, #14532d); cursor: pointer; min-height: 32px; transition: background-color 0.2s ease, color 0.2s ease; }
+        @media (max-width: 480px) { .sort-label { flex-basis: 100%; } }
+        .sort-btn:hover { background: var(--chip-hover-bg, #dcfce7); }
+        .sort-btn[aria-pressed="true"], .sort-btn[aria-pressed="true"]:hover { background: var(--chip-pressed-bg, #15803d); color: var(--chip-pressed-text, #ffffff); }
+        .sort-btn:focus-visible { outline: 3px solid var(--focus-ring, #1d4ed8); outline-offset: 2px; }
         .chip:hover { background: var(--chip-hover-bg, #dcfce7); }
         .chip[aria-pressed="true"], .chip[aria-pressed="true"]:hover { background: var(--chip-pressed-bg, #15803d); color: var(--chip-pressed-text, #ffffff); }
         .filter-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 8px; }
@@ -584,6 +591,10 @@
         <div id="filters" class="filters" role="search" style="display: none;">
             <label class="search-label" for="search-input">Search roles and companies</label>
             <input type="search" id="search-input" placeholder="e.g. firmware, Thales, Cebu" autocomplete="off">
+            <div class="sort-control" role="group" aria-labelledby="sort-label">
+                <span id="sort-label" class="sort-label">Sort roles by posted date</span>
+                <button type="button" class="sort-btn" data-sort="newest" aria-pressed="true">Newest first</button><button type="button" class="sort-btn" data-sort="oldest" aria-pressed="false">Oldest first</button>
+            </div>
             <fieldset>
                 <legend>Location</legend>
                 <div id="location-chips"></div>
@@ -666,7 +677,11 @@
                 });
 
                 const buildRoleDetails = (company, parent) => {
-                    const meta = [company.location, company.posted ? 'Posted ' + company.posted : '', company.salary]
+                    const isRole = (company.section || 'watch') !== 'watch';
+                    const iso = validPosted(company.posted);
+                    const dateText = !isRole ? '' : iso ? 'Posted ' + iso
+                        : 'Date not listed' + (company.posted ? ' (posting said: ' + company.posted + ')' : '');
+                    const meta = [company.location, dateText, company.salary]
                         .filter(Boolean).join(' · ');
                     if (meta) {
                         const m = document.createElement('div');
@@ -778,6 +793,10 @@
 
                     items.push({
                         row, card, target,
+                        order: items.length,
+                        section: company.section || 'watch',
+                        company: company.company || '',
+                        posted: validPosted(company.posted),
                         region: regionOf(company.location),
                         tags: company.tags || [],
                         text: [company.company, company.focus_area, company.roles_or_projects, company.location, (company.tags || []).join(' ')]
@@ -840,7 +859,45 @@
             return 'Other / unspecified';
         }
 
+        // Strict YYYY-MM-DD that is a real calendar date; anything else is "Date not listed".
+        function validPosted(v) {
+            if (typeof v !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(v)) return null;
+            const d = new Date(v + 'T00:00:00Z');
+            return !isNaN(d) && d.toISOString().slice(0, 10) === v ? v : null;
+        }
+
+        // Stable sort: dated roles by date (newest or oldest), undated last; watch list A-Z.
+        function sortItems(items, containers, order) {
+            const byName = (a, b) => a.company.localeCompare(b.company, undefined, { sensitivity: 'base' }) || a.order - b.order;
+            const byDate = (a, b) => {
+                if (a.posted && !b.posted) return -1;
+                if (!a.posted && b.posted) return 1;
+                if (a.posted && b.posted && a.posted !== b.posted) {
+                    return order === 'oldest' ? (a.posted < b.posted ? -1 : 1) : (a.posted < b.posted ? 1 : -1);
+                }
+                return a.order - b.order;
+            };
+            Object.values(containers).forEach(c => {
+                const list = items.filter(i => i.target === c);
+                list.sort(list.length && list[0].section === 'watch' ? byName : byDate);
+                list.forEach(i => { c.tbody.appendChild(i.row); c.mobile.appendChild(i.card); });
+            });
+        }
+
         function setupFilters(items, containers) {
+            let sortOrder = 'newest';
+            try { if (localStorage.getItem('ph-embedded-sort') === 'oldest') sortOrder = 'oldest'; } catch (e) {}
+            const sortBtns = document.querySelectorAll('.sort-btn');
+            const setSort = o => {
+                sortOrder = o;
+                sortBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.sort === o)));
+                sortItems(items, containers, o);
+            };
+            sortBtns.forEach(b => b.addEventListener('click', () => {
+                setSort(b.dataset.sort);
+                try { localStorage.setItem('ph-embedded-sort', b.dataset.sort); } catch (e) {}
+            }));
+            setSort(sortOrder);
             const state = { q: '', regions: new Set(), tags: new Set() };
             const search = document.getElementById('search-input');
             const count = document.getElementById('result-count');
