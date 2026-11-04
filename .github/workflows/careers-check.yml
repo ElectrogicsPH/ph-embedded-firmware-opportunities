@@ -1,0 +1,41 @@
+name: Careers feed check
+
+on:
+  schedule:
+    - cron: "0 3 * * 1"   # Mondays 03:00 UTC (11:00 Asia/Manila), two hours after link-check
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: careers-check
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Scan public job feeds (read-only, never commits)
+        run: python scripts/careers_check.py --data data.json --feeds scripts/careers_feeds.json --report careers-report.md --delay 1.5
+      - name: Open or update the single careers-check issue
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          [ -f careers-report.md ] || echo "Careers check did not produce a report (script crashed); see the workflow run log." > careers-report.md
+          TITLE="Careers feed check: new embedded/firmware roles"
+          LABEL="careers-check"
+          gh label create "$LABEL" --repo "$GITHUB_REPOSITORY" --color 1f883d --description "Weekly careers feed check" 2>/dev/null || true
+          NUM=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "\"$TITLE\" in:title" --json number --jq '.[0].number')
+          if [ -n "$NUM" ]; then
+            gh issue edit "$NUM" --repo "$GITHUB_REPOSITORY" --body-file careers-report.md
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "$TITLE" --label "$LABEL" --body-file careers-report.md
+          fi
