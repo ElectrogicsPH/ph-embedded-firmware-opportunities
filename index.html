@@ -343,7 +343,7 @@
         }
 
         .error {
-            background: #ff6b6b;
+            background: #b91c1c;
             color: white;
             padding: 20px;
             border-radius: 10px;
@@ -500,6 +500,44 @@
                 font-size: 0.9em;
             }
         }
+        .last-updated { display: inline-block; margin-top: 14px; padding: 6px 14px; border-radius: 999px; background: var(--pill-bg, #0f2e1b); color: var(--pill-fg, #ffffff); font-size: 1em; font-weight: 600; text-shadow: none; border: 1px solid var(--pill-border, #4ade80); opacity: 1; }
+        .filters { background: var(--panel-bg, #ffffff); color: var(--text, #1f2937); border-radius: 15px; padding: 16px; margin-bottom: 10px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); }
+        .filters label.search-label { display: block; font-weight: 600; margin-bottom: 6px; }
+        .filters input[type="search"] { width: 100%; font-size: 1em; padding: 10px 12px; border: 2px solid var(--input-border, #6b7280); border-radius: 8px; color: var(--input-text, #111827); background: var(--input-bg, #ffffff); }
+        .filters input[type="search"]::placeholder { color: var(--input-placeholder, #6b7280); opacity: 1; }
+        .filters input[type="search"]:focus, .chip:focus-visible, .clear-btn:focus-visible, .website-link:focus-visible { outline: 3px solid var(--focus-ring, #1d4ed8); outline-offset: 2px; }
+        .filters fieldset { border: none; margin-top: 12px; }
+        .filters legend { font-weight: 600; margin-bottom: 6px; }
+        .chip { font: inherit; font-size: 0.85em; padding: 6px 12px; margin: 0 6px 6px 0; border-radius: 999px; border: 1px solid var(--chip-border, #15803d); background: var(--chip-bg, #ffffff); color: var(--chip-text, #14532d); cursor: pointer; min-height: 32px; transition: background-color 0.2s ease, color 0.2s ease; }
+        .chip:hover { background: var(--chip-hover-bg, #dcfce7); }
+        .chip[aria-pressed="true"], .chip[aria-pressed="true"]:hover { background: var(--chip-pressed-bg, #15803d); color: var(--chip-pressed-text, #ffffff); }
+        .filter-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 8px; }
+        .clear-btn { font: inherit; padding: 8px 14px; border-radius: 8px; border: 1px solid var(--clear-btn-border, #374151); background: var(--clear-btn-bg, #f3f4f6); color: var(--clear-btn-text, #111827); cursor: pointer; }
+        .clear-btn:hover { background: var(--clear-btn-hover-bg, #e5e7eb); }
+        .clear-btn:focus-visible { outline-color: var(--clear-btn-focus, #1d4ed8); }
+        .result-count { color: var(--result-count-text, #374151); font-size: 0.9em; }
+        .no-matches { background: var(--panel-bg, #ffffff); color: var(--text, #1f2937); border-radius: 15px; padding: 24px; text-align: center; margin-top: 20px; }
+        .website-link.apply { font-weight: 600; word-break: normal; }
+        .card-meta-row { margin-top: 6px; }
+        @media (max-width: 768px) {
+            .mobile-card-item { box-shadow: none; border: 1px solid var(--card-border, #6b7280); padding: 16px; }
+            .mobile-card-item .card-label { margin-top: 10px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+        }
+        /* AA overrides for existing selectors (values match the theme PR's variables) */
+        thead { background: linear-gradient(135deg, var(--thead-from, #15803d) 0%, var(--thead-to, #166534) 100%); }
+        .website-link { color: var(--link, #15803d); text-decoration: underline; }
+        .website-link:hover { color: var(--link-hover, #166534); }
+        .mobile-card-item .card-label { color: var(--card-label, #15803d); }
+        .role-meta { opacity: 1; color: var(--text-muted, #4b5563); }
+        .tag { background: var(--tag-bg, #eef2f7); color: var(--tag-text, #1f2937); border: 1px solid var(--tag-border, #64748b); }
+        .sr-only-legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+        .tags-toggle { font: inherit; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; min-height: 36px; border-radius: 8px; border: 1px solid var(--clear-btn-border, #374151); background: var(--clear-btn-bg, #f3f4f6); color: var(--clear-btn-text, #111827); cursor: pointer; }
+        .tags-toggle:focus-visible { outline: 3px solid var(--focus-ring, #1d4ed8); outline-offset: 2px; }
+        .tags-toggle .chev { display: inline-block; transition: transform 0.2s ease; }
+        .tags-toggle[aria-expanded="true"] .chev { transform: rotate(90deg); }
     </style>
 </head>
 <body>
@@ -535,8 +573,27 @@
 
         <div id="loading" class="loading">Loading companies...</div>
         <div id="error" class="error" style="display: none;"></div>
+        <div id="filters" class="filters" role="search" style="display: none;">
+            <label class="search-label" for="search-input">Search roles and companies</label>
+            <input type="search" id="search-input" placeholder="e.g. firmware, Thales, Cebu" autocomplete="off">
+            <fieldset>
+                <legend>Location</legend>
+                <div id="location-chips"></div>
+            </fieldset>
+            <fieldset>
+                <legend class="sr-only-legend">Skill tags</legend>
+                <button type="button" id="tags-toggle" class="tags-toggle" aria-expanded="true" aria-controls="tag-chips"><svg class="chev" aria-hidden="true" focusable="false" width="10" height="10" viewBox="0 0 10 10"><path d="M3 1 L8 5 L3 9 Z" fill="currentColor"/></svg><span id="tags-toggle-text">Skill tags</span></button>
+                <div id="tag-chips" style="margin-top: 8px;"></div>
+            </fieldset>
+            <div class="filter-actions">
+                <button type="button" id="clear-filters" class="clear-btn">Clear filters</button>
+                <span id="result-count" class="result-count" aria-live="polite"></span>
+            </div>
+        </div>
+        <div id="no-matches" class="no-matches" style="display: none;">No matches. Try another search or <button type="button" id="clear-filters-empty" class="clear-btn">clear filters</button></div>
         <div id="table-container" style="display: none;"></div>
         <template id="section-template">
+            <section class="list-section">
             <h2 class="section-title"></h2>
             <p class="section-desc"></p>
             <div class="table-container">
@@ -555,6 +612,7 @@
                 <div class="mobile-card mobile-card-container">
                 </div>
             </div>
+            </section>
         </template>
     </div>
     </div>
@@ -592,6 +650,7 @@
                     frag.querySelector('.section-title').textContent = sec.title;
                     frag.querySelector('.section-desc').textContent = sec.desc;
                     containers[sec.id] = {
+                        section: frag.querySelector('.list-section'),
                         tbody: frag.querySelector('.companies-table-body'),
                         mobile: frag.querySelector('.mobile-card-container')
                     };
@@ -615,12 +674,18 @@
                     });
                 };
 
+                const items = [];
                 companies.forEach(company => {
                     const target = containers[company.section || 'watch'] || containers.watch;
                     if (!target) return;
                     const tbody = target.tbody;
                     const mobileContainer = target.mobile;
                     const url = company.posting_url || company.website_or_linkedin;
+                    const isRole = (company.section || 'watch') !== 'watch';
+                    const linkText = isRole ? 'Apply' : (company.posting_url ? 'View posting' : 'Website');
+                    const linkLabel = isRole
+                        ? `Apply: ${company.roles_or_projects} at ${company.company} (opens in a new tab)`
+                        : `${linkText}: ${company.company} (opens in a new tab)`;
                     // Create table row for desktop
                     const row = document.createElement('tr');
 
@@ -641,7 +706,9 @@
                     link.href = url;
                     link.target = '_blank';
                     link.rel = 'noopener noreferrer';
-                    link.textContent = url;
+                    link.textContent = linkText;
+                    link.setAttribute('aria-label', linkLabel);
+                    if (isRole) link.classList.add('apply');
                     websiteCell.appendChild(link);
 
                     row.appendChild(companyCell);
@@ -693,12 +760,23 @@
                     mobileLink.href = url;
                     mobileLink.target = '_blank';
                     mobileLink.rel = 'noopener noreferrer';
-                    mobileLink.textContent = url;
+                    mobileLink.textContent = linkText;
+                    mobileLink.setAttribute('aria-label', linkLabel);
+                    if (isRole) mobileLink.classList.add('apply');
                     websiteValue.appendChild(mobileLink);
                     card.appendChild(websiteValue);
 
                     mobileContainer.appendChild(card);
+
+                    items.push({
+                        row, card, target,
+                        region: regionOf(company.location),
+                        tags: company.tags || [],
+                        text: [company.company, company.focus_area, company.roles_or_projects, company.location, (company.tags || []).join(' ')]
+                            .filter(Boolean).join(' ').toLowerCase()
+                    });
                 });
+                setupFilters(items, containers);
             } catch (error) {
                 document.getElementById('loading').style.display = 'none';
                 const errorDiv = document.getElementById('error');
@@ -738,6 +816,102 @@
             }
             sync();
         })();
+
+        // Group free-text locations into regions (no data is changed).
+        const REGION_RULES = [
+            ['Metro Manila (NCR)', /\b(ncr|metro manila|national capital|quezon city|makati|taguig|pasig|mandaluyong|muntinlupa|manila)\b/i],
+            ['Cebu', /\b(cebu|lapu-lapu|mandaue)\b/i],
+            ['Laguna', /\b(laguna|calamba|binan|biñan|santa rosa)\b/i],
+            ['Cavite', /\bcavite\b/i],
+            ['Batangas', /\b(batangas|santo tomas)\b/i]
+        ];
+        function regionOf(location) {
+            if (!location) return null;
+            for (const [name, re] of REGION_RULES) if (re.test(location)) return name;
+            return 'Other / unspecified';
+        }
+
+        function setupFilters(items, containers) {
+            const state = { q: '', regions: new Set(), tags: new Set() };
+            const search = document.getElementById('search-input');
+            const count = document.getElementById('result-count');
+            const noMatches = document.getElementById('no-matches');
+
+            // Near-duplicate tags shown as one chip that matches every alias (data is not rewritten).
+            const TAG_GROUPS = {
+                'I2C/SPI': 'I2C/SPI (incl. /UART)',
+                'I2C/SPI/UART': 'I2C/SPI (incl. /UART)',
+                'MCU': 'MCU / microcontroller',
+                'microcontroller': 'MCU / microcontroller'
+            };
+            items.forEach(i => { i.tagKeys = [...new Set(i.tags.map(t => TAG_GROUPS[t] || t))]; });
+            const uniq = arr => [...new Set(arr)].sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
+            const makeChips = (hostId, values, set) => {
+                const host = document.getElementById(hostId);
+                values.forEach(v => {
+                    const b = document.createElement('button');
+                    b.type = 'button';
+                    b.className = 'chip';
+                    b.textContent = v;
+                    b.setAttribute('aria-pressed', 'false');
+                    b.addEventListener('click', () => {
+                        set.has(v) ? set.delete(v) : set.add(v);
+                        b.setAttribute('aria-pressed', String(set.has(v)));
+                        apply();
+                    });
+                    host.appendChild(b);
+                });
+            };
+            makeChips('location-chips', uniq(items.map(i => i.region).filter(Boolean)), state.regions);
+            const tagValues = uniq(items.flatMap(i => i.tagKeys));
+            makeChips('tag-chips', tagValues, state.tags);
+
+            // Disclosure for the long tag list: collapsed by default on small screens.
+            const tagsToggle = document.getElementById('tags-toggle');
+            const tagsText = document.getElementById('tags-toggle-text');
+            const tagChips = document.getElementById('tag-chips');
+            const setExpanded = open => {
+                tagsToggle.setAttribute('aria-expanded', String(open));
+                tagChips.hidden = !open;
+            };
+            const updateToggleText = () => {
+                const n = state.tags.size;
+                tagsText.textContent = `Skill tags (${tagValues.length})` + (n ? ` · ${n} active` : '');
+            };
+            tagsToggle.addEventListener('click', () => setExpanded(tagsToggle.getAttribute('aria-expanded') !== 'true'));
+            setExpanded(!(window.matchMedia && window.matchMedia('(max-width: 768px)').matches));
+            updateToggleText();
+
+            function apply() {
+                let shown = 0;
+                const perSection = new Map();
+                items.forEach(i => {
+                    const ok = (!state.q || i.text.includes(state.q))
+                        && (!state.regions.size || state.regions.has(i.region))
+                        && (!state.tags.size || i.tagKeys.some(t => state.tags.has(t)));
+                    i.row.hidden = !ok;
+                    i.card.hidden = !ok;
+                    if (ok) shown++;
+                    perSection.set(i.target, (perSection.get(i.target) || 0) + (ok ? 1 : 0));
+                });
+                perSection.forEach((n, target) => { target.section.hidden = n === 0; });
+                noMatches.style.display = shown ? 'none' : 'block';
+                updateToggleText();
+                count.textContent = `Showing ${shown} of ${items.length} entries`;
+            }
+            function clearAll() {
+                state.q = ''; search.value = '';
+                state.regions.clear(); state.tags.clear();
+                document.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', 'false'));
+                apply();
+                search.focus();
+            }
+            search.addEventListener('input', () => { state.q = search.value.trim().toLowerCase(); apply(); });
+            document.getElementById('clear-filters').addEventListener('click', clearAll);
+            document.getElementById('clear-filters-empty').addEventListener('click', clearAll);
+            document.getElementById('filters').style.display = 'block';
+            apply();
+        }
 
         loadCompanies();
     </script>
