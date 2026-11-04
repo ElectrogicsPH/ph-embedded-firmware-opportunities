@@ -142,3 +142,10 @@ Contributions are welcome! You can contribute in two ways:
 ---
 
 > Note: This list is **community-maintained**. If you notice outdated information or broken links, feel free to open an issue or submit a pull request.
+
+---
+
+## 📄 License
+
+- This site is licensed under the **MIT License**, © Embedded Systems PH. See [LICENSE](LICENSE).
+- The SPST theme toggle is © 2026 Jeferson De Leon, under the MIT License, from [jefersondeleon.dev](https://jefersondeleon.dev).
