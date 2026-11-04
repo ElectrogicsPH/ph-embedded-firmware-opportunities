@@ -669,6 +669,7 @@
                     frag.querySelector('.section-title').textContent = sec.title;
                     frag.querySelector('.section-desc').textContent = sec.desc;
                     containers[sec.id] = {
+                        id: sec.id,
                         section: frag.querySelector('.list-section'),
                         tbody: frag.querySelector('.companies-table-body'),
                         mobile: frag.querySelector('.mobile-card-container')
@@ -699,7 +700,9 @@
 
                 const items = [];
                 companies.forEach(company => {
-                    const target = containers[company.section || 'watch'] || containers.watch;
+                    // Unknown sections never fall into the watch list (only a missing section means watch).
+                    const secId = company.section || 'watch';
+                    const target = containers[secId] || (secId === 'watch' ? null : containers.related || containers.open);
                     if (!target) return;
                     const tbody = target.tbody;
                     const mobileContainer = target.mobile;
@@ -879,7 +882,7 @@
             };
             Object.values(containers).forEach(c => {
                 const list = items.filter(i => i.target === c);
-                list.sort(list.length && list[0].section === 'watch' ? byName : byDate);
+                list.sort(c.id === 'watch' ? byName : byDate);
                 list.forEach(i => { c.tbody.appendChild(i.row); c.mobile.appendChild(i.card); });
             });
         }
