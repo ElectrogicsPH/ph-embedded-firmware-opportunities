@@ -30,60 +30,61 @@
         :root,
         :root[data-theme="dark"] {
             color-scheme: dark;
-            --page-bg: #1a4d2e;
-            --grid-line: rgba(255, 255, 255, 0.1);
-            --grid-dot: rgba(255, 255, 255, 0.15);
-            --scanline: rgba(255, 255, 255, 0.03);
+            /* neutral charcoal surfaces, green accents only */
+            --page-bg: #0d1117;
+            --grid-line: rgba(255, 255, 255, 0.04);
+            --grid-dot: rgba(255, 255, 255, 0.06);
+            --scanline: rgba(255, 255, 255, 0.012);
             --heading: #4ade80;
-            --heading-glow: 0 0 10px rgba(74, 222, 128, 0.5), 2px 2px 4px rgba(0, 0, 0, 0.5);
-            --subtitle: #86efac;
-            --section-title: #f1f5f9;
-            --section-desc: #d1fae5;
-            --pill-bg: #0f2e1b;
-            --pill-fg: #ffffff;
+            --heading-glow: 0 0 12px rgba(74, 222, 128, 0.25);
+            --subtitle: #c9d1d9;
+            --section-title: #e6edf3;
+            --section-desc: #9da7b3;
+            --pill-bg: #161b22;
+            --pill-fg: #e6edf3;
             --pill-border: #4ade80;
-            --footer-text: #d1fae5;
-            --footer-link: #86efac;
+            --footer-text: #9da7b3;
+            --footer-link: #4ade80;
             --focus-ring-page: #93c5fd;
-            --toggle-wire: #a7b4c2;
+            --toggle-wire: #8b949e;
             --toggle-accent: #4ade80;
-            --toggle-hover: rgba(74, 222, 128, 0.12);
-            /* dark surfaces */
-            --panel-bg: #0f2e1b;
-            --panel-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-            --panel-border: #2f6b45;
-            --text: #e8f5ec;
-            --text-muted: #b5d3c0;
-            --row-border: #2f6b45;
-            --row-hover: #16402a;
-            --thead-from: #15803d;
-            --thead-to: #166534;
-            --thead-text: #ffffff;
-            --link: #86efac;
-            --link-hover: #bbf7d0;
-            --card-label: #86efac;
-            --card-border: #4d8f66;
-            --tag-bg: #1a4d2e;
-            --tag-text: #e8f5ec;
-            --tag-border: #6fbf8a;
+            --toggle-hover: rgba(255, 255, 255, 0.06);
+            --panel-bg: #161b22;
+            --panel-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+            --panel-border: #30363d;
+            --text: #e6edf3;
+            --text-muted: #9da7b3;
+            --row-border: #30363d;
+            --row-hover: #1c2128;
+            --thead-from: #21262d;
+            --thead-to: #21262d;
+            --thead-text: #e6edf3;
+            --thead-underline: #4ade80;
+            --link: #4ade80;
+            --link-hover: #86efac;
+            --card-label: #4ade80;
+            --card-border: #30363d;
+            --tag-bg: #21262d;
+            --tag-text: #e6edf3;
+            --tag-border: #30363d;
             --focus-ring: #93c5fd;
             /* for the search/filter UI (PR #3) */
-            --chip-bg: #0f2e1b;
-            --chip-text: #bbf7d0;
-            --chip-border: #4ade80;
-            --chip-hover-bg: #1a4d2e;
+            --chip-bg: #21262d;
+            --chip-text: #e6edf3;
+            --chip-border: #8b949e;
+            --chip-hover-bg: #30363d;
             --chip-pressed-bg: #4ade80;
-            --chip-pressed-text: #052e16;
-            --input-bg: #0a2214;
-            --input-text: #f0fdf4;
-            --input-border: #8fb39c;
-            --input-placeholder: #a7c4b2;
-            --clear-btn-text: #f0fdf4;
-            --clear-btn-bg: #1a4d2e;
-            --clear-btn-border: #8fb39c;
-            --clear-btn-hover-bg: #235c38;
+            --chip-pressed-text: #0d1117;
+            --input-bg: #0d1117;
+            --input-text: #e6edf3;
+            --input-border: #6e7681;
+            --input-placeholder: #8b949e;
+            --clear-btn-text: #e6edf3;
+            --clear-btn-bg: #21262d;
+            --clear-btn-border: #6e7681;
+            --clear-btn-hover-bg: #30363d;
             --clear-btn-focus: #93c5fd;
-            --result-count-text: #c7e0d0;
+            --result-count-text: #9da7b3;
         }
         :root[data-theme="light"] {
             color-scheme: light;
@@ -422,6 +423,7 @@
 
         table, .mobile-card-item { color: var(--text); }
         .table-container { border: 1px solid var(--panel-border); }
+        :root:not([data-theme="light"]) thead { border-bottom: 2px solid var(--thead-underline); }
         td .role-meta { color: var(--text-muted); }
         .last-updated { display: inline-block; margin-top: 14px; padding: 6px 14px; border-radius: 999px; background: var(--pill-bg); color: var(--pill-fg); border: 1px solid var(--pill-border); font-size: 1em; font-weight: 600; text-shadow: none; }
         .section-title { margin: 30px 0 6px; font-size: 1.4em; color: var(--section-title); }
