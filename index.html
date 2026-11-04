@@ -48,9 +48,67 @@
             --toggle-wire: #a7b4c2;
             --toggle-accent: #4ade80;
             --toggle-hover: rgba(74, 222, 128, 0.12);
-            /* panels stay white in both themes */
+            /* dark surfaces */
+            --panel-bg: #0f2e1b;
+            --panel-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            --panel-border: #2f6b45;
+            --text: #e8f5ec;
+            --text-muted: #b5d3c0;
+            --row-border: #2f6b45;
+            --row-hover: #16402a;
+            --thead-from: #15803d;
+            --thead-to: #166534;
+            --thead-text: #ffffff;
+            --link: #86efac;
+            --link-hover: #bbf7d0;
+            --card-label: #86efac;
+            --card-border: #4d8f66;
+            --tag-bg: #1a4d2e;
+            --tag-text: #e8f5ec;
+            --tag-border: #6fbf8a;
+            --focus-ring: #93c5fd;
+            /* for the search/filter UI (PR #3) */
+            --chip-bg: #0f2e1b;
+            --chip-text: #bbf7d0;
+            --chip-border: #4ade80;
+            --chip-hover-bg: #1a4d2e;
+            --chip-pressed-bg: #4ade80;
+            --chip-pressed-text: #052e16;
+            --input-bg: #0a2214;
+            --input-text: #f0fdf4;
+            --input-border: #8fb39c;
+            --input-placeholder: #a7c4b2;
+            --clear-btn-text: #f0fdf4;
+            --clear-btn-bg: #1a4d2e;
+            --clear-btn-border: #8fb39c;
+            --clear-btn-hover-bg: #235c38;
+            --clear-btn-focus: #93c5fd;
+            --result-count-text: #c7e0d0;
+        }
+        :root[data-theme="light"] {
+            color-scheme: light;
+            --page-bg: #f0fdf4;
+            --grid-line: rgba(21, 128, 61, 0.12);
+            --grid-dot: rgba(21, 128, 61, 0.15);
+            --scanline: rgba(21, 128, 61, 0.03);
+            --heading: #14532d;
+            --heading-glow: none;
+            --subtitle: #166534;
+            --section-title: #14532d;
+            --section-desc: #1f2937;
+            --pill-bg: #ffffff;
+            --pill-fg: #14532d;
+            --pill-border: #15803d;
+            --footer-text: #166534;
+            --footer-link: #14532d;
+            --focus-ring-page: #1d4ed8;
+            --toggle-wire: #4b5563;
+            --toggle-accent: #15803d;
+            --toggle-hover: rgba(21, 128, 61, 0.1);
+            --panel-shadow: 0 6px 20px rgba(20, 83, 45, 0.12);
+            --panel-border: #ffffff;
+            /* light surfaces */
             --panel-bg: #ffffff;
-            --panel-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             --text: #333333;
             --text-muted: #4b5563;
             --row-border: #e0e0e0;
@@ -83,28 +141,6 @@
             --clear-btn-hover-bg: #e5e7eb;
             --clear-btn-focus: #1d4ed8;
             --result-count-text: #374151;
-        }
-        :root[data-theme="light"] {
-            color-scheme: light;
-            --page-bg: #f0fdf4;
-            --grid-line: rgba(21, 128, 61, 0.12);
-            --grid-dot: rgba(21, 128, 61, 0.15);
-            --scanline: rgba(21, 128, 61, 0.03);
-            --heading: #14532d;
-            --heading-glow: none;
-            --subtitle: #166534;
-            --section-title: #14532d;
-            --section-desc: #1f2937;
-            --pill-bg: #ffffff;
-            --pill-fg: #14532d;
-            --pill-border: #15803d;
-            --footer-text: #166534;
-            --footer-link: #14532d;
-            --focus-ring-page: #1d4ed8;
-            --toggle-wire: #4b5563;
-            --toggle-accent: #15803d;
-            --toggle-hover: rgba(21, 128, 61, 0.1);
-            --panel-shadow: 0 6px 20px rgba(20, 83, 45, 0.12);
         }
         * {
             margin: 0;
@@ -291,7 +327,7 @@
         .mobile-card-item .company-name {
             font-size: 1.2em;
             font-weight: 600;
-            color: #333;
+            color: var(--text);
             margin-bottom: 15px;
             padding-bottom: 10px;
             border-bottom: 2px solid #16a34a;
@@ -385,6 +421,7 @@
         }
 
         table, .mobile-card-item { color: var(--text); }
+        .table-container { border: 1px solid var(--panel-border); }
         td .role-meta { color: var(--text-muted); }
         .last-updated { display: inline-block; margin-top: 14px; padding: 6px 14px; border-radius: 999px; background: var(--pill-bg); color: var(--pill-fg); border: 1px solid var(--pill-border); font-size: 1em; font-weight: 600; text-shadow: none; }
         .section-title { margin: 30px 0 6px; font-size: 1.4em; color: var(--section-title); }
