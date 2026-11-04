@@ -6,18 +6,27 @@ keeps postings that look embedded/firmware AND are in the Philippines, drops any
 (or company + title) is already in data.json, and writes a Markdown report for the single
 "Careers feed check" issue. Never modifies data.json. --dry-run prints the report only.
 
-A feed error is listed in the report but does not fail the run. Exit code is 0 unless the
-script itself crashes.
+A feed error, or a feed with 0 postings, is listed in the report as a warning but does not
+fail the run. Exit code: 2 if every feed failed, 1 on a crash, else 0. The report is only
+written when there are new matches, feed errors or empty feeds (so the issue stays quiet).
 """
-import argparse, json, re, sys, time, urllib.parse, urllib.request
+import argparse, json, re, sys, time, urllib.error, urllib.parse, urllib.request
 import xml.etree.ElementTree as ET
 
 UA = "ph-embedded-firmware-opportunities careers-check (+https://github.com/ElectrogicsPH/ph-embedded-firmware-opportunities)"
 ROLE = re.compile(
     r"firmware|embedded|\bmcu\b|micro-?controller|\brtos\b|bare[- ]?metal|\bbsp\b|board support"
     r"|device driver|\bdrivers?\b.*(linux|kernel)|linux kernel|\bfpga\b|\bverilog\b|\bvhdl\b"
-    r"|hardware validation|hardware test|post-?silicon|\bsoc\b|\biot\b|electronics engineer"
-    r"|hardware engineer|test (development|equipment) engineer|\bplc\b", re.I)
+    r"|hardware validation|hardware test|post-?silicon|\biot\b|electronics? engineer|test engineer"
+    r"|systems design|hardware engineer|test (development|equipment) engineer|\bplc\b", re.I)
+# "SoC" as in system-on-chip, not a security operations centre.
+SOC = re.compile(r"\bsoc\b", re.I)
+SOC_NOT = re.compile(r"analyst|security|cyber|\bsiem\b|incident|threat", re.I)
+MAX_PAGES = 200  # safety stop only; normal runs end on an empty page
+
+
+def is_role(title):
+    return bool(ROLE.search(title)) or bool(SOC.search(title) and not SOC_NOT.search(title))
 PH = re.compile(
     r"philippines|\bphl?\b|manila|maynila|makati|taguig|bonifacio|\bbgc\b|cebu|lapu-?lapu|mandaue|laguna"
     r"|calamba|santa rosa|sta\.? rosa|bi[ñn]an|cabuyao|cavite|rosario|gen(eral)? trias|dasmari[ñn]as|imus"
@@ -31,26 +40,37 @@ def fetch(url, data=None, headers=None, timeout=30):
     body = json.dumps(data).encode() if data is not None else None
     if body is not None:
         h["Content-Type"] = "application/json"
-    req = urllib.request.Request(url, data=body, headers=h, method="POST" if body else "GET")
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return r.read().decode("utf-8", "ignore")
+    for attempt in (1, 2):
+        req = urllib.request.Request(url, data=body, headers=h, method="POST" if body else "GET")
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return r.read().decode("utf-8", "ignore")
+        except urllib.error.HTTPError as e:
+            if e.code != 429 or attempt == 2:
+                raise
+            ra = (e.headers.get("Retry-After") or "").strip()
+            wait = min(int(ra) if ra.isdigit() else 30, 60)  # capped, one retry
+            print(f"  429 from {urllib.parse.urlparse(url).netloc}, retrying in {wait}s", flush=True)
+            time.sleep(wait)
 
 
 # Each reader returns a list of dicts: title, location, url, ph_scoped (feed already searched for PH).
 def read_workday(f, delay):
     base = f"https://{f['tenant']}.wd{f['wd']}.myworkdayjobs.com"
     out, offset, total = [], 0, None
-    while offset < 400:
+    for _ in range(MAX_PAGES):
         d = json.loads(fetch(f"{base}/wday/cxs/{f['tenant']}/{f['site']}/jobs",
-                             {"appliedFacets": {}, "limit": 20, "offset": offset, "searchText": f.get("search", "")}))
+                             {"appliedFacets": f.get("facets", {}), "limit": 20, "offset": offset,
+                              "searchText": f.get("search", "")}))
         posts = d.get("jobPostings") or []
         for p in posts:
             out.append({"title": p.get("title", ""), "location": p.get("locationsText") or "",
-                        "url": f"{base}/en-US/{f['site']}{p.get('externalPath', '')}", "ph_scoped": bool(f.get("search"))})
+                        "url": f"{base}/en-US/{f['site']}{p.get('externalPath', '')}",
+                        "ph_scoped": bool(f.get("search") or f.get("facets"))})
         offset += 20
         if total is None:  # Workday only reports the total on the first page
             total = d.get("total") or 0
-        if not posts or offset >= total:
+        if not posts or (offset >= total and len(posts) < 20):
             break
         time.sleep(delay)
     return out
@@ -68,7 +88,7 @@ def read_oracle(f, delay):
 
 def read_oracle_one(f, term, delay):
     out, offset = [], 0
-    while offset < 400:
+    for _ in range(MAX_PAGES):
         q = (f"https://{f['host']}/hcmRestApi/resources/latest/recruitingCEJobRequisitions?onlyData=true"
              f"&expand=requisitionList&finder=findReqs;siteNumber={f['site']},"
              f"keyword={urllib.parse.quote(term)},limit=25,offset={offset}")
@@ -88,7 +108,7 @@ def read_oracle_one(f, term, delay):
 def read_ultipro(f, delay):
     base = f"https://recruiting2.ultipro.com/{f['tenant']}/JobBoard/{f['board']}"
     out, skip = [], 0
-    while skip < 400:
+    for _ in range(MAX_PAGES):
         d = json.loads(fetch(f"{base}/JobBoardView/LoadSearchResults", {"opportunitySearch": {
             "Top": 50, "Skip": skip, "QueryString": f.get("search", ""), "Filters": [],
             "OrderBy": [{"Value": "postedDateDesc", "PropertyName": "PostedDate", "Ascending": False}]}}))
@@ -108,7 +128,7 @@ def read_ultipro(f, delay):
 
 def read_smartrecruiters(f, delay):
     out, offset = [], 0
-    while offset < 1000:
+    for _ in range(MAX_PAGES):
         d = json.loads(fetch(f"https://api.smartrecruiters.com/v1/companies/{f['id']}/postings?limit=100&offset={offset}"))
         for p in d.get("content") or []:
             loc = p.get("location") or {}
@@ -148,6 +168,24 @@ READERS = {"workday": read_workday, "oracle_hcm": read_oracle, "ultipro": read_u
            "successfactors_rss": read_sf_rss}
 
 
+def md_text(s):
+    """Plain text that can't ping, link, embed HTML or break out of markdown."""
+    s = re.sub(r"[\x00-\x1f\x7f]+", " ", str(s or "")).strip()
+    s = re.sub(r"([\\`*_{}\[\]()<>#|!~>])", r"\\\1", s)
+    s = s.replace("@", "@\u200b").replace("&", "&amp;")
+    s = s.replace("://", ":/\u200b/").replace("www.", "www\u200b.")  # no autolinks
+    return s[:200]
+
+
+def md_link(u):
+    """Bare http(s) URL in angle brackets, or a plain-text note for anything else."""
+    u = str(u or "").strip()
+    p = urllib.parse.urlparse(u)
+    if p.scheme not in ("http", "https") or not p.netloc or re.search(r"[\s<>\"'`]", u):
+        return "(link omitted: not an http/https URL)"
+    return "<" + u.replace("@", "%40") + ">"
+
+
 def norm(s):
     return re.sub(r"[^a-z0-9]+", " ", (s or "").lower()).strip()
 
@@ -167,7 +205,7 @@ def main():
     known_titles = {(norm(e.get("company")), norm(e.get("roles_or_projects"))) for e in entries}
     feeds = json.load(open(a.feeds, encoding="utf-8"))["feeds"]
 
-    matches, known, errors, scanned = [], [], [], 0
+    matches, known, errors, empty, scanned = [], [], [], [], 0
     for n, f in enumerate(feeds):
         if n:
             time.sleep(a.delay)
@@ -178,12 +216,15 @@ def main():
             print(f"[error ] {f['company']} ({f['ats']}): {type(e).__name__}: {e}", flush=True)
             continue
         scanned += len(posts)
+        if not posts:
+            empty.append(f["company"])
+            print(f"::warning::{f['company']} ({f['ats']}) feed returned 0 postings", flush=True)
         seen, hits = set(), 0
         for p in posts:
             if p["url"] in seen:
                 continue
             seen.add(p["url"])
-            if not ROLE.search(p["title"]):
+            if not is_role(p["title"]):
                 continue
             if not (PH.search(p["location"]) or p["ph_scoped"]):
                 continue
@@ -196,21 +237,29 @@ def main():
         print(f"[ok    ] {f['company']} ({f['ats']}): {len(seen)} postings, {hits} embedded/firmware PH", flush=True)
 
     summary = (f"{len(feeds)} feeds, {scanned} postings scanned, {len(matches)} new embedded/firmware "
-               f"roles in the Philippines, {len(known)} already in data.json, {len(errors)} feed errors")
+               f"roles in the Philippines, {len(known)} already in data.json, {len(errors)} feed errors, "
+               f"{len(empty)} empty feeds")
     lines = [f"Automated careers-feed check: {summary}.", "",
              "## New matches (not yet in data.json; verify before adding)"]
-    lines += [f"- **{c}**: {t} ({l}) {u}" for c, t, l, u in matches] or ["- none"]
+    lines += [f"- **{md_text(c)}**: {md_text(t)} ({md_text(l)}) {md_link(u)}" for c, t, l, u in matches] or ["- none"]
     lines += ["", "## Feed errors (feed skipped this run)"]
-    lines += [f"- {c} ({t}): {e}" for c, t, e in errors] or ["- none"]
+    lines += [f"- {md_text(c)} ({md_text(t)}): {md_text(e)}" for c, t, e in errors] or ["- none"]
+    lines += ["", "## Warnings: feeds that returned 0 postings"]
+    lines += [f"- {md_text(c)}" for c in empty] or ["- none"]
     lines += ["", f"_Covered feeds: {', '.join(sorted(f['company'] for f in feeds))}._",
               "_Updated by `.github/workflows/careers-check.yml`. It never edits data.json._"]
     report = "\n".join(lines) + "\n"
     print("\nSummary: " + summary + "\n")
     if a.dry_run:
         print(report)
-    else:
+    elif matches or errors or empty:
         with open(a.report, "w", encoding="utf-8") as fh:
             fh.write(report)
+    else:
+        print("Nothing new, no report written (issue left as is).")
+    if feeds and len(errors) == len(feeds):
+        print("::error::every careers feed failed", flush=True)
+        return 2
     return 0
 
 
