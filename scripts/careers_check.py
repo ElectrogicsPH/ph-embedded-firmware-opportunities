@@ -7,8 +7,10 @@ keeps postings that look embedded/firmware AND are in the Philippines, drops any
 "Careers feed check" issue. Never modifies data.json. --dry-run prints the report only.
 
 A feed error, or a feed with 0 postings, is listed in the report as a warning but does not
-fail the run. Exit code: 2 if every feed failed, 1 on a crash, else 0. The report is only
-written when there are new matches, feed errors or empty feeds (so the issue stays quiet).
+fail the run. Exit code: 2 if every feed failed, 1 on a crash, else 0. --status gets "update"
+when there are new matches, feed errors or empty feeds, or "quiet" when there's nothing new
+(the report then just says "Nothing new as of <date>" and the workflow only edits an
+existing issue, never opens one).
 """
 import argparse, json, re, sys, time, urllib.error, urllib.parse, urllib.request
 import xml.etree.ElementTree as ET
@@ -195,6 +197,8 @@ def main():
     ap.add_argument("--data", default="data.json")
     ap.add_argument("--feeds", default="scripts/careers_feeds.json")
     ap.add_argument("--report", default="careers-report.md")
+    ap.add_argument("--status", default="careers-status.txt",
+                    help='writes "update" (new matches/errors/empty feeds) or "quiet" (nothing new)')
     ap.add_argument("--dry-run", action="store_true", help="print the report, write nothing")
     ap.add_argument("--delay", type=float, default=1.5, help="seconds between requests (default 1.5)")
     a = ap.parse_args()
@@ -248,15 +252,22 @@ def main():
     lines += [f"- {md_text(c)}" for c in empty] or ["- none"]
     lines += ["", f"_Covered feeds: {', '.join(sorted(f['company'] for f in feeds))}._",
               "_Updated by `.github/workflows/careers-check.yml`. It never edits data.json._"]
+    status = "update" if (matches or errors or empty) else "quiet"
+    if status == "quiet":  # replaces any stale list; the workflow never opens an issue for this
+        today = time.strftime("%Y-%m-%d", time.gmtime())
+        lines = [f"Nothing new as of {today} (UTC).", "",
+                 f"Checked {len(feeds)} feeds ({scanned} postings): {', '.join(sorted(f['company'] for f in feeds))}. "
+                 f"{len(known)} matching roles are already in data.json.", "",
+                 "_Updated by `.github/workflows/careers-check.yml`. It never edits data.json._"]
     report = "\n".join(lines) + "\n"
-    print("\nSummary: " + summary + "\n")
+    print("\nSummary: " + summary + f"\nStatus: {status}\n")
     if a.dry_run:
         print(report)
-    elif matches or errors or empty:
+    else:
         with open(a.report, "w", encoding="utf-8") as fh:
             fh.write(report)
-    else:
-        print("Nothing new, no report written (issue left as is).")
+        with open(a.status, "w", encoding="utf-8") as fh:
+            fh.write(status + "\n")
     if feeds and len(errors) == len(feeds):
         print("::error::every careers feed failed", flush=True)
         return 2

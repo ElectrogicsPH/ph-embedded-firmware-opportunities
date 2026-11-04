@@ -23,23 +23,30 @@ jobs:
         with:
           python-version: "3.12"
       - name: Scan public job feeds (read-only, never commits)
-        run: python scripts/careers_check.py --data data.json --feeds scripts/careers_feeds.json --report careers-report.md --delay 1.5
+        run: python scripts/careers_check.py --data data.json --feeds scripts/careers_feeds.json --report careers-report.md --status careers-status.txt --delay 1.5
       - name: Open or update the single careers-check issue
         if: always()
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           if [ ! -f careers-report.md ]; then
-            echo "No new matches, feed errors or empty feeds; leaving the issue alone."
-            exit 0
+            echo "Careers check did not produce a report (script crashed); see the workflow run log." > careers-report.md
+            echo update > careers-status.txt
           fi
+          STATUS=$(cat careers-status.txt 2>/dev/null || echo update)
           TITLE="Careers feed check: new embedded/firmware roles"
           LABEL="careers-check"
           if ! gh label list --repo "$GITHUB_REPOSITORY" --search "$LABEL" --json name --jq '.[].name' | grep -qx "$LABEL"; then
             gh label create "$LABEL" --repo "$GITHUB_REPOSITORY" --color 1f883d --description "Weekly careers feed check"
           fi
           NUM=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --label "$LABEL" --json number --jq '.[0].number')
-          if [ -n "$NUM" ]; then
+          if [ "$STATUS" = "quiet" ]; then
+            if [ -n "$NUM" ]; then
+              gh issue edit "$NUM" --repo "$GITHUB_REPOSITORY" --body-file careers-report.md
+            else
+              echo "Nothing new and no open issue; not creating one."
+            fi
+          elif [ -n "$NUM" ]; then
             gh issue edit "$NUM" --repo "$GITHUB_REPOSITORY" --body-file careers-report.md
           else
             gh issue create --repo "$GITHUB_REPOSITORY" --title "$TITLE" --label "$LABEL" --body-file careers-report.md
