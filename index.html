@@ -289,6 +289,12 @@
             }
         }
 
+        .last-updated { text-align: center; font-size: 0.9em; opacity: 0.8; margin-top: 8px; }
+        .section-title { margin: 30px 0 6px; font-size: 1.4em; color: #e2e8f0; }
+        .section-desc { margin: 0 0 12px; color: #cbd5e1; font-size: 0.95em; }
+        .role-meta { font-size: 0.85em; opacity: 0.75; margin-top: 4px; }
+        .tag { display: inline-block; font-size: 0.75em; padding: 2px 8px; margin: 4px 4px 0 0; border-radius: 10px; background: rgba(100, 116, 139, 0.15); }
+
         footer {
             text-align: center;
             padding: 30px 20px;
@@ -339,26 +345,33 @@
         <header>
             <h1>🇵🇭 PH Embedded & Firmware Opportunities</h1>
             <p class="subtitle">Companies offering opportunities in embedded systems, firmware engineering, hardware design, IoT, and robotics R&D</p>
+            <p class="last-updated">Last updated: Nov 4, 2026</p>
         </header>
 
         <div id="loading" class="loading">Loading companies...</div>
         <div id="error" class="error" style="display: none;"></div>
-        <div id="table-container" class="table-container" style="display: none;">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Company</th>
-                        <th>Focus Area</th>
-                        <th>Roles / Projects</th>
-                        <th>Website / LinkedIn</th>
-                    </tr>
-                </thead>
-                <tbody id="companies-table-body">
-                </tbody>
-            </table>
-            <div id="mobile-card-container" class="mobile-card">
+        <div id="table-container" style="display: none;"></div>
+        <template id="section-template">
+            <h2 class="section-title"></h2>
+            <p class="section-desc"></p>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Focus Area</th>
+                            <th>Roles / Projects</th>
+                            <th>Website / LinkedIn</th>
+                        </tr>
+                    </thead>
+                    <tbody class="companies-table-body">
+                    </tbody>
+                </table>
+                <div class="mobile-card mobile-card-container">
+                </div>
             </div>
-        </div>
+        </template>
+    </div>
     </div>
 
     <footer>
@@ -379,10 +392,50 @@
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('table-container').style.display = 'block';
 
-                const tbody = document.getElementById('companies-table-body');
-                const mobileContainer = document.getElementById('mobile-card-container');
+                // Sections (entries without "section" fall back to "watch")
+                const SECTIONS = [
+                    { id: 'open', title: 'Open embedded & firmware roles', desc: 'Verified current roles in the Philippines. Each links to its posting.' },
+                    { id: 'related', title: 'Related roles', desc: 'Adjacent hardware and test roles.' },
+                    { id: 'watch', title: 'Companies to watch', desc: 'Companies with embedded/firmware work but no current role listed here.' }
+                ];
+                const root = document.getElementById('table-container');
+                const template = document.getElementById('section-template');
+                const containers = {};
+                SECTIONS.forEach(sec => {
+                    if (!companies.some(c => (c.section || 'watch') === sec.id)) return;
+                    const frag = template.content.cloneNode(true);
+                    frag.querySelector('.section-title').textContent = sec.title;
+                    frag.querySelector('.section-desc').textContent = sec.desc;
+                    containers[sec.id] = {
+                        tbody: frag.querySelector('.companies-table-body'),
+                        mobile: frag.querySelector('.mobile-card-container')
+                    };
+                    root.appendChild(frag);
+                });
+
+                const buildRoleDetails = (company, parent) => {
+                    const meta = [company.location, company.posted ? 'Posted ' + company.posted : '', company.salary]
+                        .filter(Boolean).join(' · ');
+                    if (meta) {
+                        const m = document.createElement('div');
+                        m.className = 'role-meta';
+                        m.textContent = meta;
+                        parent.appendChild(m);
+                    }
+                    (company.tags || []).forEach(t => {
+                        const tag = document.createElement('span');
+                        tag.className = 'tag';
+                        tag.textContent = t;
+                        parent.appendChild(tag);
+                    });
+                };
 
                 companies.forEach(company => {
+                    const target = containers[company.section || 'watch'] || containers.watch;
+                    if (!target) return;
+                    const tbody = target.tbody;
+                    const mobileContainer = target.mobile;
+                    const url = company.posting_url || company.website_or_linkedin;
                     // Create table row for desktop
                     const row = document.createElement('tr');
 
@@ -395,14 +448,15 @@
 
                     const rolesCell = document.createElement('td');
                     rolesCell.textContent = company.roles_or_projects;
+                    buildRoleDetails(company, rolesCell);
 
                     const websiteCell = document.createElement('td');
                     const link = document.createElement('a');
                     link.className = 'website-link';
-                    link.href = company.website_or_linkedin;
+                    link.href = url;
                     link.target = '_blank';
                     link.rel = 'noopener noreferrer';
-                    link.textContent = company.website_or_linkedin;
+                    link.textContent = url;
                     websiteCell.appendChild(link);
 
                     row.appendChild(companyCell);
@@ -439,6 +493,7 @@
                     const rolesValue = document.createElement('div');
                     rolesValue.className = 'card-value';
                     rolesValue.textContent = company.roles_or_projects;
+                    buildRoleDetails(company, rolesValue);
                     card.appendChild(rolesValue);
 
                     const websiteLabel = document.createElement('div');
@@ -450,10 +505,10 @@
                     websiteValue.className = 'card-value';
                     const mobileLink = document.createElement('a');
                     mobileLink.className = 'website-link';
-                    mobileLink.href = company.website_or_linkedin;
+                    mobileLink.href = url;
                     mobileLink.target = '_blank';
                     mobileLink.rel = 'noopener noreferrer';
-                    mobileLink.textContent = company.website_or_linkedin;
+                    mobileLink.textContent = url;
                     websiteValue.appendChild(mobileLink);
                     card.appendChild(websiteValue);
 

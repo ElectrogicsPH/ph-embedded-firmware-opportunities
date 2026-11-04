@@ -1,134 +1,355 @@
 [
   {
-    "company": "Accenture",
-    "focus_area": "IT Consulting, Software Engineering, Embedded Systems",
-    "roles_or_projects": "Software Engineering Manager | Embedded Systems ",
-    "website_or_linkedin": "https://www.accenture.com/ph-en/careers/jobsearch"
+    "company": "Advanced Energy",
+    "focus_area": "Power Electronics, Power Conversion",
+    "roles_or_projects": "Firmware Engineer II",
+    "website_or_linkedin": "https://www.linkedin.com/jobs/view/4456078484",
+    "section": "open",
+    "posting_url": "https://www.linkedin.com/jobs/view/4456078484",
+    "location": "Quezon City, NCR",
+    "posted": "2026-10-24",
+    "tags": [
+      "MCU",
+      "DSC",
+      "digital power firmware"
+    ]
   },
   {
     "company": "Analog Devices",
     "focus_area": "Semiconductor Manufacturing, Analog Electronics",
-    "roles_or_projects": "Embedded Software Engineer | Embedded C/C++",
-    "website_or_linkedin": "https://www.analog.com/en/careers.html"
+    "roles_or_projects": "Principal Engineer, Systems Design/Architecture Engineering",
+    "website_or_linkedin": "https://www.linkedin.com/jobs/view/4482293101",
+    "section": "open",
+    "posting_url": "https://www.linkedin.com/jobs/view/4482293101",
+    "location": "Cavite, Calabarzon",
+    "posted": "~1 week ago (as of 2026-11-04)",
+    "tags": [
+      "systems architecture",
+      "mixed-signal"
+    ]
   },
   {
-    "company": "Booth",
-    "focus_area": "Cooking Appliances",
-    "roles_or_projects": "Senior Embedded Software Engineer",
-    "website_or_linkedin": "https://www.linkedin.com/company/boothglobal/"
+    "company": "Analog Devices",
+    "focus_area": "Semiconductor Manufacturing, Analog Electronics",
+    "roles_or_projects": "Staff Engineer - Embedded Software",
+    "website_or_linkedin": "https://www.linkedin.com/jobs/view/4457205203",
+    "section": "open",
+    "posting_url": "https://www.linkedin.com/jobs/view/4457205203",
+    "location": "Taguig, NCR",
+    "posted": "~6 days ago (as of 2026-11-04)",
+    "tags": [
+      "RTOS",
+      "Linux",
+      "C/C++",
+      "I2C/SPI/UART"
+    ]
   },
   {
-    "company": "Canonical",
-    "focus_area": "IoT, Linux, Embedded Systems",
-    "roles_or_projects": "Embedded Linux Senior Software Engineer",
-    "website_or_linkedin": "https://canonical.com/careers"
-  },
-  {
-    "company": "Drake International",
-    "focus_area": "IT Services, Automotive, AUTOSAR",
-    "roles_or_projects": "Senior Embedded Software Engineer",
-    "website_or_linkedin": "https://ph.jobstreet.com/job/87996151"
-  },
-  {
-    "company": "Dyson Electronics",
-    "focus_area": "Consumer Electronics",
-    "roles_or_projects": "Embedded Systems, Firmware Engineering, Robotics, R&D",
-    "website_or_linkedin": "https://www.dyson.com/"
-  },
-  {
-    "company": "Emerson Electric",
+    "company": "Emerson",
     "focus_area": "Industrial Automation, Process Control, Control Systems",
-    "roles_or_projects": "Hardware Design Engineer | Embedded microprocessor & FPGA design & development",
-    "website_or_linkedin": "https://www.emerson.com/en-us/careers"
-  },
-  {
-    "company": "HRTX",
-    "focus_area": "Industrial Automation, IoT",
-    "roles_or_projects": "Embedded Software Engineer",
-    "website_or_linkedin": "https://ph.jobstreet.com/job/88016648"
+    "roles_or_projects": "Firmware Manager",
+    "website_or_linkedin": "https://www.linkedin.com/jobs/view/4437778106",
+    "section": "open",
+    "posting_url": "https://www.linkedin.com/jobs/view/4437778106",
+    "location": "Mandaluyong, NCR",
+    "posted": "2026-10-23",
+    "tags": [
+      "MCU",
+      "ARM",
+      "I2C/SPI/UART"
+    ]
   },
   {
     "company": "Lexmark",
     "focus_area": "IoT, Imaging",
-    "roles_or_projects": "Firmware Engineer",
-    "website_or_linkedin": "https://www.linkedin.com/company/lexmark/jobs/"
-  },
-  {
-    "company": "LGT BUSINESS CONSULTANCY SERVICES ",
-    "focus_area": "Telecom, IoT, Embedded Systems",
-    "roles_or_projects": "Embedded Systems Engineer",
-    "website_or_linkedin": "https://ph.jobstreet.com/job/88211253"
-  },
-  {
-    "company": "Littelfuse",
-    "focus_area": "Design and Development of Electrical Protection Devices",
-    "roles_or_projects": "Senior Firmware Engineer",
-    "website_or_linkedin": "https://ph.indeed.com/cmp/Littelfuse"
-  },
-  {
-    "company": "MAKS Enterprises",
-    "focus_area": "Automotive, Embedded Systems, ECU, BCM, TIPM",
-    "roles_or_projects": "Automotive Embedded Software Engineer (ECU/BCM/TIPM)",
-    "website_or_linkedin": "https://tipmrebuilders.com/careers/"
-  },
-  {
-    "company": "MedSolutions Technology and Innovation Inc",
-    "focus_area": "IoT, Medical Devices, Wearables",
-    "roles_or_projects": "Senior Firmware Engineer",
-    "website_or_linkedin": "https://ph.jobstreet.com/job/88049327"
-  },
-  {
-    "company": "MTI Advanced Test Development Corp",
-    "focus_area": "Test & Validation of Semiconductor Devices",
-    "roles_or_projects": "Engineer I - Test",
-    "website_or_linkedin": "https://ph.jobstreet.com/MTI-Advanced-Test-Development-Corp.-jobs/at-this-company"
-  },
-  {
-    "company": "NCR Atleos",
-    "focus_area": "Financial Services, Payments, Point of Sale",
-    "roles_or_projects": "Hardware Firmware/Systems Integration Engineer",
-    "website_or_linkedin": "https://www.linkedin.com/company/ncratleos/jobs/"
-  },
-  {
-    "company": "Sawo",
-    "focus_area": "Sauna Industry",
-    "roles_or_projects": "Hardware Circuit Engineer",
-    "website_or_linkedin": "https://www.linkedin.com/company/sawo-inc/"
-  },
-  {
-    "company": "Sercomm",
-    "focus_area": "Semiconductor Manufacturing, Microcontrollers, Microprocessors",
-    "roles_or_projects": "Software Engineer & Programmer",
-    "website_or_linkedin": "https://www.sercomm.com/careers"
-  },
-  {
-    "company": "Texas Instruments",
-    "focus_area": "Semiconductor Manufacturing, Analog Electronics",
-    "roles_or_projects": "Embedded Software Engineer | Applications Engineer | Systems Engineer",
-    "website_or_linkedin": "https://careers.ti.com/en/sites/CX"
+    "roles_or_projects": "Test Development Engineer w/ Signing Bonus",
+    "website_or_linkedin": "https://ph.jobstreet.com/job/95468779",
+    "section": "open",
+    "posting_url": "https://ph.jobstreet.com/job/95468779",
+    "location": "Cebu City, Cebu",
+    "posted": "11d ago (as of 2026-11-04)",
+    "tags": [
+      "firmware validation",
+      "test automation",
+      "scripting"
+    ]
   },
   {
     "company": "Thales",
-    "focus_area": "6G, Sim Card,Telecom",
+    "focus_area": "6G, Sim Card, Telecom",
     "roles_or_projects": "Embedded Software Engineer",
-    "website_or_linkedin": "https://www.linkedin.com/company/thales/"
+    "website_or_linkedin": "https://www.linkedin.com/jobs/view/4472171312",
+    "section": "open",
+    "posting_url": "https://www.linkedin.com/jobs/view/4472171312",
+    "location": "Makati, NCR",
+    "posted": "2026-10-21",
+    "tags": [
+      "embedded Linux",
+      "SoC",
+      "smart-card/SIM OS"
+    ]
   },
   {
-    "company": "Trend Micro",
-    "focus_area": "Cybersecurity, IoT, Embedded Systems",
-    "roles_or_projects": "Embedded Software Engineer (C/C++)",
-    "website_or_linkedin": "https://ph.jobstreet.com/job/87160141"
+    "company": "Thales",
+    "focus_area": "6G, Sim Card, Telecom",
+    "roles_or_projects": "Software Engineer",
+    "website_or_linkedin": "https://www.linkedin.com/jobs/view/4473918168",
+    "section": "open",
+    "posting_url": "https://www.linkedin.com/jobs/view/4473918168",
+    "location": "Makati, NCR",
+    "posted": "2026-10-22",
+    "tags": [
+      "smart-card/SIM OS",
+      "microcontroller"
+    ]
   },
   {
-    "company": "Trend Power",
-    "focus_area": "Digital Power Systems",
-    "roles_or_projects": "FW Engineer / Sr. Engineer",
-    "website_or_linkedin": "https://ph.jobstreet.com/job/88377287"
+    "company": "Ultra Clean Technology",
+    "focus_area": "IIoT",
+    "roles_or_projects": "Test Engineer IV",
+    "website_or_linkedin": "https://www.linkedin.com/jobs/view/4446745032",
+    "section": "open",
+    "posting_url": "https://www.linkedin.com/jobs/view/4446745032",
+    "location": "Lapu-Lapu, Central Visayas",
+    "posted": "2026-10-23",
+    "tags": [
+      "embedded SW/HW test",
+      "IIoT",
+      "test automation"
+    ]
+  },
+  {
+    "company": "Varex Imaging Philippines",
+    "focus_area": "Medical Devices",
+    "roles_or_projects": "Development Engineer Medical Devices",
+    "website_or_linkedin": "https://www.linkedin.com/jobs/view/4477124099",
+    "section": "open",
+    "posting_url": "https://www.linkedin.com/jobs/view/4477124099",
+    "location": "Calamba, Calabarzon",
+    "posted": "2026-10-08",
+    "tags": [
+      "firmware",
+      "MCU",
+      "PCB"
+    ]
+  },
+  {
+    "company": "Xerox Philippines",
+    "focus_area": "Imaging, Printers",
+    "roles_or_projects": "Firmware Engineer",
+    "website_or_linkedin": "https://www.linkedin.com/jobs/view/4470307776",
+    "section": "open",
+    "posting_url": "https://www.linkedin.com/jobs/view/4470307776",
+    "location": "Cebu, Central Visayas",
+    "posted": "2026-10-16",
+    "tags": [
+      "firmware",
+      "embedded Linux",
+      "C/C++"
+    ]
+  },
+  {
+    "company": "Xerox Philippines",
+    "focus_area": "Imaging, Printers",
+    "roles_or_projects": "Test Development Engineer",
+    "website_or_linkedin": "https://www.linkedin.com/jobs/view/4481902122",
+    "section": "open",
+    "posting_url": "https://www.linkedin.com/jobs/view/4481902122",
+    "location": "Cebu, Central Visayas",
+    "posted": "2026-10-23",
+    "tags": [
+      "test development",
+      "firmware"
+    ]
   },
   {
     "company": "XP Power",
     "focus_area": "Power Electronics, Electronics Manufacturing",
     "roles_or_projects": "Firmware Engineer",
-    "website_or_linkedin": "https://www.linkedin.com/company/xp-power/jobs/"
+    "website_or_linkedin": "https://www.linkedin.com/jobs/view/4469300540",
+    "section": "open",
+    "posting_url": "https://www.linkedin.com/jobs/view/4469300540",
+    "location": "Pasig, NCR",
+    "posted": "2026-10-14",
+    "tags": [
+      "firmware",
+      "I2C/SPI"
+    ]
+  },
+  {
+    "company": "XP Power",
+    "focus_area": "Power Electronics, Electronics Manufacturing",
+    "roles_or_projects": "Senior Firmware Engineer",
+    "website_or_linkedin": "https://www.linkedin.com/jobs/view/4469311343",
+    "section": "open",
+    "posting_url": "https://www.linkedin.com/jobs/view/4469311343",
+    "location": "Pasig, NCR",
+    "posted": "2026-10-14",
+    "tags": [
+      "FreeRTOS",
+      "bootloader",
+      "I2C/SPI",
+      "FPGA"
+    ]
+  },
+  {
+    "company": "Accenture",
+    "focus_area": "IT Consulting, Software Engineering, Embedded Systems",
+    "roles_or_projects": "Embedded Java Software Lead Developer",
+    "website_or_linkedin": "https://ph.jobstreet.com/job/95235083",
+    "section": "related",
+    "posting_url": "https://ph.jobstreet.com/job/95235083",
+    "location": "Metro Manila (Hybrid)",
+    "posted": "22d ago (as of 2026-11-04)",
+    "tags": [
+      "Java",
+      "embedded platform",
+      "JUnit"
+    ]
+  },
+  {
+    "company": "Advanced Energy",
+    "focus_area": "Power Electronics, Power Conversion",
+    "roles_or_projects": "Electronic Engineer I - Power Electronics Graduate Program",
+    "website_or_linkedin": "https://ph.jobstreet.com/job/95458434",
+    "section": "related",
+    "posting_url": "https://ph.jobstreet.com/job/95458434",
+    "location": "Eastwood, Quezon City",
+    "posted": "12d ago (as of 2026-11-04)",
+    "tags": [
+      "power electronics",
+      "graduate program"
+    ]
+  },
+  {
+    "company": "Advanced Energy",
+    "focus_area": "Power Electronics, Power Conversion",
+    "roles_or_projects": "Sr. Test Engineer",
+    "website_or_linkedin": "https://ph.jobstreet.com/job/95662731",
+    "section": "related",
+    "posting_url": "https://ph.jobstreet.com/job/95662731",
+    "location": "Eastwood, Quezon City",
+    "posted": "1d ago (as of 2026-11-04)",
+    "tags": [
+      "test automation",
+      "Python",
+      "HW/FW integration"
+    ]
+  },
+  {
+    "company": "BTCPower Cebu",
+    "focus_area": "EV Charging, Power Electronics",
+    "roles_or_projects": "Sr. Hardware Design Engineer",
+    "website_or_linkedin": "https://ph.jobstreet.com/job/95147062",
+    "section": "related",
+    "posting_url": "https://ph.jobstreet.com/job/95147062",
+    "location": "Lapu-Lapu City, Cebu",
+    "posted": "27d ago (as of 2026-11-04)",
+    "tags": [
+      "PCBA",
+      "schematics",
+      "MCU",
+      "EV charger"
+    ]
+  },
+  {
+    "company": "Dyson",
+    "focus_area": "Consumer Electronics",
+    "roles_or_projects": "Associate Principal Hardware Engineer",
+    "website_or_linkedin": "https://ph.jobstreet.com/job/95434947",
+    "section": "related",
+    "posting_url": "https://ph.jobstreet.com/job/95434947",
+    "location": "Santo Tomas City, Batangas",
+    "posted": "13d ago (as of 2026-11-04)",
+    "tags": [
+      "electronics architecture",
+      "MCU",
+      "I2C/SPI/UART",
+      "PCB"
+    ]
+  },
+  {
+    "company": "Emerson",
+    "focus_area": "Industrial Automation, Process Control, Control Systems",
+    "roles_or_projects": "Embedded Software Test Engineer",
+    "website_or_linkedin": "https://www.linkedin.com/jobs/view/4484021193",
+    "section": "related",
+    "posting_url": "https://www.linkedin.com/jobs/view/4484021193",
+    "location": "Mandaluyong, NCR",
+    "posted": "2026-10-27",
+    "tags": [
+      "software QA",
+      "Azure DevOps"
+    ]
+  },
+  {
+    "company": "MTI Advanced Test Development Corp",
+    "focus_area": "Test & Validation of Semiconductor Devices",
+    "roles_or_projects": "Engineer I - Test Hardware",
+    "website_or_linkedin": "https://ph.jobstreet.com/job/95528786",
+    "section": "related",
+    "posting_url": "https://ph.jobstreet.com/job/95528786",
+    "location": "Philippines",
+    "posted": "8d ago (as of 2026-11-04)",
+    "tags": [
+      "test hardware",
+      "schematic/PCB"
+    ]
+  },
+  {
+    "company": "Booth",
+    "focus_area": "Cooking Appliances",
+    "roles_or_projects": "Senior Embedded Software Engineer",
+    "website_or_linkedin": "https://www.linkedin.com/company/boothglobal/",
+    "section": "watch"
+  },
+  {
+    "company": "Canonical",
+    "focus_area": "IoT, Linux, Embedded Systems",
+    "roles_or_projects": "Embedded Linux Senior Software Engineer",
+    "website_or_linkedin": "https://canonical.com/careers",
+    "section": "watch"
+  },
+  {
+    "company": "Littelfuse",
+    "focus_area": "Design and Development of Electrical Protection Devices",
+    "roles_or_projects": "Senior Firmware Engineer",
+    "website_or_linkedin": "https://ph.indeed.com/cmp/Littelfuse",
+    "section": "watch"
+  },
+  {
+    "company": "MAKS Enterprises",
+    "focus_area": "Automotive, Embedded Systems, ECU, BCM, TIPM",
+    "roles_or_projects": "Automotive Embedded Software Engineer (ECU/BCM/TIPM)",
+    "website_or_linkedin": "https://tipmrebuilders.com/careers/",
+    "section": "watch"
+  },
+  {
+    "company": "NCR Atleos",
+    "focus_area": "Financial Services, Payments, Point of Sale",
+    "roles_or_projects": "Hardware Firmware/Systems Integration Engineer",
+    "website_or_linkedin": "https://www.linkedin.com/company/ncratleos/jobs/",
+    "section": "watch"
+  },
+  {
+    "company": "Sawo",
+    "focus_area": "Sauna Industry",
+    "roles_or_projects": "Hardware Circuit Engineer",
+    "website_or_linkedin": "https://www.linkedin.com/company/sawo-inc/",
+    "section": "watch"
+  },
+  {
+    "company": "Sercomm",
+    "focus_area": "Semiconductor Manufacturing, Microcontrollers, Microprocessors",
+    "roles_or_projects": "Software Engineer & Programmer",
+    "website_or_linkedin": "https://www.sercomm.com/careers",
+    "section": "watch"
+  },
+  {
+    "company": "Texas Instruments",
+    "focus_area": "Semiconductor Manufacturing, Analog Electronics",
+    "roles_or_projects": "Embedded Software Engineer | Applications Engineer | Systems Engineer",
+    "website_or_linkedin": "https://careers.ti.com/en/sites/CX",
+    "section": "watch"
   }
 ]

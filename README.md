@@ -2,16 +2,22 @@
 
 A curated directory of companies and organizations in the Philippines offering opportunities in **embedded systems**, **firmware engineering**, **hardware design**, and **IoT**. This resource is intended for engineers, students, and tech enthusiasts exploring career paths or collaboration opportunities in embedded technology.
 
+**Last updated: Nov 4, 2026**
+
 ---
 
 ## 🔹 How to Use
 
-- Browse the list of companies below.
+- The site is split into three sections:
+  - **Open embedded & firmware roles**: verified, current roles in the Philippines, each linking to its posting
+  - **Related roles**: a short list of adjacent hardware and test roles
+  - **Companies to watch**: companies doing embedded/firmware work with no current role listed
 - Each entry includes:
   - Company name
   - Focus area
   - Roles or projects
-  - Website or LinkedIn link
+  - Website or LinkedIn link (the posting link for roles)
+  - For roles: location, posted date, and skill tags taken from the posting
 - Use this as a starting point to research and reach out directly to organizations of interest.
 
 ---
@@ -70,52 +76,68 @@ Contributions are welcome! You can contribute in two ways:
 1. **Submit a Pull Request** - Add new companies, update information, or improve the formatting directly
 2. **Open an Issue** - If you'd like to suggest a company but prefer not to make the changes yourself, you can open an issue with the company details and we'll add it for you
 
-### How to Add a New Company
+### How to Add or Update an Entry
 
-1. **Open `data.json`** in the repository root.
+1. **Open `data.json`** in the repository root. It is a flat JSON array; each object is either a **role** (one posting) or a **company to watch**.
 
-2. **Add a new entry** following this JSON structure:
+2. **Add a role** (sections `open` or `related`):
    ```json
    {
      "company": "Company Name",
      "focus_area": "Industry or Focus Area",
-     "roles_or_projects": "Job Roles or Project Types",
-     "website_or_linkedin": "https://company-website.com/"
+     "roles_or_projects": "Exact job title from the posting",
+     "website_or_linkedin": "https://link-to-the-posting",
+     "section": "open",
+     "posting_url": "https://link-to-the-posting",
+     "location": "City, Region",
+     "posted": "2026-10-24",
+     "tags": ["FreeRTOS", "MCU", "I2C/SPI"]
    }
    ```
 
-3. **Important Guidelines:**
-   - **Maintain alphabetical order** by company name (A-Z)
-   - Use proper JSON formatting (commas, quotes, brackets)
-   - Ensure the `website_or_linkedin` field contains a valid URL
-   - Keep descriptions concise and relevant
-
-4. **Example Entry:**
+3. **Add a company to watch** (no current role):
    ```json
-    {
-      "company": "Dyson Electronics",
-      "focus_area": "Consumer Electronics",
-      "roles_or_projects": "Embedded Systems, Firmware Engineering, Robotics, R&D",
-      "website_or_linkedin": "https://www.dyson.com/"
-    }
+   {
+     "company": "Company Name",
+     "focus_area": "Industry or Focus Area",
+     "roles_or_projects": "Typical roles or projects",
+     "website_or_linkedin": "https://company-careers-page/",
+     "section": "watch"
+   }
    ```
+
+4. **Important Guidelines:**
+   - `section` is one of `open` (embedded/firmware roles), `related` (adjacent hardware/test roles) or `watch` (companies with no current role). Entries without `section` show under Companies to watch.
+   - **Maintain alphabetical order** by company name (A-Z), then by title, within each section
+   - Only list roles located in the Philippines whose posting is live; remove entries when the posting expires
+   - `tags` must come from the posting text; add `"salary"` only when the posting states one
+   - `posted` is the posting date (ISO `YYYY-MM-DD`) or the relative age shown on the posting with the date you checked it
+   - Use proper JSON formatting and valid URLs; keep descriptions concise
+   - Update the "Last updated" date in `index.html` and this README when you refresh the list
 
 5. **Test Locally (Optional):**
    - **Important:** Use a live server (see "Running Locally" section above) - do not open `index.html` directly
-   - Verify the new company appears in the table in alphabetical order
-   - Check that all links work correctly
+   - Verify the entry appears in the right section in alphabetical order and that links work
 
 6. **Submit Your Changes:**
    - Commit your changes with a descriptive message
    - Push to your fork
    - Create a pull request
 
-### Required Fields
+### Fields
 
-- **Company**: Full company name
-- **Focus Area**: Industry, sector, or primary focus (e.g., "IoT, Medical Devices, Wearables")
-- **Roles / Projects**: Job roles or project types offered (e.g., "Senior Firmware Engineer", "Embedded Systems, Firmware Engineering")
-- **Website / LinkedIn**: Valid URL to company website, career page, or LinkedIn profile
+| Field | Required | Description |
+|---|---|---|
+| `company` | Yes | Full company name |
+| `focus_area` | Yes | Industry, sector, or primary focus |
+| `roles_or_projects` | Yes | Job title (roles) or typical roles/projects (watch) |
+| `website_or_linkedin` | Yes | Posting URL (roles) or careers/LinkedIn page (watch) |
+| `section` | Recommended | `open`, `related` or `watch` |
+| `posting_url` | Roles | Link to the job posting |
+| `location` | Roles | Location stated in the posting |
+| `posted` | Roles | Posting date or age as shown on the posting |
+| `tags` | Optional | Skill tags from the posting text |
+| `salary` | Optional | Only when the posting states it |
 
 ---
 
