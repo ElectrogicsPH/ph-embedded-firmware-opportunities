@@ -1,0 +1,47 @@
+name: Link check
+
+on:
+  schedule:
+    - cron: "0 1 * * 1"   # Mondays 01:00 UTC (09:00 Asia/Manila)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: link-check
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check links (read-only, never commits)
+        id: check
+        run: |
+          set +e
+          python scripts/link_check.py --data data.json --report link-report.md --delay 1.5
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+      - name: Open or update the single link-check issue
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          [ -f link-report.md ] || echo "Link check did not produce a report (script crashed); see the workflow run log." > link-report.md
+          TITLE="Link check: dead or unverified links"
+          NUM=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "\"$TITLE\" in:title" --json number --jq '.[0].number')
+          if [ -n "$NUM" ]; then
+            gh issue edit "$NUM" --repo "$GITHUB_REPOSITORY" --body-file link-report.md
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --title "$TITLE" --body-file link-report.md
+          fi
+      - name: Fail the job if any link is dead
+        if: steps.check.outputs.exit_code != '0'
+        run: |
+          echo "link_check.py exited with ${{ steps.check.outputs.exit_code }} (dead links found or script error)"
+          exit 1
