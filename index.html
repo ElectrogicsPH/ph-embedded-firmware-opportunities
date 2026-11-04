@@ -115,7 +115,7 @@
         }
 
         thead {
-            background: linear-gradient(135deg, #15803d 0%, #166534 100%);
+            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
             color: white;
         }
 
@@ -145,8 +145,8 @@
         }
 
         .website-link {
-            color: #15803d;
-            text-decoration: underline;
+            color: #16a34a;
+            text-decoration: none;
             transition: color 0.3s ease;
             word-break: break-all;
             display: inline-block;
@@ -155,7 +155,7 @@
         }
 
         .website-link:hover {
-            color: #166534;
+            color: #15803d;
             text-decoration: underline;
         }
 
@@ -174,7 +174,7 @@
 
         .mobile-card-item .card-label {
             font-weight: 600;
-            color: #15803d;
+            color: #16a34a;
             font-size: 0.85em;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -289,34 +289,9 @@
             }
         }
 
-        .last-updated { display: inline-block; margin-top: 14px; padding: 6px 14px; border-radius: 999px; background: #0f2e1b; color: #ffffff; font-size: 1em; font-weight: 600; text-shadow: none; border: 1px solid #4ade80; }
-        .filters { background: #ffffff; color: #1f2937; border-radius: 15px; padding: 16px; margin-bottom: 10px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); }
-        .filters label.search-label { display: block; font-weight: 600; margin-bottom: 6px; }
-        .filters input[type="search"] { width: 100%; font-size: 1em; padding: 10px 12px; border: 2px solid #6b7280; border-radius: 8px; color: #111827; background: #ffffff; }
-        .filters input[type="search"]::placeholder { color: #6b7280; opacity: 1; }
-        .filters input[type="search"]:focus, .chip:focus-visible, .clear-btn:focus-visible, .website-link:focus-visible { outline: 3px solid #2563eb; outline-offset: 2px; }
-        .filters fieldset { border: none; margin-top: 12px; }
-        .filters legend { font-weight: 600; margin-bottom: 6px; }
-        .chip { font: inherit; font-size: 0.85em; padding: 6px 12px; margin: 0 6px 6px 0; border-radius: 999px; border: 1px solid #15803d; background: #ffffff; color: #14532d; cursor: pointer; min-height: 32px; transition: background-color 0.2s ease, color 0.2s ease; }
-        .chip:hover { background: #dcfce7; }
-        .chip[aria-pressed="true"], .chip[aria-pressed="true"]:hover { background: #15803d; color: #ffffff; }
-        .filter-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 8px; }
-        .clear-btn { font: inherit; padding: 8px 14px; border-radius: 8px; border: 1px solid #374151; background: #f3f4f6; color: #111827; cursor: pointer; }
-        .result-count { color: #374151; font-size: 0.9em; }
-        .no-matches { background: #ffffff; color: #1f2937; border-radius: 15px; padding: 24px; text-align: center; margin-top: 20px; }
-        .website-link.apply { font-weight: 600; word-break: normal; }
-        .card-meta-row { margin-top: 6px; }
-        @media (max-width: 768px) {
-            .mobile-card-item { box-shadow: none; border: 1px solid #6b7280; padding: 16px; }
-            .mobile-card-item .card-label { margin-top: 10px; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
-        }
-        .section-title { margin: 30px 0 6px; font-size: 1.4em; color: #e2e8f0; }
-        .section-desc { margin: 0 0 12px; color: #cbd5e1; font-size: 0.95em; }
-        .role-meta { font-size: 0.85em; color: #4b5563; margin-top: 4px; }
-        .tag { display: inline-block; font-size: 0.75em; padding: 2px 8px; margin: 4px 4px 0 0; border-radius: 10px; background: #eef2f7; color: #1f2937; border: 1px solid #64748b; }
+        .last-updated { text-align: center; font-size: 0.9em; opacity: 0.8; margin-top: 8px; }
+        .role-meta { font-size: 0.85em; opacity: 0.75; margin-top: 4px; }
+        .tag { display: inline-block; font-size: 0.75em; padding: 2px 8px; margin: 4px 4px 0 0; border-radius: 10px; background: rgba(100, 116, 139, 0.15); }
 
         footer {
             text-align: center;
@@ -361,6 +336,46 @@
                 font-size: 0.9em;
             }
         }
+        .last-updated { display: inline-block; margin-top: 14px; padding: 6px 14px; border-radius: 999px; background: var(--pill-bg, #0f2e1b); color: var(--pill-fg, #ffffff); font-size: 1em; font-weight: 600; text-shadow: none; border: 1px solid var(--pill-border, #4ade80); opacity: 1; }
+        .filters { background: var(--panel-bg, #ffffff); color: var(--tag-text, #1f2937); border-radius: 15px; padding: 16px; margin-bottom: 10px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); }
+        .filters label.search-label { display: block; font-weight: 600; margin-bottom: 6px; }
+        .filters input[type="search"] { width: 100%; font-size: 1em; padding: 10px 12px; border: 2px solid var(--input-border, #6b7280); border-radius: 8px; color: var(--input-text, #111827); background: var(--input-bg, #ffffff); }
+        .filters input[type="search"]::placeholder { color: var(--input-placeholder, #6b7280); opacity: 1; }
+        .filters input[type="search"]:focus, .chip:focus-visible, .clear-btn:focus-visible, .website-link:focus-visible { outline: 3px solid var(--focus-ring, #1d4ed8); outline-offset: 2px; }
+        .filters fieldset { border: none; margin-top: 12px; }
+        .filters legend { font-weight: 600; margin-bottom: 6px; }
+        .chip { font: inherit; font-size: 0.85em; padding: 6px 12px; margin: 0 6px 6px 0; border-radius: 999px; border: 1px solid var(--chip-border, #15803d); background: var(--chip-bg, #ffffff); color: var(--chip-text, #14532d); cursor: pointer; min-height: 32px; transition: background-color 0.2s ease, color 0.2s ease; }
+        .chip:hover { background: var(--chip-hover-bg, #dcfce7); }
+        .chip[aria-pressed="true"], .chip[aria-pressed="true"]:hover { background: var(--chip-pressed-bg, #15803d); color: var(--chip-pressed-text, #ffffff); }
+        .filter-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 8px; }
+        .clear-btn { font: inherit; padding: 8px 14px; border-radius: 8px; border: 1px solid var(--clear-btn-border, #374151); background: var(--clear-btn-bg, #f3f4f6); color: var(--clear-btn-text, #111827); cursor: pointer; }
+        .clear-btn:hover { background: var(--clear-btn-hover-bg, #e5e7eb); }
+        .clear-btn:focus-visible { outline-color: var(--clear-btn-focus, #1d4ed8); }
+        .result-count { color: var(--result-count-text, #374151); font-size: 0.9em; }
+        .no-matches { background: var(--panel-bg, #ffffff); color: var(--tag-text, #1f2937); border-radius: 15px; padding: 24px; text-align: center; margin-top: 20px; }
+        .website-link.apply { font-weight: 600; word-break: normal; }
+        .card-meta-row { margin-top: 6px; }
+        @media (max-width: 768px) {
+            .mobile-card-item { box-shadow: none; border: 1px solid var(--card-border, #6b7280); padding: 16px; }
+            .mobile-card-item .card-label { margin-top: 10px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+        }
+        .section-title { margin: 30px 0 6px; font-size: 1.4em; color: #e2e8f0; }
+        .section-desc { margin: 0 0 12px; color: #cbd5e1; font-size: 0.95em; }
+        /* AA overrides for existing selectors (values match the theme PR's variables) */
+        thead { background: linear-gradient(135deg, var(--thead-from, #15803d) 0%, var(--thead-to, #166534) 100%); }
+        .website-link { color: var(--link, #15803d); text-decoration: underline; }
+        .website-link:hover { color: var(--link-hover, #166534); }
+        .mobile-card-item .card-label { color: var(--card-label, #15803d); }
+        .role-meta { opacity: 1; color: var(--text-muted, #4b5563); }
+        .tag { background: var(--tag-bg, #eef2f7); color: var(--tag-text, #1f2937); border: 1px solid var(--tag-border, #64748b); }
+        .sr-only-legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+        .tags-toggle { font: inherit; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; min-height: 36px; border-radius: 8px; border: 1px solid var(--clear-btn-border, #374151); background: var(--clear-btn-bg, #f3f4f6); color: var(--clear-btn-text, #111827); cursor: pointer; }
+        .tags-toggle:focus-visible { outline: 3px solid var(--focus-ring, #1d4ed8); outline-offset: 2px; }
+        .tags-toggle .chev { display: inline-block; transition: transform 0.2s ease; }
+        .tags-toggle[aria-expanded="true"] .chev { transform: rotate(90deg); }
     </style>
 </head>
 <body>
@@ -381,8 +396,9 @@
                 <div id="location-chips"></div>
             </fieldset>
             <fieldset>
-                <legend>Skill tags</legend>
-                <div id="tag-chips"></div>
+                <legend class="sr-only-legend">Skill tags</legend>
+                <button type="button" id="tags-toggle" class="tags-toggle" aria-expanded="true" aria-controls="tag-chips"><svg class="chev" aria-hidden="true" focusable="false" width="10" height="10" viewBox="0 0 10 10"><path d="M3 1 L8 5 L3 9 Z" fill="currentColor"/></svg><span id="tags-toggle-text">Skill tags</span></button>
+                <div id="tag-chips" style="margin-top: 8px;"></div>
             </fieldset>
             <div class="filter-actions">
                 <button type="button" id="clear-filters" class="clear-btn">Clear filters</button>
@@ -605,6 +621,14 @@
             const count = document.getElementById('result-count');
             const noMatches = document.getElementById('no-matches');
 
+            // Near-duplicate tags shown as one chip that matches every alias (data is not rewritten).
+            const TAG_GROUPS = {
+                'I2C/SPI': 'I2C/SPI (incl. /UART)',
+                'I2C/SPI/UART': 'I2C/SPI (incl. /UART)',
+                'MCU': 'MCU / microcontroller',
+                'microcontroller': 'MCU / microcontroller'
+            };
+            items.forEach(i => { i.tagKeys = [...new Set(i.tags.map(t => TAG_GROUPS[t] || t))]; });
             const uniq = arr => [...new Set(arr)].sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
             const makeChips = (hostId, values, set) => {
                 const host = document.getElementById(hostId);
@@ -623,7 +647,24 @@
                 });
             };
             makeChips('location-chips', uniq(items.map(i => i.region).filter(Boolean)), state.regions);
-            makeChips('tag-chips', uniq(items.flatMap(i => i.tags)), state.tags);
+            const tagValues = uniq(items.flatMap(i => i.tagKeys));
+            makeChips('tag-chips', tagValues, state.tags);
+
+            // Disclosure for the long tag list: collapsed by default on small screens.
+            const tagsToggle = document.getElementById('tags-toggle');
+            const tagsText = document.getElementById('tags-toggle-text');
+            const tagChips = document.getElementById('tag-chips');
+            const setExpanded = open => {
+                tagsToggle.setAttribute('aria-expanded', String(open));
+                tagChips.hidden = !open;
+            };
+            const updateToggleText = () => {
+                const n = state.tags.size;
+                tagsText.textContent = `Skill tags (${tagValues.length})` + (n ? ` · ${n} active` : '');
+            };
+            tagsToggle.addEventListener('click', () => setExpanded(tagsToggle.getAttribute('aria-expanded') !== 'true'));
+            setExpanded(!(window.matchMedia && window.matchMedia('(max-width: 768px)').matches));
+            updateToggleText();
 
             function apply() {
                 let shown = 0;
@@ -631,7 +672,7 @@
                 items.forEach(i => {
                     const ok = (!state.q || i.text.includes(state.q))
                         && (!state.regions.size || state.regions.has(i.region))
-                        && (!state.tags.size || i.tags.some(t => state.tags.has(t)));
+                        && (!state.tags.size || i.tagKeys.some(t => state.tags.has(t)));
                     i.row.hidden = !ok;
                     i.card.hidden = !ok;
                     if (ok) shown++;
@@ -639,6 +680,7 @@
                 });
                 perSection.forEach((n, target) => { target.section.hidden = n === 0; });
                 noMatches.style.display = shown ? 'none' : 'block';
+                updateToggleText();
                 count.textContent = `Showing ${shown} of ${items.length} entries`;
             }
             function clearAll() {
