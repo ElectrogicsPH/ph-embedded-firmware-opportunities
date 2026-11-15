@@ -682,7 +682,10 @@
                     const iso = validPosted(company.posted);
                     const dateText = !isRole ? '' : iso ? 'Posted ' + iso
                         : 'Date not listed' + (company.posted ? ' (posting said: ' + company.posted + ')' : '');
-                    const meta = [company.location, dateText, company.salary]
+                    const exp = company.experience;
+                    const expText = !isRole || !exp ? ''
+                        : (exp === 'Not stated' ? 'Experience not stated' : 'Experience: ' + exp);
+                    const meta = [company.location, dateText, expText, company.salary]
                         .filter(Boolean).join(' · ');
                     if (meta) {
                         const m = document.createElement('div');
@@ -802,7 +805,7 @@
                         posted: validPosted(company.posted),
                         region: regionOf(company.location),
                         tags: company.tags || [],
-                        text: [company.company, company.focus_area, company.roles_or_projects, company.location, (company.tags || []).join(' ')]
+                        text: [company.company, company.focus_area, company.roles_or_projects, company.location, company.experience, (company.tags || []).join(' ')]
                             .filter(Boolean).join(' ').toLowerCase()
                     });
                 });

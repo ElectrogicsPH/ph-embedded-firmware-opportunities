@@ -17,7 +17,7 @@ A curated directory of companies and organizations in the Philippines offering o
   - Focus area
   - Roles or projects
   - Website or LinkedIn link (the posting link for roles)
-  - For roles: location, posted date, and skill tags taken from the posting
+  - For roles: location, posted date, years of experience (when the posting states it), and skill tags taken from the posting
 - Use this as a starting point to research and reach out directly to organizations of interest.
 
 ---
@@ -91,6 +91,7 @@ Contributions are welcome! You can contribute in two ways:
      "posting_url": "https://link-to-the-posting",
      "location": "City, Region",
      "posted": "2026-10-24",
+     "experience": "3+ years",
      "tags": ["FreeRTOS", "MCU", "I2C/SPI"]
    }
    ```
@@ -112,6 +113,7 @@ Contributions are welcome! You can contribute in two ways:
    - Only list roles located in the Philippines whose posting is live; remove entries when the posting expires
    - `tags` must come from the posting text; add `"salary"` only when the posting states one
    - `posted` is the posting date (ISO `YYYY-MM-DD`) or the relative age shown on the posting with the date you checked it
+   - `experience` is the years of experience stated in the posting, condensed (for example `3+ years`, `0-2 years`, `5-6+ years`). Use `Not stated` when the posting can be read but does not give a number. Do not guess from the job title. Omit the field if the posting cannot be read.
    - Use proper JSON formatting and valid URLs; keep descriptions concise
    - Update the "Last updated" date in `index.html` and this README when you refresh the list
 
@@ -136,6 +138,7 @@ Contributions are welcome! You can contribute in two ways:
 | `posting_url` | Roles | Link to the job posting |
 | `location` | Roles | Location stated in the posting |
 | `posted` | Roles | Posting date or age as shown on the posting |
+| `experience` | Roles | Years of experience from the posting, or `Not stated`. Omit if the posting cannot be read |
 | `tags` | Optional | Skill tags from the posting text |
 | `salary` | Optional | Only when the posting states it |
 
