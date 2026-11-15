@@ -1,17 +1,18 @@
 [
   {
-    "company": "Advanced Energy",
-    "focus_area": "Power Electronics, Power Conversion",
-    "roles_or_projects": "Firmware Engineer II",
-    "website_or_linkedin": "https://www.linkedin.com/jobs/view/4456078484",
+    "company": "Analog Devices",
+    "focus_area": "Semiconductor Manufacturing, Analog Electronics",
+    "roles_or_projects": "Associate Engineer, Embedded Software",
+    "website_or_linkedin": "https://analogdevices.wd1.myworkdayjobs.com/en-US/External/job/Philippines-Bonifacio-Global-City/Associate-Engineer--Embedded-Software_R267193",
     "section": "open",
-    "posting_url": "https://www.linkedin.com/jobs/view/4456078484",
-    "location": "Quezon City, NCR",
-    "posted": "2026-10-24",
+    "posting_url": "https://analogdevices.wd1.myworkdayjobs.com/en-US/External/job/Philippines-Bonifacio-Global-City/Associate-Engineer--Embedded-Software_R267193",
+    "location": "Bonifacio Global City, NCR",
+    "posted": "2026-11-09",
     "tags": [
+      "C/C++",
+      "Rust",
       "MCU",
-      "DSC",
-      "digital power firmware"
+      "I2C/SPI/UART/CAN"
     ]
   },
   {
@@ -26,22 +27,6 @@
     "tags": [
       "systems architecture",
       "mixed-signal"
-    ]
-  },
-  {
-    "company": "Analog Devices",
-    "focus_area": "Semiconductor Manufacturing, Analog Electronics",
-    "roles_or_projects": "Staff Engineer - Embedded Software",
-    "website_or_linkedin": "https://www.linkedin.com/jobs/view/4457205203",
-    "section": "open",
-    "posting_url": "https://www.linkedin.com/jobs/view/4457205203",
-    "location": "Taguig, NCR",
-    "posted": "2026-10-29",
-    "tags": [
-      "RTOS",
-      "Linux",
-      "C/C++",
-      "I2C/SPI/UART"
     ]
   },
   {
@@ -104,36 +89,6 @@
     ]
   },
   {
-    "company": "Ultra Clean Technology",
-    "focus_area": "IIoT",
-    "roles_or_projects": "Test Engineer IV",
-    "website_or_linkedin": "https://www.linkedin.com/jobs/view/4446745032",
-    "section": "open",
-    "posting_url": "https://www.linkedin.com/jobs/view/4446745032",
-    "location": "Lapu-Lapu, Central Visayas",
-    "posted": "2026-10-23",
-    "tags": [
-      "embedded SW/HW test",
-      "IIoT",
-      "test automation"
-    ]
-  },
-  {
-    "company": "Varex Imaging Philippines",
-    "focus_area": "Medical Devices",
-    "roles_or_projects": "Development Engineer Medical Devices",
-    "website_or_linkedin": "https://www.linkedin.com/jobs/view/4477124099",
-    "section": "open",
-    "posting_url": "https://www.linkedin.com/jobs/view/4477124099",
-    "location": "Calamba, Calabarzon",
-    "posted": "2026-10-08",
-    "tags": [
-      "firmware",
-      "MCU",
-      "PCB"
-    ]
-  },
-  {
     "company": "Xerox Philippines",
     "focus_area": "Imaging, Printers",
     "roles_or_projects": "Firmware Engineer",
@@ -146,20 +101,6 @@
       "firmware",
       "embedded Linux",
       "C/C++"
-    ]
-  },
-  {
-    "company": "Xerox Philippines",
-    "focus_area": "Imaging, Printers",
-    "roles_or_projects": "Test Development Engineer",
-    "website_or_linkedin": "https://www.linkedin.com/jobs/view/4481902122",
-    "section": "open",
-    "posting_url": "https://www.linkedin.com/jobs/view/4481902122",
-    "location": "Cebu, Central Visayas",
-    "posted": "2026-10-23",
-    "tags": [
-      "test development",
-      "firmware"
     ]
   },
   {
@@ -195,6 +136,21 @@
   {
     "company": "Accenture",
     "focus_area": "IT Consulting, Software Engineering, Embedded Systems",
+    "roles_or_projects": "Embedded Java Software Developer",
+    "website_or_linkedin": "https://accenture.wd103.myworkdayjobs.com/en-US/AccentureCareers/job/Manila/Embedded-Java-Software-Developer_ATCP-1415407-S422286",
+    "section": "related",
+    "posting_url": "https://accenture.wd103.myworkdayjobs.com/en-US/AccentureCareers/job/Manila/Embedded-Java-Software-Developer_ATCP-1415407-S422286",
+    "location": "Manila, NCR",
+    "posted": "2026-03-30",
+    "tags": [
+      "Java",
+      "automotive embedded platform",
+      "test automation"
+    ]
+  },
+  {
+    "company": "Accenture",
+    "focus_area": "IT Consulting, Software Engineering, Embedded Systems",
     "roles_or_projects": "Embedded Java Software Lead Developer",
     "website_or_linkedin": "https://ph.jobstreet.com/job/95235083",
     "section": "related",
@@ -224,6 +180,51 @@
   {
     "company": "Advanced Energy",
     "focus_area": "Power Electronics, Power Conversion",
+    "roles_or_projects": "Electronic Engineer II",
+    "website_or_linkedin": "https://jobs.advanced-energy.com/job/Quezon-City-Electronic-Engineer-II-00-1110/1421817000/",
+    "section": "related",
+    "posting_url": "https://jobs.advanced-energy.com/job/Quezon-City-Electronic-Engineer-II-00-1110/1421817000/",
+    "location": "Quezon City, NCR",
+    "posted": "2026-10-18",
+    "tags": [
+      "power electronics",
+      "SMPS",
+      "schematic design"
+    ]
+  },
+  {
+    "company": "Advanced Energy",
+    "focus_area": "Power Electronics, Power Conversion",
+    "roles_or_projects": "Lead Electronic Engineer",
+    "website_or_linkedin": "https://jobs.advanced-energy.com/job/Quezon-City-Lead-Electronic-Engineer-00-1110/1421817500/",
+    "section": "related",
+    "posting_url": "https://jobs.advanced-energy.com/job/Quezon-City-Lead-Electronic-Engineer-00-1110/1421817500/",
+    "location": "Quezon City, NCR",
+    "posted": "2026-10-18",
+    "tags": [
+      "medical electronics",
+      "firmware",
+      "ISO 13485"
+    ]
+  },
+  {
+    "company": "Advanced Energy",
+    "focus_area": "Power Electronics, Power Conversion",
+    "roles_or_projects": "Sr Electronic Engineer",
+    "website_or_linkedin": "https://jobs.advanced-energy.com/job/Quezon-City-Sr-Electronic-Engineer-00-1110/1450430000/",
+    "section": "related",
+    "posting_url": "https://jobs.advanced-energy.com/job/Quezon-City-Sr-Electronic-Engineer-00-1110/1450430000/",
+    "location": "Quezon City, NCR",
+    "posted": "2026-11-13",
+    "tags": [
+      "power electronics",
+      "schematic design",
+      "PCB"
+    ]
+  },
+  {
+    "company": "Advanced Energy",
+    "focus_area": "Power Electronics, Power Conversion",
     "roles_or_projects": "Sr. Test Engineer",
     "website_or_linkedin": "https://ph.jobstreet.com/job/95662731",
     "section": "related",
@@ -234,6 +235,84 @@
       "test automation",
       "Python",
       "HW/FW integration"
+    ]
+  },
+  {
+    "company": "Analog Devices",
+    "focus_area": "Semiconductor Manufacturing, Analog Electronics",
+    "roles_or_projects": "Associate Engineer, Test Engineering - Product Development (R265874)",
+    "website_or_linkedin": "https://analogdevices.wd1.myworkdayjobs.com/en-US/External/job/Philippines-Cavite-GTC/Associate-Engineer--Test-Engineering---Product-Development_R265874",
+    "section": "related",
+    "posting_url": "https://analogdevices.wd1.myworkdayjobs.com/en-US/External/job/Philippines-Cavite-GTC/Associate-Engineer--Test-Engineering---Product-Development_R265874",
+    "location": "Cavite, Calabarzon",
+    "posted": "2026-09-08",
+    "tags": [
+      "semiconductor test",
+      "test fixtures",
+      "PCB",
+      "product development"
+    ]
+  },
+  {
+    "company": "Analog Devices",
+    "focus_area": "Semiconductor Manufacturing, Analog Electronics",
+    "roles_or_projects": "Associate Test Engineer - Product Development (R266527)",
+    "website_or_linkedin": "https://analogdevices.wd1.myworkdayjobs.com/en-US/External/job/Philippines-Cavite-GTC/Associate-Test-Engineer---Product-Development_R266527",
+    "section": "related",
+    "posting_url": "https://analogdevices.wd1.myworkdayjobs.com/en-US/External/job/Philippines-Cavite-GTC/Associate-Test-Engineer---Product-Development_R266527",
+    "location": "Cavite, Calabarzon",
+    "posted": "2026-11-08",
+    "tags": [
+      "semiconductor test",
+      "test fixtures",
+      "PCB",
+      "product development"
+    ]
+  },
+  {
+    "company": "Analog Devices",
+    "focus_area": "Semiconductor Manufacturing, Analog Electronics",
+    "roles_or_projects": "Engineer - Test Engineering - Manufacturing Engineering - Eval Board Operations (R266943)",
+    "website_or_linkedin": "https://analogdevices.wd1.myworkdayjobs.com/en-US/External/job/Philippines-Cavite-jp/Engineer---Test-Engineering---Manufacturing-Engineering---Eval-Board-Operations_R266943",
+    "section": "related",
+    "posting_url": "https://analogdevices.wd1.myworkdayjobs.com/en-US/External/job/Philippines-Cavite-jp/Engineer---Test-Engineering---Manufacturing-Engineering---Eval-Board-Operations_R266943",
+    "location": "Cavite, Calabarzon",
+    "posted": "2026-11-03",
+    "tags": [
+      "evaluation boards",
+      "board bring-up",
+      "firmware",
+      "manufacturing test"
+    ]
+  },
+  {
+    "company": "Analog Devices",
+    "focus_area": "Semiconductor Manufacturing, Analog Electronics",
+    "roles_or_projects": "Senior Engineer, Test Engineering - Product Development (R264433)",
+    "website_or_linkedin": "https://analogdevices.wd1.myworkdayjobs.com/en-US/External/job/Philippines-Cavite-jp/Senior-Engineer--Test-Engineering---Product-Development_R264433",
+    "section": "related",
+    "posting_url": "https://analogdevices.wd1.myworkdayjobs.com/en-US/External/job/Philippines-Cavite-jp/Senior-Engineer--Test-Engineering---Product-Development_R264433",
+    "location": "Cavite, Calabarzon",
+    "posted": "2026-11-13",
+    "tags": [
+      "semiconductor test",
+      "test fixtures",
+      "product development"
+    ]
+  },
+  {
+    "company": "Analog Devices",
+    "focus_area": "Semiconductor Manufacturing, Analog Electronics",
+    "roles_or_projects": "Senior Engineer, Test Engineering - Product Development (R264779-1)",
+    "website_or_linkedin": "https://analogdevices.wd1.myworkdayjobs.com/en-US/External/job/Philippines-Cavite-jp/Senior-Engineer--Test-Engineering---Product-Development_R264779-1",
+    "section": "related",
+    "posting_url": "https://analogdevices.wd1.myworkdayjobs.com/en-US/External/job/Philippines-Cavite-jp/Senior-Engineer--Test-Engineering---Product-Development_R264779-1",
+    "location": "Cavite, Calabarzon",
+    "posted": "2026-09-23",
+    "tags": [
+      "semiconductor test",
+      "test fixtures",
+      "product development"
     ]
   },
   {
@@ -350,6 +429,20 @@
     "focus_area": "Semiconductor Manufacturing, Analog Electronics",
     "roles_or_projects": "Embedded Software Engineer | Applications Engineer | Systems Engineer",
     "website_or_linkedin": "https://careers.ti.com/en/sites/CX",
+    "section": "watch"
+  },
+  {
+    "company": "Ultra Clean Technology",
+    "focus_area": "IIoT",
+    "roles_or_projects": "Test Engineer IV",
+    "website_or_linkedin": "https://recruiting2.ultipro.com/ULT1005UCH/JobBoard/93be8725-1d6c-4162-aba5-e796cf8ea1b5",
+    "section": "watch"
+  },
+  {
+    "company": "Varex Imaging Philippines",
+    "focus_area": "Medical Devices",
+    "roles_or_projects": "Development Engineer Medical Devices",
+    "website_or_linkedin": "https://vareximaging.wd103.myworkdayjobs.com/en-US/External_Career_Site",
     "section": "watch"
   }
 ]
