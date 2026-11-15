@@ -2,7 +2,7 @@
 
 A curated directory of companies and organizations in the Philippines offering opportunities in **embedded systems**, **firmware engineering**, **hardware design**, and **IoT**. This resource is intended for engineers, students, and tech enthusiasts exploring career paths or collaboration opportunities in embedded technology.
 
-**Last updated: Nov 4, 2026**
+**Last updated: Nov 15, 2026**
 
 ---
 
