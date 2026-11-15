@@ -8,6 +8,7 @@
     "posting_url": "https://analogdevices.wd1.myworkdayjobs.com/en-US/External/job/Philippines-Bonifacio-Global-City/Associate-Engineer--Embedded-Software_R267193",
     "location": "Bonifacio Global City, NCR",
     "posted": "2026-11-09",
+    "experience": "0-2 years",
     "tags": [
       "C/C++",
       "Rust",
@@ -24,6 +25,7 @@
     "posting_url": "https://www.linkedin.com/jobs/view/4482293101",
     "location": "Cavite, Calabarzon",
     "posted": "2026-10-28",
+    "experience": "10+ years",
     "tags": [
       "systems architecture",
       "mixed-signal"
@@ -38,6 +40,7 @@
     "posting_url": "https://www.linkedin.com/jobs/view/4437778106",
     "location": "Mandaluyong, NCR",
     "posted": "2026-10-23",
+    "experience": "3+ years",
     "tags": [
       "MCU",
       "ARM",
@@ -53,6 +56,7 @@
     "posting_url": "https://ph.jobstreet.com/job/95468779",
     "location": "Cebu City, Cebu",
     "posted": "2026-10-24",
+    "experience": "Not stated",
     "tags": [
       "firmware validation",
       "test automation",
@@ -68,6 +72,7 @@
     "posting_url": "https://www.linkedin.com/jobs/view/4472171312",
     "location": "Makati, NCR",
     "posted": "2026-10-21",
+    "experience": "Not stated",
     "tags": [
       "embedded Linux",
       "SoC",
@@ -83,6 +88,7 @@
     "posting_url": "https://www.linkedin.com/jobs/view/4473918168",
     "location": "Makati, NCR",
     "posted": "2026-10-22",
+    "experience": "2-6 years",
     "tags": [
       "smart-card/SIM OS",
       "microcontroller"
@@ -97,6 +103,7 @@
     "posting_url": "https://www.linkedin.com/jobs/view/4470307776",
     "location": "Cebu, Central Visayas",
     "posted": "2026-10-16",
+    "experience": "Not stated",
     "tags": [
       "firmware",
       "embedded Linux",
@@ -112,6 +119,7 @@
     "posting_url": "https://www.linkedin.com/jobs/view/4469300540",
     "location": "Pasig, NCR",
     "posted": "2026-10-14",
+    "experience": "2+ years",
     "tags": [
       "firmware",
       "I2C/SPI"
@@ -126,6 +134,7 @@
     "posting_url": "https://www.linkedin.com/jobs/view/4469311343",
     "location": "Pasig, NCR",
     "posted": "2026-10-14",
+    "experience": "6+ years",
     "tags": [
       "FreeRTOS",
       "bootloader",
@@ -142,6 +151,7 @@
     "posting_url": "https://accenture.wd103.myworkdayjobs.com/en-US/AccentureCareers/job/Manila/Embedded-Java-Software-Developer_ATCP-1415407-S422286",
     "location": "Manila, NCR",
     "posted": "2026-03-30",
+    "experience": "3+ years",
     "tags": [
       "Java",
       "automotive embedded platform",
@@ -157,6 +167,7 @@
     "posting_url": "https://ph.jobstreet.com/job/95235083",
     "location": "Metro Manila (Hybrid)",
     "posted": "2026-10-13",
+    "experience": "5+ years",
     "tags": [
       "Java",
       "embedded platform",
@@ -172,6 +183,7 @@
     "posting_url": "https://ph.jobstreet.com/job/95458434",
     "location": "Eastwood, Quezon City",
     "posted": "2026-10-23",
+    "experience": "Recent graduate",
     "tags": [
       "power electronics",
       "graduate program"
@@ -186,6 +198,7 @@
     "posting_url": "https://jobs.advanced-energy.com/job/Quezon-City-Electronic-Engineer-II-00-1110/1421817000/",
     "location": "Quezon City, NCR",
     "posted": "2026-10-18",
+    "experience": "3+ years",
     "tags": [
       "power electronics",
       "SMPS",
@@ -201,6 +214,7 @@
     "posting_url": "https://jobs.advanced-energy.com/job/Quezon-City-Lead-Electronic-Engineer-00-1110/1421817500/",
     "location": "Quezon City, NCR",
     "posted": "2026-10-18",
+    "experience": "7+ years",
     "tags": [
       "medical electronics",
       "firmware",
@@ -216,6 +230,7 @@
     "posting_url": "https://jobs.advanced-energy.com/job/Quezon-City-Sr-Electronic-Engineer-00-1110/1450430000/",
     "location": "Quezon City, NCR",
     "posted": "2026-11-13",
+    "experience": "5+ years",
     "tags": [
       "power electronics",
       "schematic design",
@@ -231,6 +246,7 @@
     "posting_url": "https://ph.jobstreet.com/job/95662731",
     "location": "Eastwood, Quezon City",
     "posted": "2026-11-03",
+    "experience": "5-6+ years",
     "tags": [
       "test automation",
       "Python",
@@ -246,6 +262,7 @@
     "posting_url": "https://analogdevices.wd1.myworkdayjobs.com/en-US/External/job/Philippines-Cavite-GTC/Associate-Engineer--Test-Engineering---Product-Development_R265874",
     "location": "Cavite, Calabarzon",
     "posted": "2026-09-08",
+    "experience": "0-2 years",
     "tags": [
       "semiconductor test",
       "test fixtures",
@@ -262,6 +279,7 @@
     "posting_url": "https://analogdevices.wd1.myworkdayjobs.com/en-US/External/job/Philippines-Cavite-GTC/Associate-Test-Engineer---Product-Development_R266527",
     "location": "Cavite, Calabarzon",
     "posted": "2026-11-08",
+    "experience": "0-2 years",
     "tags": [
       "semiconductor test",
       "test fixtures",
@@ -278,6 +296,7 @@
     "posting_url": "https://analogdevices.wd1.myworkdayjobs.com/en-US/External/job/Philippines-Cavite-jp/Engineer---Test-Engineering---Manufacturing-Engineering---Eval-Board-Operations_R266943",
     "location": "Cavite, Calabarzon",
     "posted": "2026-11-03",
+    "experience": "2+ years",
     "tags": [
       "evaluation boards",
       "board bring-up",
@@ -294,6 +313,7 @@
     "posting_url": "https://analogdevices.wd1.myworkdayjobs.com/en-US/External/job/Philippines-Cavite-jp/Senior-Engineer--Test-Engineering---Product-Development_R264433",
     "location": "Cavite, Calabarzon",
     "posted": "2026-11-13",
+    "experience": "5+ years",
     "tags": [
       "semiconductor test",
       "test fixtures",
@@ -309,6 +329,7 @@
     "posting_url": "https://analogdevices.wd1.myworkdayjobs.com/en-US/External/job/Philippines-Cavite-jp/Senior-Engineer--Test-Engineering---Product-Development_R264779-1",
     "location": "Cavite, Calabarzon",
     "posted": "2026-09-23",
+    "experience": "7+ years",
     "tags": [
       "semiconductor test",
       "test fixtures",
@@ -324,6 +345,7 @@
     "posting_url": "https://ph.jobstreet.com/job/95147062",
     "location": "Lapu-Lapu City, Cebu",
     "posted": "2026-10-08",
+    "experience": "7-10 years",
     "tags": [
       "PCBA",
       "schematics",
@@ -340,6 +362,7 @@
     "posting_url": "https://ph.jobstreet.com/job/95434947",
     "location": "Santo Tomas City, Batangas",
     "posted": "2026-10-22",
+    "experience": "8+ years",
     "tags": [
       "electronics architecture",
       "MCU",
@@ -356,6 +379,7 @@
     "posting_url": "https://www.linkedin.com/jobs/view/4484021193",
     "location": "Mandaluyong, NCR",
     "posted": "2026-10-27",
+    "experience": "5+ years",
     "tags": [
       "software QA",
       "Azure DevOps"
