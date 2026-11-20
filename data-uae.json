@@ -72,6 +72,41 @@
     "tags": ["C/C++", "RTOS", "bare-metal", "Yocto", "Linux drivers"]
   },
   {
+    "company": "Analog",
+    "focus_area": "Robotics, embedded Linux",
+    "roles_or_projects": "Senior Embedded Linux Engineer (Jetson, robotics)",
+    "website_or_linkedin": "https://ae.indeed.com/viewjob?jk=103a95c749a9b6eb",
+    "section": "open",
+    "posting_url": "https://ae.indeed.com/viewjob?jk=103a95c749a9b6eb",
+    "location": "Abu Dhabi, UAE",
+    "experience": "5+ years",
+    "tags": ["embedded Linux", "NVIDIA Jetson", "BSP", "ROS 2", "C++"]
+  },
+  {
+    "company": "ARCA Technologies",
+    "focus_area": "UAV flight control, ArduPilot",
+    "roles_or_projects": "ArduPilot Software Engineer",
+    "website_or_linkedin": "https://www.linkedin.com/jobs/view/4491694979/",
+    "section": "open",
+    "posting_url": "https://www.linkedin.com/jobs/view/4491694979/",
+    "location": "Abu Dhabi, UAE",
+    "posted": "2026-11-20",
+    "experience": "Not stated",
+    "tags": ["ArduPilot", "C/C++", "MAVLink", "Pixhawk"]
+  },
+  {
+    "company": "ARCA Technology Manufacturing",
+    "focus_area": "UAV flight-control firmware",
+    "roles_or_projects": "Embedded Software Engineer",
+    "website_or_linkedin": "https://www.naukrigulf.com/embedded-software-engineer-jobs-in-abu-dhabi-uae-in-arca-technology-manufacturing-ltd-2-to-5-years-n-cd-331557-jid-081026000091",
+    "section": "open",
+    "posting_url": "https://www.naukrigulf.com/embedded-software-engineer-jobs-in-abu-dhabi-uae-in-arca-technology-manufacturing-ltd-2-to-5-years-n-cd-331557-jid-081026000091",
+    "location": "Abu Dhabi, UAE",
+    "experience": "2-5 years",
+    "salary": "AED 7,000-12,000/month",
+    "tags": ["C/C++", "STM32", "RTOS", "CAN", "UART"]
+  },
+  {
     "company": "EDGE Group",
     "focus_area": "Avionics embedded software",
     "roles_or_projects": "Embedded Software Engineer II",
@@ -202,6 +237,114 @@
     "posted": "2026-11-09",
     "experience": "8+ years",
     "tags": ["C/C++", "RTOS", "bare-metal", "SPI/I2C/UART/CAN"]
+  },
+  {
+    "company": "Halian",
+    "focus_area": "Secure mission computing, autonomous systems",
+    "roles_or_projects": "Lead Software Engineer – Secure Mission Computing",
+    "website_or_linkedin": "https://www.halian.com/jobs/lead-software-engineer-secure-mission-computing-555905",
+    "section": "open",
+    "posting_url": "https://www.halian.com/jobs/lead-software-engineer-secure-mission-computing-555905",
+    "location": "Abu Dhabi, UAE",
+    "posted": "2026-11-16",
+    "experience": "10+ years",
+    "tags": ["ROS2", "PX4", "embedded Linux", "NVIDIA Jetson", "BSP"]
+  },
+  {
+    "company": "Halian",
+    "focus_area": "Embedded flight-control software",
+    "roles_or_projects": "Senior Software Developer - Flight Controller (m/f/d)",
+    "website_or_linkedin": "https://www.bayt.com/en/uae/jobs/senior-software-developer-flight-controller-m-f-d-75435475/",
+    "section": "open",
+    "posting_url": "https://www.bayt.com/en/uae/jobs/senior-software-developer-flight-controller-m-f-d-75435475/",
+    "location": "Abu Dhabi, UAE",
+    "posted": "2026-11-17",
+    "experience": "8+ years",
+    "tags": ["C/C++", "PX4", "NuttX", "MAVLink", "CAN"]
+  },
+  {
+    "company": "Halian",
+    "focus_area": "Embedded security firmware",
+    "roles_or_projects": "Senior Software Engineer – Embedded Security & Tamper Protection",
+    "website_or_linkedin": "https://www.halian.com/jobs/senior-software-engineer-embedded-security-and-tamper-protection-555907",
+    "section": "open",
+    "posting_url": "https://www.halian.com/jobs/senior-software-engineer-embedded-security-and-tamper-protection-555907",
+    "location": "Abu Dhabi, UAE",
+    "posted": "2026-11-16",
+    "experience": "5-8+ years",
+    "tags": ["C/C++", "Zephyr", "ARM Cortex-M", "secure boot", "MCUboot"]
+  },
+  {
+    "company": "Halian",
+    "focus_area": "Secure mission computing, autonomous systems",
+    "roles_or_projects": "Senior Software Engineer – Mission Computing",
+    "website_or_linkedin": "https://www.halian.com/jobs/senior-software-engineer-mission-computing-555906",
+    "section": "open",
+    "posting_url": "https://www.halian.com/jobs/senior-software-engineer-mission-computing-555906",
+    "location": "Abu Dhabi, UAE",
+    "posted": "2026-11-16",
+    "experience": "8+ years",
+    "tags": ["ROS2", "PX4", "embedded Linux", "Qualcomm", "BSP"]
+  },
+  {
+    "company": "Micropolis Robotics",
+    "focus_area": "Automotive embedded systems, STM32",
+    "roles_or_projects": "Senior Embedded Systems Engineer (Automotive / STM32)",
+    "website_or_linkedin": "https://micropolis.ai/careers/senior-embedded-systems-engineer-automotive-stm32",
+    "section": "open",
+    "posting_url": "https://micropolis.ai/careers/senior-embedded-systems-engineer-automotive-stm32",
+    "location": "Dubai, UAE",
+    "experience": "Not stated",
+    "tags": ["STM32", "C/C++", "RTOS", "CAN", "I2C/SPI/UART"]
+  },
+  {
+    "company": "Sanvi Business Solutions",
+    "focus_area": "USV marine firmware",
+    "roles_or_projects": "Embedded Firmware Engineer - Hull Division",
+    "website_or_linkedin": "https://ae.indeed.com/viewjob?jk=52973f75e8bec5c7",
+    "section": "open",
+    "posting_url": "https://ae.indeed.com/viewjob?jk=52973f75e8bec5c7",
+    "location": "Abu Dhabi, UAE",
+    "experience": "5+ years",
+    "salary": "AED 10,000-12,000/month + accommodation",
+    "tags": ["ArduPilot", "PX4", "STM32", "C/C++", "CAN"]
+  },
+  {
+    "company": "Sanvi Engineering",
+    "focus_area": "USV marine firmware",
+    "roles_or_projects": "Embedded Firmware Engineer - Unmanned Surface Vehicle",
+    "website_or_linkedin": "https://www.qarera.com/job/2629615",
+    "section": "open",
+    "posting_url": "https://www.qarera.com/job/2629615",
+    "location": "Abu Dhabi, UAE",
+    "posted": "2026-11-02",
+    "experience": "5+ years",
+    "salary": "AED 8,000-10,000 + accommodation",
+    "tags": ["ArduPilot", "PX4", "STM32", "C/C++", "CAN"]
+  },
+  {
+    "company": "Sundus Management Consultancy",
+    "focus_area": "Robotics embedded systems",
+    "roles_or_projects": "Robot Embedded Systems Engineer",
+    "website_or_linkedin": "https://www.naukrigulf.com/robot-embedded-systems-engineer-jobs-in-dubai-uae-in-sundus-consultancy-5-to-10-years-m-cd-31713-jid-261026000199",
+    "section": "open",
+    "posting_url": "https://www.naukrigulf.com/robot-embedded-systems-engineer-jobs-in-dubai-uae-in-sundus-consultancy-5-to-10-years-m-cd-31713-jid-261026000199",
+    "location": "Dubai, UAE",
+    "posted": "2026-10-26",
+    "experience": "5-10 years",
+    "tags": ["ROS2", "RTOS", "embedded Linux", "C/C++", "bare-metal"]
+  },
+  {
+    "company": "The Greater Change",
+    "focus_area": "Smart home IoT and wearables",
+    "roles_or_projects": "IoT & Wearables Integration Engineer (Smart Home & Agentic AI)",
+    "website_or_linkedin": "https://apply.workable.com/the-greater-change-1/j/48AA03FB5D",
+    "section": "open",
+    "posting_url": "https://apply.workable.com/the-greater-change-1/j/48AA03FB5D",
+    "location": "Dubai, UAE",
+    "posted": "2026-11-07",
+    "experience": "4+ years",
+    "tags": ["IoT", "BLE", "wearables", "Wi-Fi"]
   },
   {
     "company": "ADASI",
@@ -430,6 +573,30 @@
     "posted": "2026-11-10",
     "experience": "4+ years",
     "tags": ["PCB", "schematic/layout", "low-noise analog", "EMC/EMI"]
+  },
+  {
+    "company": "Technology Innovation Institute",
+    "focus_area": "Hardware and firmware security research",
+    "roles_or_projects": "Senior Hardware Security Researcher",
+    "website_or_linkedin": "https://talent.tii.ae/job/Senior-Hardware-Security-Researcher/732643322/",
+    "section": "related",
+    "posting_url": "https://talent.tii.ae/job/Senior-Hardware-Security-Researcher/732643322/",
+    "location": "United Arab Emirates",
+    "posted": "2026-11-15",
+    "experience": "5+ years",
+    "tags": ["firmware", "side-channel", "JTAG", "ARM Cortex-M", "Python"]
+  },
+  {
+    "company": "Ultiwiseconsult",
+    "focus_area": "Automotive electronics and embedded firmware",
+    "roles_or_projects": "Senior Electronics Hardware & Embedded Engineer",
+    "website_or_linkedin": "https://www.bayt.com/en/uae/jobs/senior-electronics-hardware-embedded-engineer-74955902/",
+    "section": "related",
+    "posting_url": "https://www.bayt.com/en/uae/jobs/senior-electronics-hardware-embedded-engineer-74955902/",
+    "location": "Dubai, UAE",
+    "experience": "7+ years",
+    "salary": "AED 13,000-15,000/month",
+    "tags": ["Altium", "PCB", "FreeRTOS", "STM32", "CAN"]
   },
   {
     "company": "Unikie",
