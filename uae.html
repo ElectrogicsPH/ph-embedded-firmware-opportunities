@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<!-- 
+    NOTE: This file needs to be opened using a live server (not directly via file://)
+    The fetch API requires a web server to load data-uae.json due to CORS restrictions.
+    
+    Options to run:
+    1. Use VS Code Live Server extension
+    2. Run: python -m http.server 8000 (then open http://localhost:8000)
+    3. Use: npx http-server -p 8000
+    4. Deploy to GitHub Pages (recommended for production)
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAE Embedded & Firmware Opportunities</title>
+    <meta name="color-scheme" content="dark light">
+    <script>
+        // SPST theme toggle © 2026 Jeferson De Leon, MIT License (full notice above the toggle CSS).
+        // Set the theme before CSS paints to avoid a flash of the wrong theme.
+        (function () {
+            var t = null;
+            try { t = localStorage.getItem('ph-embedded-theme'); } catch (e) {}
+            if (t !== 'light' && t !== 'dark') {
+                t = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+            }
+            document.documentElement.dataset.theme = t;
+        })();
+    </script>
+    <style>
+        :root,
+        :root[data-theme="dark"] {
+            color-scheme: dark;
+            /* neutral charcoal surfaces, green accents only */
+            --page-bg: #0d1117;
+            --grid-line: rgba(255, 255, 255, 0.04);
+            --grid-dot: rgba(255, 255, 255, 0.06);
+            --scanline: rgba(255, 255, 255, 0.012);
+            --heading: #4ade80;
+            --heading-glow: 0 0 12px rgba(74, 222, 128, 0.25);
+            --subtitle: #c9d1d9;
+            --section-title: #e6edf3;
+            --section-desc: #9da7b3;
+            --pill-bg: #161b22;
+            --pill-fg: #e6edf3;
+            --pill-border: #4ade80;
+            --footer-text: #9da7b3;
+            --footer-link: #4ade80;
+            --focus-ring-page: #93c5fd;
+            --toggle-wire: #8b949e;
+            --toggle-accent: #4ade80;
+            --toggle-hover: rgba(255, 255, 255, 0.06);
+            --panel-bg: #161b22;
+            --panel-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+            --panel-border: #484f58;
+            --text: #e6edf3;
+            --text-muted: #9da7b3;
+            --row-border: #30363d;
+            --row-hover: #1c2128;
+            --thead-from: #21262d;
+            --thead-to: #21262d;
+            --thead-text: #e6edf3;
+            --thead-underline: #4ade80;
+            --link: #4ade80;
+            --link-hover: #86efac;
+            --card-label: #4ade80;
+            --card-border: #484f58;
+            --tag-bg: #21262d;
+            --tag-text: #e6edf3;
+            --tag-border: #6e7681;
+            --focus-ring: #93c5fd;
+            /* for the search/filter UI (PR #3) */
+            --chip-bg: #21262d;
+            --chip-text: #e6edf3;
+            --chip-border: #8b949e;
+            --chip-hover-bg: #30363d;
+            --chip-pressed-bg: #4ade80;
+            --chip-pressed-text: #0d1117;
+            --input-bg: #0d1117;
+            --input-text: #e6edf3;
+            --input-border: #6e7681;
+            --input-placeholder: #8b949e;
+            --clear-btn-text: #e6edf3;
+            --clear-btn-bg: #21262d;
+            --clear-btn-border: #6e7681;
+            --clear-btn-hover-bg: #30363d;
+            --clear-btn-focus: #93c5fd;
+            --result-count-text: #9da7b3;
+        }
+        :root[data-theme="light"] {
+            color-scheme: light;
+            --page-bg: #f0fdf4;
+            --grid-line: rgba(21, 128, 61, 0.12);
+            --grid-dot: rgba(21, 128, 61, 0.15);
+            --scanline: rgba(21, 128, 61, 0.03);
+            --heading: #14532d;
+            --heading-glow: none;
+            --subtitle: #166534;
+            --section-title: #14532d;
+            --section-desc: #1f2937;
+            --pill-bg: #ffffff;
+            --pill-fg: #14532d;
+            --pill-border: #15803d;
+            --footer-text: #166534;
+            --footer-link: #14532d;
+            --focus-ring-page: #1d4ed8;
+            --toggle-wire: #4b5563;
+            --toggle-accent: #15803d;
+            --toggle-hover: rgba(21, 128, 61, 0.1);
+            --panel-shadow: 0 6px 20px rgba(20, 83, 45, 0.12);
+            --panel-border: #ffffff;
+            /* light surfaces */
+            --panel-bg: #ffffff;
+            --text: #333333;
+            --text-muted: #4b5563;
+            --row-border: #e0e0e0;
+            --row-hover: #f5f5f5;
+            --thead-from: #15803d;
+            --thead-to: #166534;
+            --thead-text: #ffffff;
+            --link: #15803d;
+            --link-hover: #166534;
+            --card-label: #15803d;
+            --card-border: #6b7280;
+            --tag-bg: #eef2f7;
+            --tag-text: #1f2937;
+            --tag-border: #64748b;
+            --focus-ring: #1d4ed8;
+            /* for the search/filter UI (PR A) */
+            --chip-bg: #ffffff;
+            --chip-text: #14532d;
+            --chip-border: #15803d;
+            --chip-hover-bg: #dcfce7;
+            --chip-pressed-bg: #15803d;
+            --chip-pressed-text: #ffffff;
+            --input-bg: #ffffff;
+            --input-text: #111827;
+            --input-border: #6b7280;
+            --input-placeholder: #6b7280;
+            --clear-btn-text: #111827;
+            --clear-btn-bg: #f3f4f6;
+            --clear-btn-border: #374151;
+            --clear-btn-hover-bg: #e5e7eb;
+            --clear-btn-focus: #1d4ed8;
+            --result-count-text: #374151;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--page-bg);
+            background-image: 
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                radial-gradient(circle, var(--grid-dot) 2px, transparent 2px),
+                radial-gradient(circle, var(--grid-line) 1px, transparent 1px);
+            background-size: 
+                50px 50px,
+                50px 50px,
+                200px 200px,
+                100px 100px;
+            background-position: 
+                0 0,
+                0 0,
+                0 0,
+                25px 25px;
+            min-height: 100vh;
+            padding: 20px 10px;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    var(--scanline) 2px,
+                    var(--scanline) 4px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    var(--scanline) 2px,
+                    var(--scanline) 4px
+                );
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            color: var(--heading);
+            margin-bottom: 30px;
+            text-shadow: var(--heading-glow);
+            position: relative;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            text-shadow: var(--heading-glow);
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1em;
+            opacity: 0.9;
+            color: var(--subtitle);
+            line-height: 1.4;
+            padding: 0 10px;
+        }
+
+        .table-container {
+            background: var(--panel-bg);
+            border-radius: 15px;
+            padding: 20px 10px;
+            box-shadow: var(--panel-shadow);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        thead {
+            background: linear-gradient(135deg, var(--thead-from) 0%, var(--thead-to) 100%);
+            color: var(--thead-text);
+        }
+
+        th {
+            color: var(--thead-text);
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        td {
+            color: var(--text);
+            padding: 15px;
+            border-bottom: 1px solid var(--row-border);
+        }
+
+        tbody tr:hover {
+            background-color: var(--row-hover);
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .company-name {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .website-link {
+            color: var(--link);
+            text-decoration: underline;
+            transition: color 0.3s ease;
+            word-break: break-all;
+            display: inline-block;
+            min-height: 44px;
+            padding: 4px 0;
+        }
+
+        .website-link:hover {
+            color: var(--link-hover);
+            text-decoration: underline;
+        }
+
+        /* Mobile Card Layout */
+        .mobile-card {
+            display: none;
+        }
+
+        .mobile-card-item {
+            background: var(--panel-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-card-item .card-label {
+            font-weight: 600;
+            color: var(--card-label);
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+            margin-top: 15px;
+        }
+
+        .mobile-card-item .card-label:first-child {
+            margin-top: 0;
+        }
+
+        .mobile-card-item .card-value {
+            color: var(--text);
+            font-size: 1em;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .mobile-card-item .company-name {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #16a34a;
+        }
+
+        .loading {
+            text-align: center;
+            color: var(--heading);
+            font-size: 1.5em;
+            padding: 50px;
+            text-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+        }
+
+        .error {
+            background: #b91c1c;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px 8px;
+            }
+
+            header {
+                margin-bottom: 20px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+                padding: 0 5px;
+            }
+
+            .subtitle {
+                font-size: 0.9em;
+                padding: 0 5px;
+            }
+
+            .table-container {
+                padding: 15px 8px;
+                border-radius: 10px;
+            }
+
+            /* Hide table on mobile, show cards */
+            table {
+                display: none;
+            }
+
+            .mobile-card {
+                display: block;
+            }
+
+            .loading {
+                font-size: 1.2em;
+                padding: 30px 20px;
+            }
+
+            .error {
+                padding: 15px;
+                font-size: 0.9em;
+                margin: 15px 0;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            body {
+                padding: 30px 15px;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .table-container {
+                padding: 25px 15px;
+            }
+
+            th, td {
+                padding: 12px;
+                font-size: 0.95em;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-card {
+                display: none;
+            }
+        }
+
+        table, .mobile-card-item { color: var(--text); }
+        .table-container { border: 1px solid var(--panel-border); }
+        :root:not([data-theme="light"]) thead { border-bottom: 2px solid var(--thead-underline); }
+        td .role-meta { color: var(--text-muted); }
+        .last-updated { display: inline-block; margin-top: 14px; padding: 6px 14px; border-radius: 999px; background: var(--pill-bg); color: var(--pill-fg); border: 1px solid var(--pill-border); font-size: 1em; font-weight: 600; text-shadow: none; }
+        .edition-link { margin-top: 12px; font-size: 0.95em; }
+        .edition-link a { color: var(--link); font-weight: 600; text-decoration: underline; }
+        .section-title { margin: 30px 0 6px; font-size: 1.4em; color: var(--section-title); }
+        .section-desc { margin: 0 0 12px; color: var(--section-desc); font-size: 0.95em; }
+        .role-meta { font-size: 0.85em; color: var(--text-muted); margin-top: 4px; }
+        .tag { display: inline-block; font-size: 0.75em; padding: 2px 8px; margin: 4px 4px 0 0; border-radius: 10px; background: var(--tag-bg); color: var(--tag-text); border: 1px solid var(--tag-border); }
+
+        .website-link:focus-visible, footer a:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
+        footer a:focus-visible { outline-color: var(--focus-ring-page); }
+        /* SPST theme toggle © 2026 Jeferson De Leon (https://jefersondeleon.dev). MIT License. Keep this notice when reusing. */
+        /* SPST theme switch, ported from the portfolio's theme-toggle */
+        .theme-toggle { position: absolute; top: 0; right: 0; display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 4px 6px; border: 0; border-radius: 4px; background: transparent; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+        .theme-toggle:hover, .theme-toggle:active, .theme-toggle:focus { background: transparent; }
+        .theme-toggle:focus:not(:focus-visible) { outline: none; }
+        @media (hover: hover) and (pointer: fine) {
+            .theme-toggle:hover .lever { stroke-width: 2.75; }
+            .theme-toggle:hover .wire { stroke: var(--toggle-accent); }
+        }
+        .theme-toggle:focus-visible { outline: 2px solid var(--focus-ring-page); outline-offset: 2px; }
+        .theme-toggle svg { display: block; height: 32px; width: auto; aspect-ratio: 110 / 32; }
+        .theme-toggle .wire { fill: none; stroke: var(--toggle-wire); stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.2s ease, opacity 0.2s ease; }
+        .theme-toggle .terminal { fill: var(--page-bg); stroke: var(--toggle-accent); stroke-width: 1.75; }
+        .theme-toggle .lever { fill: none; stroke: var(--toggle-accent); stroke-width: 2.25; stroke-linecap: round; transition: d 0.2s ease, stroke-width 0.15s ease; }
+        .theme-toggle .led { fill: none; }
+        .theme-toggle .rays { opacity: 0.4; }
+        :root[data-theme="light"] .theme-toggle .led { fill: var(--toggle-accent); stroke: var(--toggle-accent); filter: drop-shadow(0 0 2px rgba(21, 128, 61, 0.45)); }
+        :root[data-theme="light"] .theme-toggle .led-bar,
+        :root[data-theme="light"] .theme-toggle .rays { stroke: var(--toggle-accent); opacity: 1; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+        @media (max-width: 1200px) {
+            header { padding-top: 44px; }
+        }
+        @media (max-width: 768px) {
+            .theme-toggle svg { height: 30px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { transition: none !important; animation: none !important; }
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+            color: var(--footer-text);
+            font-size: 0.95em;
+            position: relative;
+            z-index: 1;
+        }
+
+        footer a {
+            color: var(--footer-link);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-shadow: var(--heading-glow);
+        }
+
+        footer a:hover {
+            color: var(--footer-link);
+            text-shadow: var(--heading-glow);
+            text-decoration: underline;
+        }
+
+        footer .heart {
+            color: #ef4444;
+            display: inline-block;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            footer {
+                padding: 25px 15px;
+                margin-top: 30px;
+                font-size: 0.9em;
+            }
+        }
+        .last-updated { display: inline-block; margin-top: 14px; padding: 6px 14px; border-radius: 999px; background: var(--pill-bg, #0f2e1b); color: var(--pill-fg, #ffffff); font-size: 1em; font-weight: 600; text-shadow: none; border: 1px solid var(--pill-border, #4ade80); opacity: 1; }
+        .filters { background: var(--panel-bg, #ffffff); color: var(--text, #1f2937); border-radius: 15px; padding: 16px; margin-bottom: 10px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); }
+        .filters label.search-label { display: block; font-weight: 600; margin-bottom: 6px; }
+        .filters input[type="search"] { width: 100%; font-size: 1em; padding: 10px 12px; border: 2px solid var(--input-border, #6b7280); border-radius: 8px; color: var(--input-text, #111827); background: var(--input-bg, #ffffff); }
+        .filters input[type="search"]::placeholder { color: var(--input-placeholder, #6b7280); opacity: 1; }
+        .filters input[type="search"]:focus, .chip:focus-visible, .clear-btn:focus-visible, .website-link:focus-visible { outline: 3px solid var(--focus-ring, #1d4ed8); outline-offset: 2px; }
+        .filters fieldset { border: none; margin-top: 12px; }
+        .filters legend { font-weight: 600; margin-bottom: 6px; }
+        .chip { font: inherit; font-size: 0.85em; padding: 6px 12px; margin: 0 6px 6px 0; border-radius: 999px; border: 1px solid var(--chip-border, #15803d); background: var(--chip-bg, #ffffff); color: var(--chip-text, #14532d); cursor: pointer; min-height: 32px; transition: background-color 0.2s ease, color 0.2s ease; }
+        .sort-control { margin: 10px 0 4px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+        .sort-label { font-weight: 600; font-size: 0.9em; margin-right: 4px; }
+        .sort-btn { font: inherit; font-size: 0.85em; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--chip-border, #15803d); background: var(--chip-bg, #ffffff); color: var(--chip-text, #14532d); cursor: pointer; min-height: 32px; transition: background-color 0.2s ease, color 0.2s ease; }
+        @media (max-width: 480px) { .sort-label { flex-basis: 100%; } }
+        .sort-btn:hover { background: var(--chip-hover-bg, #dcfce7); }
+        .sort-btn[aria-pressed="true"], .sort-btn[aria-pressed="true"]:hover { background: var(--chip-pressed-bg, #15803d); color: var(--chip-pressed-text, #ffffff); }
+        .sort-btn:focus-visible { outline: 3px solid var(--focus-ring, #1d4ed8); outline-offset: 2px; }
+        .chip:hover { background: var(--chip-hover-bg, #dcfce7); }
+        .chip[aria-pressed="true"], .chip[aria-pressed="true"]:hover { background: var(--chip-pressed-bg, #15803d); color: var(--chip-pressed-text, #ffffff); }
+        .filter-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 8px; }
+        .clear-btn { font: inherit; padding: 8px 14px; border-radius: 8px; border: 1px solid var(--clear-btn-border, #374151); background: var(--clear-btn-bg, #f3f4f6); color: var(--clear-btn-text, #111827); cursor: pointer; }
+        .clear-btn:hover { background: var(--clear-btn-hover-bg, #e5e7eb); }
+        .clear-btn:focus-visible { outline-color: var(--clear-btn-focus, #1d4ed8); }
+        .result-count { color: var(--result-count-text, #374151); font-size: 0.9em; }
+        .no-matches { background: var(--panel-bg, #ffffff); color: var(--text, #1f2937); border-radius: 15px; padding: 24px; text-align: center; margin-top: 20px; }
+        .website-link.apply { font-weight: 600; word-break: normal; }
+        .card-meta-row { margin-top: 6px; }
+        @media (max-width: 768px) {
+            .mobile-card-item { box-shadow: none; border: 1px solid var(--card-border, #6b7280); padding: 16px; }
+            .mobile-card-item .card-label { margin-top: 10px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+        }
+        /* AA overrides for existing selectors (values match the theme PR's variables) */
+        thead { background: linear-gradient(135deg, var(--thead-from, #15803d) 0%, var(--thead-to, #166534) 100%); }
+        .website-link { color: var(--link, #15803d); text-decoration: underline; }
+        .website-link:hover { color: var(--link-hover, #166534); }
+        .mobile-card-item .card-label { color: var(--card-label, #15803d); }
+        .role-meta { opacity: 1; color: var(--text-muted, #4b5563); }
+        .tag { background: var(--tag-bg, #eef2f7); color: var(--tag-text, #1f2937); border: 1px solid var(--tag-border, #64748b); }
+        .sr-only-legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+        .tags-toggle { font: inherit; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; min-height: 36px; border-radius: 8px; border: 1px solid var(--clear-btn-border, #374151); background: var(--clear-btn-bg, #f3f4f6); color: var(--clear-btn-text, #111827); cursor: pointer; }
+        .tags-toggle:focus-visible { outline: 3px solid var(--focus-ring, #1d4ed8); outline-offset: 2px; }
+        .tags-toggle .chev { display: inline-block; transition: transform 0.2s ease; }
+        .tags-toggle[aria-expanded="true"] .chev { transform: rotate(90deg); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <!-- SPST theme toggle © 2026 Jeferson De Leon, MIT License (full notice above the toggle CSS). -->
+            <button type="button" id="theme-toggle" class="theme-toggle" aria-pressed="false" aria-label="Toggle theme to light" title="Toggle theme to light">
+                <svg viewBox="0 0 110 32" aria-hidden="true" focusable="false">
+                    <g>
+                        <path class="wire" d="M2 8 H10" />
+                        <path class="wire" d="M6 8 V16" />
+                        <path class="wire" d="M6 16 H22" />
+                        <path class="wire" d="M42 16 H48" />
+                        <path class="wire" d="M48 16 L50 12 L54 20 L58 12 L62 20 L66 12 L68 16" />
+                        <path class="wire" d="M68 16 H76" />
+                        <path class="wire led" d="M76 10 L76 22 L86 16 Z" />
+                        <path class="wire led-bar" d="M86 10 V22" />
+                        <path class="wire rays" d="M80 8 L84 4 M82 4 H84 V6 M85 9 L89 5 M87 5 H89 V7" />
+                        <path class="wire" d="M86 16 H100" />
+                        <path class="wire" d="M100 16 V22 M94 22 H106 M96 25 H104 M98 28 H102" />
+                    </g>
+                    <g>
+                        <circle class="terminal" cx="24" cy="16" r="2" />
+                        <circle class="terminal" cx="40" cy="16" r="2" />
+                        <path class="lever" id="theme-lever" d="M24 16 L38 6" />
+                    </g>
+                </svg>
+                <span class="sr-only" id="theme-toggle-text">Toggle theme to light</span>
+            </button>
+            <h1>UAE Embedded & Firmware Opportunities</h1>
+            <p class="subtitle">Open embedded systems, firmware, and hardware roles in the United Arab Emirates</p>
+            <p class="last-updated">Last updated: Nov 20, 2026</p>
+            <p class="edition-link"><a href="index.html">Philippines edition</a></p>
+        </header>
+
+        <div id="loading" class="loading">Loading companies...</div>
+        <div id="error" class="error" style="display: none;"></div>
+        <div id="filters" class="filters" role="search" style="display: none;">
+            <label class="search-label" for="search-input">Search roles and companies</label>
+            <input type="search" id="search-input" placeholder="e.g. firmware, HALCON, Dubai" autocomplete="off">
+            <div class="sort-control" role="group" aria-labelledby="sort-label">
+                <span id="sort-label" class="sort-label">Sort roles by posted date</span>
+                <button type="button" class="sort-btn" data-sort="newest" aria-pressed="true">Newest first</button><button type="button" class="sort-btn" data-sort="oldest" aria-pressed="false">Oldest first</button>
+            </div>
+            <fieldset>
+                <legend>Location</legend>
+                <div id="location-chips"></div>
+            </fieldset>
+            <fieldset>
+                <legend class="sr-only-legend">Skill tags</legend>
+                <button type="button" id="tags-toggle" class="tags-toggle" aria-expanded="true" aria-controls="tag-chips"><svg class="chev" aria-hidden="true" focusable="false" width="10" height="10" viewBox="0 0 10 10"><path d="M3 1 L8 5 L3 9 Z" fill="currentColor"/></svg><span id="tags-toggle-text">Skill tags</span></button>
+                <div id="tag-chips" style="margin-top: 8px;"></div>
+            </fieldset>
+            <div class="filter-actions">
+                <button type="button" id="clear-filters" class="clear-btn">Clear filters</button>
+                <span id="result-count" class="result-count" aria-live="polite"></span>
+            </div>
+        </div>
+        <div id="no-matches" class="no-matches" style="display: none;">No matches. Try another search or <button type="button" id="clear-filters-empty" class="clear-btn">clear filters</button></div>
+        <div id="table-container" style="display: none;"></div>
+        <template id="section-template">
+            <section class="list-section">
+            <h2 class="section-title"></h2>
+            <p class="section-desc"></p>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Focus Area</th>
+                            <th>Roles / Projects</th>
+                            <th>Website / LinkedIn</th>
+                        </tr>
+                    </thead>
+                    <tbody class="companies-table-body">
+                    </tbody>
+                </table>
+                <div class="mobile-card mobile-card-container">
+                </div>
+            </div>
+            </section>
+        </template>
+    </div>
+    </div>
+
+    <footer>
+        Made with <span class="heart">❤️</span> by <a href="https://www.facebook.com/groups/embeddsysph/" target="_blank" rel="noopener noreferrer">Embedded Systems PH community</a>
+        <br><br>
+        Want to add your company or contribute? <a href="https://github.com/ElectrogicsPH/ph-embedded-firmware-opportunities/issues/new" target="_blank" rel="noopener noreferrer">Create an issue on GitHub</a>
+    </footer>
+
+    <script>
+        async function loadCompanies() {
+            try {
+                const response = await fetch('data-uae.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load companies');
+                }
+                const companies = await response.json();
+
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('table-container').style.display = 'block';
+
+                // Sections (entries without "section" fall back to "watch")
+                const SECTIONS = [
+                    { id: 'open', title: 'Open embedded & firmware roles', desc: 'Verified current embedded and firmware roles in the United Arab Emirates. Each links to its posting.' },
+                    { id: 'related', title: 'Related roles', desc: 'Adjacent hardware, electronics, and test roles.' },
+                    { id: 'watch', title: 'Companies to watch', desc: 'UAE companies with embedded, firmware, or hardware work and no current role listed here.' }
+                ];
+                const root = document.getElementById('table-container');
+                const template = document.getElementById('section-template');
+                const containers = {};
+                SECTIONS.forEach(sec => {
+                    if (!companies.some(c => (c.section || 'watch') === sec.id)) return;
+                    const frag = template.content.cloneNode(true);
+                    frag.querySelector('.section-title').textContent = sec.title;
+                    frag.querySelector('.section-desc').textContent = sec.desc;
+                    containers[sec.id] = {
+                        id: sec.id,
+                        section: frag.querySelector('.list-section'),
+                        tbody: frag.querySelector('.companies-table-body'),
+                        mobile: frag.querySelector('.mobile-card-container')
+                    };
+                    root.appendChild(frag);
+                });
+
+                const buildRoleDetails = (company, parent) => {
+                    const isRole = (company.section || 'watch') !== 'watch';
+                    const iso = validPosted(company.posted);
+                    const dateText = !isRole ? '' : iso ? 'Posted ' + iso
+                        : 'Date not listed' + (company.posted ? ' (posting said: ' + company.posted + ')' : '');
+                    const exp = company.experience;
+                    const expText = !isRole || !exp ? ''
+                        : (exp === 'Not stated' ? 'Experience not stated' : 'Experience: ' + exp);
+                    const meta = [company.location, dateText, expText, company.salary]
+                        .filter(Boolean).join(' · ');
+                    if (meta) {
+                        const m = document.createElement('div');
+                        m.className = 'role-meta';
+                        m.textContent = meta;
+                        parent.appendChild(m);
+                    }
+                    (company.tags || []).forEach(t => {
+                        const tag = document.createElement('span');
+                        tag.className = 'tag';
+                        tag.textContent = t;
+                        parent.appendChild(tag);
+                    });
+                };
+
+                const items = [];
+                companies.forEach(company => {
+                    // Unknown sections never fall into the watch list (only a missing section means watch).
+                    const secId = company.section || 'watch';
+                    const target = containers[secId] || (secId === 'watch' ? null : containers.related || containers.open);
+                    if (!target) return;
+                    const tbody = target.tbody;
+                    const mobileContainer = target.mobile;
+                    const url = company.posting_url || company.website_or_linkedin;
+                    const isRole = (company.section || 'watch') !== 'watch';
+                    const linkText = isRole ? 'Apply' : (company.posting_url ? 'View posting' : 'Website');
+                    const linkLabel = isRole
+                        ? `Apply: ${company.roles_or_projects} at ${company.company} (opens in a new tab)`
+                        : `${linkText}: ${company.company} (opens in a new tab)`;
+                    // Create table row for desktop
+                    const row = document.createElement('tr');
+
+                    const companyCell = document.createElement('td');
+                    companyCell.className = 'company-name';
+                    companyCell.textContent = company.company;
+
+                    const focusAreaCell = document.createElement('td');
+                    focusAreaCell.textContent = company.focus_area;
+
+                    const rolesCell = document.createElement('td');
+                    rolesCell.textContent = company.roles_or_projects;
+                    buildRoleDetails(company, rolesCell);
+
+                    const websiteCell = document.createElement('td');
+                    const link = document.createElement('a');
+                    link.className = 'website-link';
+                    link.href = url;
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
+                    link.textContent = linkText;
+                    link.setAttribute('aria-label', linkLabel);
+                    if (isRole) link.classList.add('apply');
+                    websiteCell.appendChild(link);
+
+                    row.appendChild(companyCell);
+                    row.appendChild(focusAreaCell);
+                    row.appendChild(rolesCell);
+                    row.appendChild(websiteCell);
+
+                    tbody.appendChild(row);
+
+                    // Create mobile card
+                    const card = document.createElement('div');
+                    card.className = 'mobile-card-item';
+
+                    const companyName = document.createElement('div');
+                    companyName.className = 'company-name';
+                    companyName.textContent = company.company;
+                    card.appendChild(companyName);
+
+                    const focusAreaLabel = document.createElement('div');
+                    focusAreaLabel.className = 'card-label';
+                    focusAreaLabel.textContent = 'Focus Area';
+                    card.appendChild(focusAreaLabel);
+
+                    const focusAreaValue = document.createElement('div');
+                    focusAreaValue.className = 'card-value';
+                    focusAreaValue.textContent = company.focus_area;
+                    card.appendChild(focusAreaValue);
+
+                    const rolesLabel = document.createElement('div');
+                    rolesLabel.className = 'card-label';
+                    rolesLabel.textContent = 'Roles / Projects';
+                    card.appendChild(rolesLabel);
+
+                    const rolesValue = document.createElement('div');
+                    rolesValue.className = 'card-value';
+                    rolesValue.textContent = company.roles_or_projects;
+                    buildRoleDetails(company, rolesValue);
+                    card.appendChild(rolesValue);
+
+                    const websiteLabel = document.createElement('div');
+                    websiteLabel.className = 'card-label';
+                    websiteLabel.textContent = 'Website / LinkedIn';
+                    card.appendChild(websiteLabel);
+
+                    const websiteValue = document.createElement('div');
+                    websiteValue.className = 'card-value';
+                    const mobileLink = document.createElement('a');
+                    mobileLink.className = 'website-link';
+                    mobileLink.href = url;
+                    mobileLink.target = '_blank';
+                    mobileLink.rel = 'noopener noreferrer';
+                    mobileLink.textContent = linkText;
+                    mobileLink.setAttribute('aria-label', linkLabel);
+                    if (isRole) mobileLink.classList.add('apply');
+                    websiteValue.appendChild(mobileLink);
+                    card.appendChild(websiteValue);
+
+                    mobileContainer.appendChild(card);
+
+                    items.push({
+                        row, card, target,
+                        order: items.length,
+                        section: company.section || 'watch',
+                        company: company.company || '',
+                        posted: validPosted(company.posted),
+                        region: regionOf(company.location),
+                        tags: company.tags || [],
+                        text: [company.company, company.focus_area, company.roles_or_projects, company.location, company.experience, (company.tags || []).join(' ')]
+                            .filter(Boolean).join(' ').toLowerCase()
+                    });
+                });
+                setupFilters(items, containers);
+            } catch (error) {
+                document.getElementById('loading').style.display = 'none';
+                const errorDiv = document.getElementById('error');
+                errorDiv.textContent = 'Failed to load companies. Please try again later.';
+                errorDiv.style.display = 'block';
+                console.error('Error loading companies:', error);
+            }
+        }
+
+        // SPST theme toggle © 2026 Jeferson De Leon, MIT License (full notice above the toggle CSS).
+        // Theme switch: system default, choice saved in localStorage.
+        (function () {
+            const btn = document.getElementById('theme-toggle');
+            const lever = document.getElementById('theme-lever');
+            const text = document.getElementById('theme-toggle-text');
+            const sync = () => {
+                const light = document.documentElement.dataset.theme === 'light';
+                const label = light ? 'Toggle theme to dark' : 'Toggle theme to light';
+                btn.setAttribute('aria-pressed', String(light));
+                btn.setAttribute('aria-label', label);
+                btn.title = label;
+                text.textContent = label;
+                lever.setAttribute('d', light ? 'M24 16 L40 16' : 'M24 16 L38 6');
+            };
+            btn.addEventListener('click', () => {
+                const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+                document.documentElement.dataset.theme = next;
+                try { localStorage.setItem('ph-embedded-theme', next); } catch (e) {}
+                sync();
+            });
+            const mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: light)') : null;
+            if (mq && mq.addEventListener) {
+                mq.addEventListener('change', e => {
+                    let saved = null;
+                    try { saved = localStorage.getItem('ph-embedded-theme'); } catch (err) {}
+                    if (!saved) { document.documentElement.dataset.theme = e.matches ? 'light' : 'dark'; sync(); }
+                });
+            }
+            sync();
+        })();
+
+        // Group free-text locations into regions (no data is changed).
+        const REGION_RULES = [
+            ['Abu Dhabi', /\babu dhabi\b/i],
+            ['Dubai', /\bdubai\b/i],
+            ['Sharjah', /\bsharjah\b/i],
+            ['Ajman', /\bajman\b/i],
+            ['Umm Al Quwain', /\bumm al quwain\b/i],
+            ['Ras Al Khaimah', /\b(ras al khaimah|rak)\b/i],
+            ['Fujairah', /\bfujairah\b/i],
+            ['United Arab Emirates', /\b(united arab emirates|uae)\b/i]
+        ];
+        function regionOf(location) {
+            if (!location) return null;
+            for (const [name, re] of REGION_RULES) if (re.test(location)) return name;
+            return 'Other / unspecified';
+        }
+
+        // Strict YYYY-MM-DD that is a real calendar date; anything else is "Date not listed".
+        function validPosted(v) {
+            if (typeof v !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(v)) return null;
+            const d = new Date(v + 'T00:00:00Z');
+            return !isNaN(d) && d.toISOString().slice(0, 10) === v ? v : null;
+        }
+
+        // Stable sort: dated roles by date (newest or oldest), undated last; watch list A-Z.
+        function sortItems(items, containers, order) {
+            const byName = (a, b) => a.company.localeCompare(b.company, undefined, { sensitivity: 'base' }) || a.order - b.order;
+            const byDate = (a, b) => {
+                if (a.posted && !b.posted) return -1;
+                if (!a.posted && b.posted) return 1;
+                if (a.posted && b.posted && a.posted !== b.posted) {
+                    return order === 'oldest' ? (a.posted < b.posted ? -1 : 1) : (a.posted < b.posted ? 1 : -1);
+                }
+                return a.order - b.order;
+            };
+            Object.values(containers).forEach(c => {
+                const list = items.filter(i => i.target === c);
+                list.sort(c.id === 'watch' ? byName : byDate);
+                list.forEach(i => { c.tbody.appendChild(i.row); c.mobile.appendChild(i.card); });
+            });
+        }
+
+        function setupFilters(items, containers) {
+            let sortOrder = 'newest';
+            try { if (localStorage.getItem('uae-embedded-sort') === 'oldest') sortOrder = 'oldest'; } catch (e) {}
+            const sortBtns = document.querySelectorAll('.sort-btn');
+            const setSort = o => {
+                sortOrder = o;
+                sortBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.sort === o)));
+                sortItems(items, containers, o);
+            };
+            sortBtns.forEach(b => b.addEventListener('click', () => {
+                setSort(b.dataset.sort);
+                try { localStorage.setItem('uae-embedded-sort', b.dataset.sort); } catch (e) {}
+            }));
+            setSort(sortOrder);
+            const state = { q: '', regions: new Set(), tags: new Set() };
+            const search = document.getElementById('search-input');
+            const count = document.getElementById('result-count');
+            const noMatches = document.getElementById('no-matches');
+
+            // Near-duplicate tags shown as one chip that matches every alias (data is not rewritten).
+            const TAG_GROUPS = {
+                'I2C/SPI': 'I2C/SPI (incl. /UART)',
+                'I2C/SPI/UART': 'I2C/SPI (incl. /UART)',
+                'MCU': 'MCU / microcontroller',
+                'microcontroller': 'MCU / microcontroller'
+            };
+            items.forEach(i => { i.tagKeys = [...new Set(i.tags.map(t => TAG_GROUPS[t] || t))]; });
+            const uniq = arr => [...new Set(arr)].sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
+            const makeChips = (hostId, values, set) => {
+                const host = document.getElementById(hostId);
+                values.forEach(v => {
+                    const b = document.createElement('button');
+                    b.type = 'button';
+                    b.className = 'chip';
+                    b.textContent = v;
+                    b.setAttribute('aria-pressed', 'false');
+                    b.addEventListener('click', () => {
+                        set.has(v) ? set.delete(v) : set.add(v);
+                        b.setAttribute('aria-pressed', String(set.has(v)));
+                        apply();
+                    });
+                    host.appendChild(b);
+                });
+            };
+            makeChips('location-chips', uniq(items.map(i => i.region).filter(Boolean)), state.regions);
+            const tagValues = uniq(items.flatMap(i => i.tagKeys));
+            makeChips('tag-chips', tagValues, state.tags);
+
+            // Disclosure for the long tag list: collapsed by default on small screens.
+            const tagsToggle = document.getElementById('tags-toggle');
+            const tagsText = document.getElementById('tags-toggle-text');
+            const tagChips = document.getElementById('tag-chips');
+            const setExpanded = open => {
+                tagsToggle.setAttribute('aria-expanded', String(open));
+                tagChips.hidden = !open;
+            };
+            const updateToggleText = () => {
+                const n = state.tags.size;
+                tagsText.textContent = `Skill tags (${tagValues.length})` + (n ? ` · ${n} active` : '');
+            };
+            tagsToggle.addEventListener('click', () => setExpanded(tagsToggle.getAttribute('aria-expanded') !== 'true'));
+            setExpanded(!(window.matchMedia && window.matchMedia('(max-width: 768px)').matches));
+            updateToggleText();
+
+            function apply() {
+                let shown = 0;
+                const perSection = new Map();
+                items.forEach(i => {
+                    const ok = (!state.q || i.text.includes(state.q))
+                        && (!state.regions.size || state.regions.has(i.region))
+                        && (!state.tags.size || i.tagKeys.some(t => state.tags.has(t)));
+                    i.row.hidden = !ok;
+                    i.card.hidden = !ok;
+                    if (ok) shown++;
+                    perSection.set(i.target, (perSection.get(i.target) || 0) + (ok ? 1 : 0));
+                });
+                perSection.forEach((n, target) => { target.section.hidden = n === 0; });
+                noMatches.style.display = shown ? 'none' : 'block';
+                updateToggleText();
+                count.textContent = `Showing ${shown} of ${items.length} entries`;
+            }
+            function clearAll() {
+                state.q = ''; search.value = '';
+                state.regions.clear(); state.tags.clear();
+                document.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', 'false'));
+                apply();
+                search.focus();
+            }
+            search.addEventListener('input', () => { state.q = search.value.trim().toLowerCase(); apply(); });
+            document.getElementById('clear-filters').addEventListener('click', clearAll);
+            document.getElementById('clear-filters-empty').addEventListener('click', clearAll);
+            document.getElementById('filters').style.display = 'block';
+            apply();
+        }
+
+        loadCompanies();
+    </script>
+</body>
+</html>

@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Check every posting_url / website_or_linkedin in data.json (Python stdlib only).
+"""Check every posting_url / website_or_linkedin in a data file (Python stdlib only).
+
+Default file is data.json (Philippines). Pass --data data-uae.json for the UAE list.
 
 Status per URL:
   dead        HTTP 404/410, DNS failure, or an obvious "expired"/"no longer accepting" marker
