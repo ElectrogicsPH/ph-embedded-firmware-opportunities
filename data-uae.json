@@ -420,6 +420,41 @@
     "tags": ["PX4", "ArduPilot", "ROS2", "C/C++"]
   },
   {
+    "company": "Technology Innovation Institute",
+    "focus_area": "Quantum sensing, Quantum Research Center",
+    "roles_or_projects": "Senior Electrical Engineer",
+    "website_or_linkedin": "https://talent.tii.ae/job/Senior-Electrical-Engineer/732726422/",
+    "section": "related",
+    "posting_url": "https://talent.tii.ae/job/Senior-Electrical-Engineer/732726422/",
+    "location": "United Arab Emirates",
+    "posted": "2026-11-10",
+    "experience": "4+ years",
+    "tags": ["PCB", "schematic/layout", "low-noise analog", "EMC/EMI"]
+  },
+  {
+    "company": "Unikie",
+    "focus_area": "Embedded device hardware and RF",
+    "roles_or_projects": "Senior HW Engineer / RF Solutions",
+    "website_or_linkedin": "https://odoo.unikie.com/jobs/detail/senior-hw-engineer-rf-solutions-471",
+    "section": "related",
+    "posting_url": "https://odoo.unikie.com/jobs/detail/senior-hw-engineer-rf-solutions-471",
+    "location": "Abu Dhabi, UAE",
+    "posted": "2026-11-17",
+    "experience": "8+ years",
+    "tags": ["RF", "PCB layout", "microcontrollers", "DSP", "EMC"]
+  },
+  {
+    "company": "Unikie",
+    "focus_area": "PCB layout for hardware products",
+    "roles_or_projects": "Senior HW PCB Layout Engineer",
+    "website_or_linkedin": "https://odoo.unikie.com/jobs/detail/senior-hw-pcb-layout-engineer-472",
+    "section": "related",
+    "posting_url": "https://odoo.unikie.com/jobs/detail/senior-hw-pcb-layout-engineer-472",
+    "location": "Abu Dhabi, UAE",
+    "experience": "Not stated",
+    "tags": ["Altium", "PCB layout", "high-speed", "EMC"]
+  },
+  {
     "company": "HIMA",
     "focus_area": "Safety-related automation, process and rail",
     "roles_or_projects": "Safety controller and firmware engineering",
