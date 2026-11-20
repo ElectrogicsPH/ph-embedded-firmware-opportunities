@@ -4,6 +4,10 @@ A curated directory of companies and organizations in the Philippines offering o
 
 **Last updated: Nov 15, 2026**
 
+The Philippines list is the default page ([index.html](index.html), [data.json](data.json)). A separate [UAE edition](uae.html) uses the same layout and reads [data-uae.json](data-uae.json).
+
+**UAE edition last updated: Nov 20, 2026**
+
 ---
 
 ## 🔹 How to Use
@@ -107,7 +111,16 @@ Contributions are welcome! You can contribute in two ways:
    }
    ```
 
-4. **Important Guidelines:**
+4. **UAE edition:** add or update roles in `data-uae.json`, not `data.json`. The same fields and rules apply, with these differences:
+   - Only list roles located in the UAE whose posting is live
+   - `open` is embedded software, firmware, embedded Linux, MCU, RTOS, IoT device, and BSP/driver roles
+   - `related` is adjacent hardware design, electronics, power electronics, PCB, and hardware test or validation roles
+   - `watch` is UAE companies doing embedded, firmware, or hardware work with no current role found
+   - `location` is the place stated on the posting, such as `Dubai, UAE` or `Abu Dhabi, UAE`
+   - Update the "Last updated" date in `uae.html` and the UAE date in this README when you refresh that list
+   - `scripts/link_check.py --data data-uae.json` checks those links. The weekly careers-feed check still scans Philippines feeds only.
+
+5. **Important Guidelines:**
    - `section` is one of `open` (embedded/firmware roles), `related` (adjacent hardware/test roles) or `watch` (companies with no current role). Entries without `section` show under Companies to watch.
    - **Maintain alphabetical order** by company name (A-Z), then by title, within each section
    - Only list roles located in the Philippines whose posting is live; remove entries when the posting expires
@@ -117,11 +130,11 @@ Contributions are welcome! You can contribute in two ways:
    - Use proper JSON formatting and valid URLs; keep descriptions concise
    - Update the "Last updated" date in `index.html` and this README when you refresh the list
 
-5. **Test Locally (Optional):**
+6. **Test Locally (Optional):**
    - **Important:** Use a live server (see "Running Locally" section above) - do not open `index.html` directly
    - Verify the entry appears in the right section in alphabetical order and that links work
 
-6. **Submit Your Changes:**
+7. **Submit Your Changes:**
    - Commit your changes with a descriptive message
    - Push to your fork
    - Create a pull request

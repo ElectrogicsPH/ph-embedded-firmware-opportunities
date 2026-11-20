@@ -25,8 +25,24 @@ jobs:
         id: check
         run: |
           set +e
-          python scripts/link_check.py --data data.json --report link-report.md --delay 1.5
-          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          python scripts/link_check.py --data data.json --report link-report-ph.md --delay 1.5
+          ph=$?
+          python scripts/link_check.py --data data-uae.json --report link-report-uae.md --delay 1.5
+          uae=$?
+          {
+            echo "# Philippines (data.json)"
+            echo
+            cat link-report-ph.md
+            echo
+            echo "# United Arab Emirates (data-uae.json)"
+            echo
+            cat link-report-uae.md
+          } > link-report.md
+          code=0
+          if [ "$ph" != "0" ] || [ "$uae" != "0" ]; then
+            code=1
+          fi
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
       - name: Open or update the single link-check issue
         if: always()
         env:
