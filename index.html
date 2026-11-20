@@ -427,8 +427,10 @@
         :root:not([data-theme="light"]) thead { border-bottom: 2px solid var(--thead-underline); }
         td .role-meta { color: var(--text-muted); }
         .last-updated { display: inline-block; margin-top: 14px; padding: 6px 14px; border-radius: 999px; background: var(--pill-bg); color: var(--pill-fg); border: 1px solid var(--pill-border); font-size: 1em; font-weight: 600; text-shadow: none; }
-        .edition-link { margin-top: 12px; font-size: 0.95em; }
-        .edition-link a { color: var(--link); font-weight: 600; text-decoration: underline; }
+        .country-switch { margin-top: 14px; display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .country-switch label { font-weight: 600; color: var(--subtitle); }
+        .country-select { font: inherit; font-weight: 600; min-height: 44px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--pill-border); background: var(--pill-bg); color: var(--pill-fg); cursor: pointer; }
+        .country-select:focus-visible { outline: 3px solid var(--focus-ring-page); outline-offset: 2px; }
         .section-title { margin: 30px 0 6px; font-size: 1.4em; color: var(--section-title); }
         .section-desc { margin: 0 0 12px; color: var(--section-desc); font-size: 0.95em; }
         .role-meta { font-size: 0.85em; color: var(--text-muted); margin-top: 4px; }
@@ -583,10 +585,13 @@
                 </svg>
                 <span class="sr-only" id="theme-toggle-text">Toggle theme to light</span>
             </button>
-            <h1>🇵🇭 PH Embedded & Firmware Opportunities</h1>
-            <p class="subtitle">Companies offering opportunities in embedded systems, firmware engineering, hardware design, IoT, and robotics R&D</p>
-            <p class="last-updated">Last updated: Nov 15, 2026</p>
-            <p class="edition-link"><a href="uae.html">UAE edition</a></p>
+            <h1 id="page-title">🇵🇭 PH Embedded & Firmware Opportunities</h1>
+            <p class="subtitle" id="page-subtitle">Companies offering opportunities in embedded systems, firmware engineering, hardware design, IoT, and robotics R&D</p>
+            <p class="last-updated" id="last-updated">Last updated: Nov 15, 2026</p>
+            <div class="country-switch">
+                <label for="country-select">Country</label>
+                <select id="country-select"></select>
+            </div>
         </header>
 
         <div id="loading" class="loading">Loading companies...</div>
@@ -646,24 +651,119 @@
     </footer>
 
     <script>
-        async function loadCompanies() {
+        // One entry per country. A new country is a data file plus an object here.
+        const COUNTRIES = [
+            {
+                id: 'ph',
+                name: 'Philippines',
+                file: 'data.json',
+                title: '🇵🇭 PH Embedded & Firmware Opportunities',
+                documentTitle: 'PH Embedded & Firmware Opportunities',
+                subtitle: 'Companies offering opportunities in embedded systems, firmware engineering, hardware design, IoT, and robotics R&D',
+                updated: 'Nov 15, 2026',
+                placeholder: 'e.g. firmware, Thales, Cebu',
+                sortKey: 'ph-embedded-sort',
+                sections: [
+                    { id: 'open', title: 'Open embedded & firmware roles', desc: 'Verified current roles in the Philippines. Each links to its posting.' },
+                    { id: 'related', title: 'Related roles', desc: 'Adjacent hardware and test roles.' },
+                    { id: 'watch', title: 'Companies to watch', desc: 'Companies with embedded/firmware work but no current role listed here.' }
+                ],
+                regions: [
+                    ['Metro Manila (NCR)', /\b(ncr|metro manila|national capital|quezon city|makati|taguig|pasig|mandaluyong|muntinlupa|manila)\b/i],
+                    ['Cebu', /\b(cebu|lapu-lapu|mandaue)\b/i],
+                    ['Laguna', /\b(laguna|calamba|binan|biñan|santa rosa)\b/i],
+                    ['Cavite', /\bcavite\b/i],
+                    ['Batangas', /\b(batangas|santo tomas)\b/i]
+                ]
+            },
+            {
+                id: 'ae',
+                name: 'United Arab Emirates',
+                file: 'data-uae.json',
+                title: 'UAE Embedded & Firmware Opportunities',
+                documentTitle: 'UAE Embedded & Firmware Opportunities',
+                subtitle: 'Open embedded systems, firmware, and hardware roles in the United Arab Emirates',
+                updated: 'Nov 20, 2026',
+                placeholder: 'e.g. firmware, HALCON, Dubai',
+                sortKey: 'uae-embedded-sort',
+                sections: [
+                    { id: 'open', title: 'Open embedded & firmware roles', desc: 'Verified current embedded and firmware roles in the United Arab Emirates. Each links to its posting.' },
+                    { id: 'related', title: 'Related roles', desc: 'Adjacent hardware, electronics, and test roles.' },
+                    { id: 'watch', title: 'Companies to watch', desc: 'UAE companies with embedded, firmware, or hardware work and no current role listed here.' }
+                ],
+                regions: [
+                    ['Abu Dhabi', /\babu dhabi\b/i],
+                    ['Dubai', /\bdubai\b/i],
+                    ['Sharjah', /\bsharjah\b/i],
+                    ['Ajman', /\bajman\b/i],
+                    ['Umm Al Quwain', /\bumm al quwain\b/i],
+                    ['Ras Al Khaimah', /\b(ras al khaimah|rak)\b/i],
+                    ['Fujairah', /\bfujairah\b/i],
+                    ['United Arab Emirates', /\b(united arab emirates|uae)\b/i]
+                ]
+            }
+        ];
+        const COUNTRY_KEY = 'ph-embedded-country';
+        const view = { country: COUNTRIES[0], items: [], containers: {}, state: { q: '', regions: new Set(), tags: new Set() }, tagValues: [], sortOrder: 'newest' };
+        let loadToken = 0;
+
+        function countryById(id) {
+            return COUNTRIES.find(c => c.id === id) || null;
+        }
+        function readSavedCountry() {
+            try { return localStorage.getItem(COUNTRY_KEY); } catch (e) { return null; }
+        }
+        function writeSavedCountry(id) {
+            try { localStorage.setItem(COUNTRY_KEY, id); } catch (e) {}
+        }
+        function resolveCountry() {
+            const q = new URLSearchParams(location.search).get('country');
+            if (q) return countryById(q) || COUNTRIES[0];
+            return countryById(readSavedCountry()) || COUNTRIES[0];
+        }
+        function setCountryUrl(id, mode) {
+            const url = new URL(location.href);
+            if (id === 'ph') url.searchParams.delete('country');
+            else url.searchParams.set('country', id);
+            const state = { country: id };
+            if (mode === 'push') history.pushState(state, '', url);
+            else history.replaceState(state, '', url);
+        }
+        function applyCountryChrome(country) {
+            document.title = country.documentTitle;
+            document.getElementById('page-title').textContent = country.title;
+            document.getElementById('page-subtitle').textContent = country.subtitle;
+            document.getElementById('last-updated').textContent = 'Last updated: ' + country.updated;
+            document.getElementById('search-input').placeholder = country.placeholder;
+            const select = document.getElementById('country-select');
+            if (select.value !== country.id) select.value = country.id;
+        }
+
+        async function loadCompanies(country) {
+            const token = ++loadToken;
+            view.country = country;
+            applyCountryChrome(country);
+            const loading = document.getElementById('loading');
+            const errorDiv = document.getElementById('error');
+            const root = document.getElementById('table-container');
+            loading.style.display = 'block';
+            errorDiv.style.display = 'none';
+            document.getElementById('filters').style.display = 'none';
+            document.getElementById('no-matches').style.display = 'none';
+            root.style.display = 'none';
+            root.replaceChildren();
             try {
-                const response = await fetch('data.json');
+                const response = await fetch(country.file);
                 if (!response.ok) {
                     throw new Error('Failed to load companies');
                 }
                 const companies = await response.json();
+                if (token !== loadToken) return;
 
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('table-container').style.display = 'block';
+                loading.style.display = 'none';
+                root.style.display = 'block';
 
-                // Sections (entries without "section" fall back to "watch")
-                const SECTIONS = [
-                    { id: 'open', title: 'Open embedded & firmware roles', desc: 'Verified current roles in the Philippines. Each links to its posting.' },
-                    { id: 'related', title: 'Related roles', desc: 'Adjacent hardware and test roles.' },
-                    { id: 'watch', title: 'Companies to watch', desc: 'Companies with embedded/firmware work but no current role listed here.' }
-                ];
-                const root = document.getElementById('table-container');
+                const SECTIONS = country.sections;
                 const template = document.getElementById('section-template');
                 const containers = {};
                 SECTIONS.forEach(sec => {
@@ -806,14 +906,17 @@
                         section: company.section || 'watch',
                         company: company.company || '',
                         posted: validPosted(company.posted),
-                        region: regionOf(company.location),
+                        region: regionOf(company.location, country),
                         tags: company.tags || [],
                         text: [company.company, company.focus_area, company.roles_or_projects, company.location, company.experience, (company.tags || []).join(' ')]
                             .filter(Boolean).join(' ').toLowerCase()
                     });
                 });
-                setupFilters(items, containers);
+                view.items = items;
+                view.containers = containers;
+                setupFilters();
             } catch (error) {
+                if (token !== loadToken) return;
                 document.getElementById('loading').style.display = 'none';
                 const errorDiv = document.getElementById('error');
                 errorDiv.textContent = 'Failed to load companies. Please try again later.';
@@ -854,17 +957,10 @@
             sync();
         })();
 
-        // Group free-text locations into regions (no data is changed).
-        const REGION_RULES = [
-            ['Metro Manila (NCR)', /\b(ncr|metro manila|national capital|quezon city|makati|taguig|pasig|mandaluyong|muntinlupa|manila)\b/i],
-            ['Cebu', /\b(cebu|lapu-lapu|mandaue)\b/i],
-            ['Laguna', /\b(laguna|calamba|binan|biñan|santa rosa)\b/i],
-            ['Cavite', /\bcavite\b/i],
-            ['Batangas', /\b(batangas|santo tomas)\b/i]
-        ];
-        function regionOf(location) {
+        // Group free-text locations into regions (no data is changed). Rules come from the country config.
+        function regionOf(location, country) {
             if (!location) return null;
-            for (const [name, re] of REGION_RULES) if (re.test(location)) return name;
+            for (const [name, re] of country.regions) if (re.test(location)) return name;
             return 'Other / unspecified';
         }
 
@@ -893,24 +989,22 @@
             });
         }
 
-        function setupFilters(items, containers) {
-            let sortOrder = 'newest';
-            try { if (localStorage.getItem('ph-embedded-sort') === 'oldest') sortOrder = 'oldest'; } catch (e) {}
-            const sortBtns = document.querySelectorAll('.sort-btn');
-            const setSort = o => {
-                sortOrder = o;
-                sortBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.sort === o)));
-                sortItems(items, containers, o);
-            };
-            sortBtns.forEach(b => b.addEventListener('click', () => {
-                setSort(b.dataset.sort);
-                try { localStorage.setItem('ph-embedded-sort', b.dataset.sort); } catch (e) {}
-            }));
-            setSort(sortOrder);
-            const state = { q: '', regions: new Set(), tags: new Set() };
+        function setupFilters() {
+            const items = view.items;
+            const containers = view.containers;
             const search = document.getElementById('search-input');
             const count = document.getElementById('result-count');
             const noMatches = document.getElementById('no-matches');
+            const sortBtns = document.querySelectorAll('.sort-btn');
+            const tagsToggle = document.getElementById('tags-toggle');
+            const tagsText = document.getElementById('tags-toggle-text');
+            const tagChips = document.getElementById('tag-chips');
+
+            view.state = { q: '', regions: new Set(), tags: new Set() };
+            search.value = '';
+            let sortOrder = 'newest';
+            try { if (localStorage.getItem(view.country.sortKey) === 'oldest') sortOrder = 'oldest'; } catch (e) {}
+            view.sortOrder = sortOrder;
 
             // Near-duplicate tags shown as one chip that matches every alias (data is not rewritten).
             const TAG_GROUPS = {
@@ -923,6 +1017,7 @@
             const uniq = arr => [...new Set(arr)].sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
             const makeChips = (hostId, values, set) => {
                 const host = document.getElementById(hostId);
+                host.replaceChildren();
                 values.forEach(v => {
                     const b = document.createElement('button');
                     b.type = 'button';
@@ -937,27 +1032,23 @@
                     host.appendChild(b);
                 });
             };
-            makeChips('location-chips', uniq(items.map(i => i.region).filter(Boolean)), state.regions);
-            const tagValues = uniq(items.flatMap(i => i.tagKeys));
-            makeChips('tag-chips', tagValues, state.tags);
+            makeChips('location-chips', uniq(items.map(i => i.region).filter(Boolean)), view.state.regions);
+            view.tagValues = uniq(items.flatMap(i => i.tagKeys));
+            makeChips('tag-chips', view.tagValues, view.state.tags);
 
-            // Disclosure for the long tag list: collapsed by default on small screens.
-            const tagsToggle = document.getElementById('tags-toggle');
-            const tagsText = document.getElementById('tags-toggle-text');
-            const tagChips = document.getElementById('tag-chips');
             const setExpanded = open => {
                 tagsToggle.setAttribute('aria-expanded', String(open));
                 tagChips.hidden = !open;
             };
             const updateToggleText = () => {
-                const n = state.tags.size;
-                tagsText.textContent = `Skill tags (${tagValues.length})` + (n ? ` · ${n} active` : '');
+                const n = view.state.tags.size;
+                tagsText.textContent = `Skill tags (${view.tagValues.length})` + (n ? ` · ${n} active` : '');
             };
-            tagsToggle.addEventListener('click', () => setExpanded(tagsToggle.getAttribute('aria-expanded') !== 'true'));
             setExpanded(!(window.matchMedia && window.matchMedia('(max-width: 768px)').matches));
             updateToggleText();
 
             function apply() {
+                const state = view.state;
                 let shown = 0;
                 const perSection = new Map();
                 items.forEach(i => {
@@ -974,21 +1065,86 @@
                 updateToggleText();
                 count.textContent = `Showing ${shown} of ${items.length} entries`;
             }
-            function clearAll() {
-                state.q = ''; search.value = '';
-                state.regions.clear(); state.tags.clear();
-                document.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', 'false'));
-                apply();
-                search.focus();
-            }
-            search.addEventListener('input', () => { state.q = search.value.trim().toLowerCase(); apply(); });
-            document.getElementById('clear-filters').addEventListener('click', clearAll);
-            document.getElementById('clear-filters-empty').addEventListener('click', clearAll);
+            view.apply = apply;
+            const setSort = o => {
+                view.sortOrder = o;
+                sortBtns.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.sort === o)));
+                sortItems(items, containers, o);
+            };
+            setSort(sortOrder);
             document.getElementById('filters').style.display = 'block';
             apply();
         }
 
-        loadCompanies();
+        function bindFilterControls() {
+            const search = document.getElementById('search-input');
+            const sortBtns = document.querySelectorAll('.sort-btn');
+            const tagsToggle = document.getElementById('tags-toggle');
+            const tagChips = document.getElementById('tag-chips');
+            sortBtns.forEach(b => b.addEventListener('click', () => {
+                if (!view.apply) return;
+                view.sortOrder = b.dataset.sort;
+                sortBtns.forEach(btn => btn.setAttribute('aria-pressed', String(btn.dataset.sort === view.sortOrder)));
+                try { localStorage.setItem(view.country.sortKey, b.dataset.sort); } catch (e) {}
+                sortItems(view.items, view.containers, view.sortOrder);
+            }));
+            tagsToggle.addEventListener('click', () => {
+                const open = tagsToggle.getAttribute('aria-expanded') !== 'true';
+                tagsToggle.setAttribute('aria-expanded', String(open));
+                tagChips.hidden = !open;
+            });
+            const clearAll = () => {
+                if (!view.apply) return;
+                view.state.q = '';
+                search.value = '';
+                view.state.regions.clear();
+                view.state.tags.clear();
+                document.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', 'false'));
+                view.apply();
+                search.focus();
+            };
+            search.addEventListener('input', () => {
+                if (!view.apply) return;
+                view.state.q = search.value.trim().toLowerCase();
+                view.apply();
+            });
+            document.getElementById('clear-filters').addEventListener('click', clearAll);
+            document.getElementById('clear-filters-empty').addEventListener('click', clearAll);
+        }
+
+        function initCountrySelect() {
+            const select = document.getElementById('country-select');
+            COUNTRIES.forEach(c => {
+                const opt = document.createElement('option');
+                opt.value = c.id;
+                opt.textContent = c.name;
+                select.appendChild(opt);
+            });
+            const initial = resolveCountry();
+            select.value = initial.id;
+            writeSavedCountry(initial.id);
+            const urlCountry = new URLSearchParams(location.search).get('country');
+            if (urlCountry !== (initial.id === 'ph' ? null : initial.id)) {
+                setCountryUrl(initial.id, 'replace');
+            }
+            select.addEventListener('change', () => {
+                const next = countryById(select.value) || COUNTRIES[0];
+                writeSavedCountry(next.id);
+                setCountryUrl(next.id, 'push');
+                loadCompanies(next);
+            });
+            window.addEventListener('popstate', () => {
+                const q = new URLSearchParams(location.search).get('country');
+                const next = (q && countryById(q)) || COUNTRIES[0];
+                select.value = next.id;
+                writeSavedCountry(next.id);
+                loadCompanies(next);
+            });
+            bindFilterControls();
+            loadCompanies(initial);
+        }
+
+        initCountrySelect();
     </script>
 </body>
 </html>

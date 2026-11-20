@@ -4,7 +4,7 @@ A curated directory of companies and organizations in the Philippines offering o
 
 **Last updated: Nov 15, 2026**
 
-The Philippines list is the default page ([index.html](index.html), [data.json](data.json)). A separate [UAE edition](uae.html) uses the same layout and reads [data-uae.json](data-uae.json).
+The Philippines list is the default ([index.html](index.html), [data.json](data.json)). A country menu on that page also loads the United Arab Emirates list from [data-uae.json](data-uae.json). Open `index.html?country=ae` to land on the UAE list. [uae.html](uae.html) redirects there. To add a country later, add a data file and one entry in the country list in `index.html`.
 
 **UAE edition last updated: Nov 20, 2026**
 
@@ -117,7 +117,7 @@ Contributions are welcome! You can contribute in two ways:
    - `related` is adjacent hardware design, electronics, power electronics, PCB, and hardware test or validation roles
    - `watch` is UAE companies doing embedded, firmware, or hardware work with no current role found
    - `location` is the place stated on the posting, such as `Dubai, UAE` or `Abu Dhabi, UAE`
-   - Update the "Last updated" date in `uae.html` and the UAE date in this README when you refresh that list
+   - Update the UAE "Last updated" date in the country list in `index.html`, and the UAE date in this README, when you refresh that list
    - `scripts/link_check.py --data data-uae.json` checks those links. The weekly careers-feed check still scans Philippines feeds only.
 
 5. **Important Guidelines:**
