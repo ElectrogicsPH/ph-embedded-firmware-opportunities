@@ -2,7 +2,7 @@
 
 A curated directory of companies and organizations in the Philippines offering opportunities in **embedded systems**, **firmware engineering**, **hardware design**, and **IoT**. This resource is intended for engineers, students, and tech enthusiasts exploring career paths or collaboration opportunities in embedded technology.
 
-**Last updated: Nov 15, 2026**
+**Last updated: Nov 21, 2026**
 
 The Philippines list is the default ([index.html](index.html), [data.json](data.json)). A country menu on that page also loads the United Arab Emirates list from [data-uae.json](data-uae.json). Open `index.html?country=ae` to land on the UAE list. [uae.html](uae.html) redirects there. To add a country later, add a data file and one entry in the country list in `index.html`.
 

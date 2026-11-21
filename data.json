@@ -32,6 +32,24 @@
     ]
   },
   {
+    "company": "BTCPower Cebu",
+    "focus_area": "EV Charging, Power Electronics",
+    "roles_or_projects": "Senior Embedded Linux Firmware Engineer",
+    "website_or_linkedin": "https://www.mynimo.com/jobs/view/488086",
+    "section": "open",
+    "posting_url": "https://www.mynimo.com/jobs/view/488086",
+    "location": "Lapu-Lapu City, Cebu",
+    "posted": "2026-11-21",
+    "experience": "6+ years",
+    "tags": [
+      "embedded Linux",
+      "Yocto",
+      "C",
+      "device drivers",
+      "I2C/SPI/UART/CAN"
+    ]
+  },
+  {
     "company": "Emerson",
     "focus_area": "Industrial Automation, Process Control, Control Systems",
     "roles_or_projects": "Firmware Manager",
@@ -97,17 +115,36 @@
   {
     "company": "Xerox Philippines",
     "focus_area": "Imaging, Printers",
-    "roles_or_projects": "Firmware Engineer",
-    "website_or_linkedin": "https://www.linkedin.com/jobs/view/4470307776",
+    "location": "Cebu City, Central Visayas",
     "section": "open",
-    "posting_url": "https://www.linkedin.com/jobs/view/4470307776",
-    "location": "Cebu, Central Visayas",
-    "posted": "2026-10-16",
+    "roles_or_projects": "Firmware Engineer",
+    "website_or_linkedin": "https://xerox.avature.net/en_US/careers/JobDetail?jobId=51067",
+    "posting_url": "https://xerox.avature.net/en_US/careers/JobDetail?jobId=51067",
+    "posted": "2026-10-26",
+    "experience": "3+ years",
+    "tags": [
+      "C/C++",
+      "Python",
+      "embedded Linux",
+      "Git",
+      "signal analysis"
+    ]
+  },
+  {
+    "company": "Xerox Philippines",
+    "focus_area": "Imaging, Printers",
+    "location": "Cebu City, Central Visayas",
+    "section": "open",
+    "roles_or_projects": "Firmware Engineer",
+    "website_or_linkedin": "https://xerox.avature.net/en_US/careers/JobDetail/Firmware-Engineer/52783",
+    "posting_url": "https://xerox.avature.net/en_US/careers/JobDetail/Firmware-Engineer/52783",
+    "posted": "2026-10-29",
     "experience": "Not stated",
     "tags": [
-      "firmware",
-      "embedded Linux",
-      "C/C++"
+      "C/C++",
+      "embedded firmware",
+      "Linux",
+      "Agile/Scrum"
     ]
   },
   {
@@ -156,22 +193,6 @@
       "Java",
       "automotive embedded platform",
       "test automation"
-    ]
-  },
-  {
-    "company": "Accenture",
-    "focus_area": "IT Consulting, Software Engineering, Embedded Systems",
-    "roles_or_projects": "Embedded Java Software Lead Developer",
-    "website_or_linkedin": "https://ph.jobstreet.com/job/95235083",
-    "section": "related",
-    "posting_url": "https://ph.jobstreet.com/job/95235083",
-    "location": "Metro Manila (Hybrid)",
-    "posted": "2026-10-13",
-    "experience": "5+ years",
-    "tags": [
-      "Java",
-      "embedded platform",
-      "JUnit"
     ]
   },
   {
@@ -337,23 +358,6 @@
     ]
   },
   {
-    "company": "BTCPower Cebu",
-    "focus_area": "EV Charging, Power Electronics",
-    "roles_or_projects": "Sr. Hardware Design Engineer",
-    "website_or_linkedin": "https://ph.jobstreet.com/job/95147062",
-    "section": "related",
-    "posting_url": "https://ph.jobstreet.com/job/95147062",
-    "location": "Lapu-Lapu City, Cebu",
-    "posted": "2026-10-08",
-    "experience": "7-10 years",
-    "tags": [
-      "PCBA",
-      "schematics",
-      "MCU",
-      "EV charger"
-    ]
-  },
-  {
     "company": "Dyson",
     "focus_area": "Consumer Electronics",
     "roles_or_projects": "Associate Principal Hardware Engineer",
@@ -386,20 +390,6 @@
     ]
   },
   {
-    "company": "MTI Advanced Test Development Corp",
-    "focus_area": "Test & Validation of Semiconductor Devices",
-    "roles_or_projects": "Engineer I - Test Hardware",
-    "website_or_linkedin": "https://ph.jobstreet.com/job/95528786",
-    "section": "related",
-    "posting_url": "https://ph.jobstreet.com/job/95528786",
-    "location": "Philippines",
-    "posted": "2026-10-27",
-    "tags": [
-      "test hardware",
-      "schematic/PCB"
-    ]
-  },
-  {
     "company": "Booth",
     "focus_area": "Cooking Appliances",
     "roles_or_projects": "Senior Embedded Software Engineer",
@@ -425,6 +415,13 @@
     "focus_area": "Automotive, Embedded Systems, ECU, BCM, TIPM",
     "roles_or_projects": "Automotive Embedded Software Engineer (ECU/BCM/TIPM)",
     "website_or_linkedin": "https://tipmrebuilders.com/careers/",
+    "section": "watch"
+  },
+  {
+    "company": "MTI Advanced Test Development Corp",
+    "focus_area": "Test & Validation of Semiconductor Devices",
+    "roles_or_projects": "Test Hardware Engineer",
+    "website_or_linkedin": "https://ph.jobstreet.com/job/95528786",
     "section": "watch"
   },
   {
