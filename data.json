@@ -1,5 +1,22 @@
 [
   {
+    "company": "Advanced Energy",
+    "focus_area": "Power Electronics, Power Conversion",
+    "roles_or_projects": "Firmware Engineer II",
+    "website_or_linkedin": "https://jobs.advanced-energy.com/job/Quezon-City-Firmware-Engineer-II-00-1110/1421818100/",
+    "section": "open",
+    "posting_url": "https://jobs.advanced-energy.com/job/Quezon-City-Firmware-Engineer-II-00-1110/1421818100/",
+    "location": "Quezon City, NCR",
+    "posted": "2026-11-16",
+    "experience": "2+ years",
+    "tags": [
+      "C/C++",
+      "MCU",
+      "DSP",
+      "digital power conversion"
+    ]
+  },
+  {
     "company": "Analog Devices",
     "focus_area": "Semiconductor Manufacturing, Analog Electronics",
     "roles_or_projects": "Associate Engineer, Embedded Software",
@@ -79,6 +96,23 @@
       "firmware validation",
       "test automation",
       "scripting"
+    ]
+  },
+  {
+    "company": "Precision Path Technologies Inc.",
+    "focus_area": "UAV Systems, Drones",
+    "roles_or_projects": "UAV Systems Engineer",
+    "website_or_linkedin": "https://www.linkedin.com/jobs/view/4489587151",
+    "section": "open",
+    "posting_url": "https://www.linkedin.com/jobs/view/4489587151",
+    "location": "Mandaluyong, NCR",
+    "posted": "2026-11-14",
+    "experience": "Not stated",
+    "tags": [
+      "C/C++",
+      "Python",
+      "MCU",
+      "UAV"
     ]
   },
   {
@@ -358,6 +392,23 @@
     ]
   },
   {
+    "company": "Atlas Motion",
+    "focus_area": "BLDC Motors, Robotic Actuators",
+    "roles_or_projects": "Senior R&D Engineer",
+    "website_or_linkedin": "https://www.linkedin.com/jobs/view/4490222952",
+    "section": "related",
+    "posting_url": "https://www.linkedin.com/jobs/view/4490222952",
+    "location": "Biñan, Calabarzon",
+    "posted": "2026-11-16",
+    "experience": "5+ years",
+    "tags": [
+      "electric machines",
+      "BLDC motors",
+      "actuators",
+      "FEA"
+    ]
+  },
+  {
     "company": "Dyson",
     "focus_area": "Consumer Electronics",
     "roles_or_projects": "Associate Principal Hardware Engineer",
@@ -388,6 +439,13 @@
       "software QA",
       "Azure DevOps"
     ]
+  },
+  {
+    "company": "Atlas Motion",
+    "focus_area": "BLDC Motors, Robotic Actuators",
+    "roles_or_projects": "Senior R&D Engineer",
+    "website_or_linkedin": "https://atlasmotion.com/contact/",
+    "section": "watch"
   },
   {
     "company": "Booth",
@@ -429,6 +487,13 @@
     "focus_area": "Financial Services, Payments, Point of Sale",
     "roles_or_projects": "Hardware Firmware/Systems Integration Engineer",
     "website_or_linkedin": "https://www.linkedin.com/company/ncratleos/jobs/",
+    "section": "watch"
+  },
+  {
+    "company": "Precision Path Technologies Inc.",
+    "focus_area": "UAV Systems, Drones",
+    "roles_or_projects": "UAV Systems Engineer",
+    "website_or_linkedin": "https://precisionpathtech.com/philippine-drone-careers/",
     "section": "watch"
   },
   {
